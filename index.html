@@ -2,260 +2,802 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<title>Changement de Fabrication</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Changement – Temp/Machine</title>
 <style>
-    body {
-        font-family: Arial, sans-serif;
-        margin: 20px;
-    }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
 
-    h2 {
-        text-align: center;
-        margin-bottom: 10px;
-    }
+  body {
+    font-family: Arial, sans-serif;
+    background: #f2f2f7;
+    color: #1c1c1e;
+    min-height: 100vh;
+  }
 
-    .hidden {
-        display: none;
-    }
+  .hdr {
+    background: #fff;
+    border-bottom: 1px solid #d1d1d6;
+    padding: 10px 14px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    position: sticky;
+    top: 0;
+    z-index: 200;
+  }
+  .logo {
+    width: 44px; height: 44px;
+    background: #1a3a6b;
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .logo span { color: #fff; font-size: 11px; font-weight: 700; line-height: 1.2; text-align: center; }
+  .hdr-text h1 { font-size: 15px; font-weight: 700; color: #1c1c1e; }
+  .hdr-text p  { font-size: 11px; color: #6c6c70; margin-top: 1px; }
 
-    table {
-        border-collapse: collapse;
-        width: 100%;
-        margin-top: 15px;
-    }
+  .form-wrap { padding: 10px; }
 
-    th, td {
-        border: 1px solid #444;
-        padding: 6px;
-        text-align: center;
-    }
+  .machine-banner {
+    background: #1a3a6b; color: #fff;
+    border-radius: 10px; padding: 10px 14px;
+    margin-bottom: 10px; font-size: 13px;
+    font-weight: 700; text-align: center;
+  }
 
-    th {
-        background: #e6e6e6;
-        font-weight: bold;
-    }
+  .sec {
+    background: #fff; border-radius: 12px;
+    border: 1px solid #e0e0e5; margin-bottom: 10px;
+    overflow: visible;
+  }
+  .sec-hd {
+    font-size: 11px; font-weight: 700; color: #6c6c70;
+    padding: 7px 12px; background: #f7f7f8;
+    border-bottom: 1px solid #e0e0e5;
+    text-transform: uppercase; letter-spacing: 0.5px;
+    border-radius: 12px 12px 0 0;
+  }
+  .row {
+    display: flex; align-items: center;
+    padding: 11px 12px; border-bottom: 1px solid #f0f0f2;
+    min-height: 46px; position: relative;
+  }
+  .row:last-child { border-bottom: none; }
+  .row label { font-size: 13px; color: #6c6c70; min-width: 110px; flex-shrink: 0; }
+  .row input {
+    flex: 1; border: none; background: transparent;
+    font-size: 15px; color: #1c1c1e;
+    font-family: Arial, sans-serif; outline: none;
+    text-align: left; min-width: 0; direction: ltr;
+  }
+  .row input::placeholder { color: #c7c7cc; font-size: 14px; }
+  .row textarea {
+    flex: 1; border: none; background: transparent;
+    font-size: 14px; color: #1c1c1e;
+    font-family: Arial, sans-serif; outline: none;
+    resize: none; min-height: 64px;
+    padding: 4px 0; text-align: left; direction: ltr;
+  }
+  .row textarea::placeholder { color: #c7c7cc; font-size: 13px; }
 
-    .group-header {
-        background: #dcdcdc;
-        font-weight: bold;
-    }
+  .time-input-wrap { flex: 1; display: flex; align-items: center; gap: 4px; }
+  .time-input-wrap input {
+    flex: unset; border: 1px solid #e0e0e5; border-radius: 8px;
+    background: #f7f7f8; font-size: 18px; font-weight: 700;
+    color: #1c1c1e; text-align: center; outline: none; padding: 4px 0;
+  }
+  .time-input-wrap input.t-h { width: 48px; }
+  .time-input-wrap input.t-m { width: 48px; }
+  .time-sep { font-size: 20px; font-weight: 700; color: #1a3a6b; line-height: 1; }
+  .time-preview { font-size: 12px; color: #6c6c70; margin-left: 8px; }
 
-    input {
-        width: 95%;
-        padding: 4px;
-        text-align: center;
-    }
+  .suggestions {
+    display: none; position: absolute;
+    top: 100%; left: 0; right: 0;
+    background: #fff; border: 1px solid #d1d1d6;
+    border-radius: 10px; z-index: 500; overflow: hidden;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+  }
+  .suggestions.open { display: block; }
+  .suggestion-item { padding: 12px 14px; font-size: 14px; color: #1c1c1e; cursor: pointer; border-bottom: 1px solid #f0f0f2; }
+  .suggestion-item:last-child { border-bottom: none; }
+  .suggestion-item:hover { background: #f2f2f7; }
 
-    .none-value {
-        color: #6c7a89; /* Gris bleuté visible mais pas agressif */
-        font-style: italic;
-    }
+  .color-row { display: flex; align-items: center; padding: 10px 12px; gap: 10px; flex-wrap: wrap; border-radius: 0 0 12px 12px; }
+  .color-row label { font-size: 13px; color: #6c6c70; min-width: 80px; }
+  .color-chip { width: 32px; height: 32px; border-radius: 50%; cursor: pointer; border: 3px solid transparent; transition: border 0.15s, transform 0.1s; }
+  .color-chip.selected { border-color: #1c1c1e; transform: scale(1.15); }
 
-    .button {
-        margin-top: 15px;
-        padding: 10px 20px;
-        font-size: 16px;
-        cursor: pointer;
-    }
+  .btns { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 0 0 10px; }
+  .btn {
+    padding: 14px; border-radius: 10px; font-size: 15px;
+    font-weight: 700; cursor: pointer; border: 1px solid #d1d1d6;
+    background: #fff; color: #1c1c1e; font-family: Arial, sans-serif;
+  }
+  .btn:active { opacity: 0.7; transform: scale(0.98); }
+  .btn-ok      { background: #34c759; color: #fff; border-color: #2dae4d; }
+  .btn-gantt   { background: #1a3a6b; color: #fff; border-color: #1a3a6b; }
+  .btn-full    { grid-column: 1/-1; color: #ff3b30; border-color: #ffb3b0; }
+
+  .recall-box {
+    display: none; background: #fffbe6;
+    border: 1px solid #ffe58f; border-radius: 10px;
+    margin-bottom: 10px; padding: 10px 12px;
+  }
+  .recall-box.visible { display: block; }
+  .recall-title { font-size: 11px; font-weight: 700; color: #856404; margin-bottom: 6px; }
+  .recall-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+  .recall-chip { background: #fff8dc; border: 1px solid #ffe58f; border-radius: 6px; padding: 3px 8px; font-size: 12px; color: #6b4e00; }
+  .recall-chip b { color: #3d2b00; }
+  .recall-dismiss { float: right; font-size: 12px; color: #856404; cursor: pointer; text-decoration: underline; }
+
+  .edit-banner {
+    display: none; background: #fff3cd;
+    border: 1px solid #ffc107; border-radius: 10px;
+    padding: 8px 14px; font-size: 12px; font-weight: 700;
+    color: #856404; text-align: center; margin-bottom: 10px;
+  }
+  .edit-banner.visible { display: block; }
+
+  .task-card { background: #fff; border-radius: 10px; border: 1px solid #e0e0e5; margin-bottom: 8px; overflow: hidden; }
+  .task-card-hd { display: flex; align-items: center; padding: 10px 12px; gap: 10px; border-bottom: 1px solid #f0f0f2; }
+  .task-color-dot { width: 14px; height: 14px; border-radius: 50%; flex-shrink: 0; }
+  .task-name { font-size: 14px; font-weight: 700; flex: 1; }
+  .task-who  { font-size: 12px; color: #6c6c70; }
+  .task-card-body { display: flex; padding: 8px 12px; gap: 16px; font-size: 12px; color: #6c6c70; flex-wrap: wrap; }
+  .task-card-body span b { color: #1c1c1e; }
+  .task-remark { padding: 0 12px 6px; font-size: 12px; color: #555; font-style: italic; }
+  .task-actions { display: flex; padding: 0 12px 8px; gap: 8px; }
+  .act-btn { padding: 5px 12px; border-radius: 6px; font-size: 12px; font-weight: 700; cursor: pointer; border: 1px solid; font-family: Arial, sans-serif; }
+  .act-btn:active { opacity: 0.6; }
+  .btn-edit { border-color: #007aff; color: #007aff; background: #e8f0fe; }
+  .btn-del  { border-color: #ff3b30; color: #ff3b30; background: #fff0f0; }
+
+  .sync-info { font-size: 11px; color: #6c6c70; text-align: center; padding: 8px; }
+
+  /* ══ GANTT ══ */
+  .gantt-section { padding: 10px; padding-bottom: 60px; }
+
+  .gantt-header-block {
+    display: flex; align-items: center; gap: 16px;
+    margin-bottom: 12px; background: #fff;
+    border-radius: 12px; padding: 14px 18px;
+    border: 1px solid #e0e0e5;
+  }
+  .gantt-logo { width: 52px; height: 52px; background: #1a3a6b; border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .gantt-logo span { color: #fff; font-size: 13px; font-weight: 700; text-align: center; line-height: 1.2; }
+  .gantt-title h2 { font-size: 18px; font-weight: 700; color: #1c1c1e; }
+  .gantt-title p  { font-size: 12px; color: #1a3a6b; font-weight: 700; margin-top: 2px; }
+
+  .gantt-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+
+  table.gantt {
+    border-collapse: collapse; font-size: 12px;
+    background: #fff; border-radius: 12px;
+    border: 1px solid #d1d1d6;
+  }
+  table.gantt th {
+    background: #e8edf5; color: #1a3a6b; font-weight: 700;
+    padding: 8px; border: 1px solid #d1d1d6;
+    text-align: center; font-size: 11px; white-space: nowrap;
+  }
+  table.gantt td { border: 1px solid #e0e0e5; padding: 0; }
+  table.gantt td.info { padding: 6px 10px; font-size: 12px; white-space: nowrap; }
+  table.gantt td.machine-name { font-weight: 700; font-size: 13px; color: #1c1c1e; min-width: 160px; }
+  table.gantt td.who-cell { color: #3a3a4a; text-align: center; min-width: 90px; }
+  table.gantt td.time-cell { text-align: center; color: #1a3a6b; font-weight: 700; min-width: 60px; }
+  table.gantt tr:nth-child(odd) td  { background: #fff; }
+  table.gantt tr:nth-child(even) td { background: #fafafa; }
+  table.gantt .section-row td { background: #dce6f5 !important; font-weight: 700; color: #1a3a6b; }
+
+  /* Ligne sélectionnée */
+  table.gantt tr.sel-a td { background: #fff8e1 !important; }
+  table.gantt tr.sel-b td { background: #e8f5e9 !important; }
+
+  .bar-cell { position: relative; min-width: 400px; padding: 0 !important; }
+  .bar-inner { position: relative; height: 36px; }
+  .gantt-bar {
+    position: absolute; top: 5px; bottom: 5px;
+    border-radius: 5px; opacity: 0.88; cursor: pointer;
+    transition: opacity 0.15s;
+  }
+  .gantt-bar:hover { opacity: 1; top: 3px; bottom: 3px; }
+
+  /* Checkbox colonne */
+  .chk-cell { text-align: center; width: 36px; padding: 0 6px !important; }
+  .chk-cell input[type=checkbox] { width: 18px; height: 18px; cursor: pointer; accent-color: #1a3a6b; }
+
+  /* ══ PANNEAU COMPARAISON ══ */
+  .cmp-bar {
+    display: none;
+    background: #1a3a6b; color: #fff;
+    border-radius: 12px; padding: 10px 14px;
+    margin-bottom: 10px;
+    align-items: center; justify-content: space-between;
+    gap: 10px; flex-wrap: wrap;
+  }
+  .cmp-bar.visible { display: flex; }
+  .cmp-bar-info { font-size: 13px; font-weight: 700; }
+  .cmp-bar-info span { font-size: 11px; font-weight: 400; opacity: 0.8; display: block; margin-top: 2px; }
+  .cmp-bar-btn {
+    padding: 8px 16px; border-radius: 8px;
+    background: #fff; color: #1a3a6b;
+    border: none; font-size: 13px; font-weight: 700;
+    cursor: pointer; font-family: Arial, sans-serif;
+    white-space: nowrap;
+  }
+  .cmp-bar-btn:active { opacity: 0.8; }
+
+  .cmp-result {
+    display: none;
+    background: #fff; border-radius: 12px;
+    border: 1px solid #e0e0e5; margin-bottom: 10px;
+    overflow: hidden;
+  }
+  .cmp-result.visible { display: block; }
+  .cmp-result-hd {
+    background: #f7f7f8; padding: 10px 14px;
+    border-bottom: 1px solid #e0e0e5;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .cmp-result-hd h3 { font-size: 13px; font-weight: 700; color: #1a3a6b; }
+  .cmp-close { font-size: 12px; color: #6c6c70; cursor: pointer; text-decoration: underline; }
+
+  .cmp-cards { display: grid; grid-template-columns: 1fr 1fr; }
+  .cmp-card { padding: 10px 14px; border-right: 1px solid #f0f0f2; }
+  .cmp-card:last-child { border-right: none; }
+  .cmp-card-badge { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.4px; margin-bottom: 4px; }
+  .cmp-card-badge.a { color: #b45309; }
+  .cmp-card-badge.b { color: #15803d; }
+  .cmp-card-name { font-size: 13px; font-weight: 700; color: #1c1c1e; }
+  .cmp-card-info { font-size: 11px; color: #6c6c70; margin-top: 2px; }
+  .cmp-card-dur  { font-size: 12px; color: #1a3a6b; font-weight: 700; margin-top: 4px; }
+
+  .cmp-diff { border-top: 1px solid #f0f0f2; padding: 10px 14px; }
+  .cmp-diff-title { font-size: 11px; font-weight: 700; color: #6c6c70; text-transform: uppercase; letter-spacing: 0.4px; margin-bottom: 8px; }
+  .cmp-row { display: flex; justify-content: space-between; align-items: center; padding: 6px 0; border-bottom: 1px solid #f7f7f8; font-size: 13px; }
+  .cmp-row:last-child { border-bottom: none; }
+  .cmp-row-lbl { color: #555; }
+  .cmp-row-val { font-weight: 700; }
+  .cmp-row-val.pos { color: #22c55e; }
+  .cmp-row-val.neg { color: #ef4444; }
+  .cmp-row-val.neu { color: #6c6c70; }
+
+  /* ══ TOOLTIP ══ */
+  #tooltip {
+    display: none; position: fixed;
+    background: #1c1c1e; color: #fff;
+    border-radius: 14px; padding: 14px 16px;
+    font-size: 12px; line-height: 1.9;
+    z-index: 9999; pointer-events: none;
+    min-width: 210px; max-width: 290px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.30);
+  }
+  #tooltip.visible { display: block; }
+  .tt-header { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; padding-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.15); }
+  .tt-dot    { width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0; }
+  .tt-title  { font-size: 14px; font-weight: 700; }
+  .tt-row    { display: flex; justify-content: space-between; gap: 14px; }
+  .tt-lbl    { color: #aaa; }
+  .tt-val    { font-weight: 700; }
+  .tt-dur    { margin-top: 8px; padding-top: 7px; border-top: 1px solid rgba(255,255,255,0.15); color: #ffd60a; font-weight: 700; font-size: 13px; }
+  .tt-remark-box { margin-top: 8px; padding: 8px 10px; background: rgba(255,255,255,0.12); border-radius: 8px; border-left: 3px solid #ffd60a; font-size: 12px; color: #fff; font-style: italic; line-height: 1.5; }
+  .tt-remark-label { font-size: 10px; font-weight: 700; color: #ffd60a; text-transform: uppercase; margin-bottom: 3px; font-style: normal; }
+
+  .empty-gantt { text-align: center; padding: 48px 24px; color: #c7c7cc; font-size: 14px; background: #fff; border-radius: 12px; border: 1px solid #e0e0e5; }
+
+  .status-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #34c759; margin-right: 5px; animation: pulse 1.5s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+
+  .divider { height: 1px; background: #d1d1d6; margin: 6px 10px 14px; }
 </style>
 </head>
 <body>
 
-<h2 id="header"></h2>
-
-<!-- FORMULAIRE -->
-<div id="form-section">
-
-    <table>
-        <tr>
-            <th>Lig</th>
-            <th>Heure Chgt</th>
-            <th>ARTICLE</th>
-            <th>CODE</th>
-        </tr>
-        <tr>
-            <td><input id="lig"></td>
-            <td><input id="heure"></td>
-            <td><input id="article"></td>
-            <td><input id="code"></td>
-        </tr>
-    </table>
-
-    <table>
-        <tr><th colspan="2" class="group-header">VITESSE</th></tr>
-        <tr>
-            <td><input id="vstd" placeholder="STD"></td>
-            <td><input id="vfab" placeholder="FAB"></td>
-        </tr>
-    </table>
-
-    <table>
-        <tr><th>PDS</th></tr>
-        <tr><td><input id="pds"></td></tr>
-    </table>
-
-    <table>
-        <tr><th colspan="3" class="group-header">FEEDER</th></tr>
-        <tr>
-            <td><input id="cuv" placeholder="CUV"></td>
-            <td><input id="vc" placeholder="VC"></td>
-            <td><input id="cp" placeholder="CP"></td>
-        </tr>
-    </table>
-
-    <table>
-        <tr><th colspan="3" class="group-header">CONDUITS</th></tr>
-        <tr>
-            <td><input id="cuil" placeholder="CUIL"></td>
-            <td><input id="int" placeholder="INT"></td>
-            <td><input id="def" placeholder="DEF"></td>
-        </tr>
-    </table>
-
-    <table>
-        <tr><th>BE</th></tr>
-        <tr><td><input id="be"></td></tr>
-    </table>
-
-    <table>
-        <tr><th colspan="3" class="group-header">MOULERIE</th></tr>
-        <tr>
-            <td><input id="serie" placeholder="Série"></td>
-            <td><input id="fabfin" placeholder="FAB FIN"></td>
-            <td><input id="finsa" placeholder="FIN SA"></td>
-        </tr>
-    </table>
-
-    <table>
-        <tr><th colspan="3" class="group-header">INDICES / DATES</th></tr>
-        <tr>
-            <td><input id="i1" placeholder="1er"></td>
-            <td><input id="i2" placeholder="2ème"></td>
-            <td><input id="i3" placeholder="3ème"></td>
-        </tr>
-    </table>
-
-    <table>
-        <tr><th>Tps de barre</th></tr>
-        <tr><td><input id="tps"></td></tr>
-    </table>
-
-    <table>
-        <tr><th>Trait</th></tr>
-        <tr><td><input id="trait"></td></tr>
-    </table>
-
-    <table>
-        <tr><th>OBSERVATIONS</th></tr>
-        <tr><td><input id="obs"></td></tr>
-    </table>
-
-    <table>
-        <tr><th>CdS</th></tr>
-        <tr><td><input id="cds"></td></tr>
-    </table>
-
-    <table>
-        <tr><th>Dernière Prod</th></tr>
-        <tr><td><input id="prod"></td></tr>
-    </table>
-
-    <button class="button" onclick="valider()">Valider</button>
+<!-- TOOLTIP -->
+<div id="tooltip">
+  <div class="tt-header">
+    <div class="tt-dot" id="tt-dot"></div>
+    <div class="tt-title" id="tt-title"></div>
+  </div>
+  <div class="tt-row"><span class="tt-lbl">Date</span><span class="tt-val" id="tt-date"></span></div>
+  <div class="tt-row"><span class="tt-lbl">Qui</span><span class="tt-val" id="tt-qui"></span></div>
+  <div class="tt-row"><span class="tt-lbl">Démarrage</span><span class="tt-val" id="tt-start"></span></div>
+  <div class="tt-row"><span class="tt-lbl">Fin</span><span class="tt-val" id="tt-end"></span></div>
+  <div class="tt-dur" id="tt-dur"></div>
+  <div class="tt-remark-box" id="tt-remark-box" style="display:none">
+    <div class="tt-remark-label">Remarque</div>
+    <div id="tt-rem"></div>
+  </div>
 </div>
 
-<!-- TABLEAU FINAL -->
-<div id="table-section" class="hidden">
-    <table id="final-table"></table>
-    <button class="button" onclick="retour()">Retour</button>
+<!-- HEADER -->
+<div class="hdr">
+  <div class="logo"><span>SGD<br>Pharma</span></div>
+  <div class="hdr-text">
+    <h1>Changement – Temp/Machine</h1>
+    <p><span class="status-dot"></span><span id="sync-status">Connexion…</span></p>
+  </div>
 </div>
 
-<script>
-function bandeau() {
-    const jours = ["DIMANCHE","LUNDI","MARDI","MERCREDI","JEUDI","VENDREDI","SAMEDI"];
-    const d = new Date();
-    const jour = jours[d.getDay()];
-    const date = d.toLocaleDateString("fr-FR");
-    const semaine = Math.ceil((d.getDate() - d.getDay() + 10) / 7);
+<!-- ══ SAISIE ══ -->
+<div class="form-wrap">
 
-    document.getElementById("header").textContent =
-        "PRÉPARATION CHANGEMENT DE FABRICATION BOUT CHAUD — Semaine " + semaine + " — " + jour + " " + date;
-}
+  <div class="machine-banner">SGD Pharma – Sucy-en-Brie</div>
+  <div class="edit-banner" id="edit-banner">✏️ Mode modification – corrigez puis Enregistrer</div>
 
-bandeau();
+  <div class="recall-box" id="recall-box">
+    <span class="recall-dismiss" onclick="dismissRecall()">Masquer</span>
+    <div class="recall-title">Dernière tâche enregistrée</div>
+    <div class="recall-chips" id="recall-chips"></div>
+  </div>
 
-function valider() {
-    const ids = [
-        "lig","heure","article","code","vstd","vfab","pds","cuv","vc","cp",
-        "cuil","int","def","be","serie","fabfin","finsa","i1","i2","i3",
-        "tps","trait","obs","cds","prod"
-    ];
+  <div class="sec">
+    <div class="sec-hd">Informations</div>
+    <div class="row">
+      <label>Date</label>
+      <input id="f-date" type="date">
+    </div>
+    <div class="row">
+      <label>Machine / Secteur</label>
+      <input id="f-machine" placeholder="ex: Mold side" autocomplete="off">
+    </div>
+    <div class="row" style="overflow:visible;z-index:100">
+      <label>Qui</label>
+      <input id="f-qui" placeholder="Libre ou choisir…" autocomplete="off"
+             oninput="showSugg()" onblur="hideSugg()">
+      <div class="suggestions" id="suggestions">
+        <div class="suggestion-item" onmousedown="pickSugg('IS')">IS</div>
+        <div class="suggestion-item" onmousedown="pickSugg('Feedermen')">Feedermen</div>
+        <div class="suggestion-item" onmousedown="pickSugg('Section Chief')">Section Chief</div>
+        <div class="suggestion-item" onmousedown="pickSugg('Maintenance')">Maintenance</div>
+        <div class="suggestion-item" onmousedown="pickSugg('Qualité')">Qualité</div>
+      </div>
+    </div>
+    <div class="row">
+      <label>Démarrage</label>
+      <div class="time-input-wrap">
+        <input class="t-h" id="s-h" inputmode="numeric" maxlength="2" placeholder="HH">
+        <span class="time-sep">:</span>
+        <input class="t-m" id="s-m" inputmode="numeric" maxlength="2" placeholder="MM">
+        <span class="time-preview" id="s-prev"></span>
+      </div>
+    </div>
+    <div class="row">
+      <label>Fin</label>
+      <div class="time-input-wrap">
+        <input class="t-h" id="e-h" inputmode="numeric" maxlength="2" placeholder="HH">
+        <span class="time-sep">:</span>
+        <input class="t-m" id="e-m" inputmode="numeric" maxlength="2" placeholder="MM">
+        <span class="time-preview" id="e-prev"></span>
+      </div>
+    </div>
+  </div>
 
-    let values = {};
-    ids.forEach(id => {
-        let v = document.getElementById(id).value.trim();
-        values[id] = v === "" ? "<span class='none-value'>None</span>" : v;
+  <div class="sec">
+    <div class="sec-hd">Remarque / Info</div>
+    <div class="row" style="align-items:flex-start;padding-top:10px">
+      <label style="padding-top:2px">Remarque</label>
+      <textarea id="f-remark" placeholder="Informations complémentaires…"></textarea>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="sec-hd">Couleur de la barre Gantt</div>
+    <div class="color-row">
+      <label>Couleur</label>
+      <div class="color-chip selected" style="background:#f59e0b" data-color="#f59e0b" onclick="selectColor(this)" title="Orange"></div>
+      <div class="color-chip" style="background:#ef4444" data-color="#ef4444" onclick="selectColor(this)" title="Rouge"></div>
+      <div class="color-chip" style="background:#22c55e" data-color="#22c55e" onclick="selectColor(this)" title="Vert"></div>
+      <div class="color-chip" style="background:#3b82f6" data-color="#3b82f6" onclick="selectColor(this)" title="Bleu"></div>
+      <div class="color-chip" style="background:#8b5cf6" data-color="#8b5cf6" onclick="selectColor(this)" title="Violet"></div>
+      <div class="color-chip" style="background:#1c1c1e" data-color="#1c1c1e" onclick="selectColor(this)" title="Noir"></div>
+      <div class="color-chip" style="background:#ec4899" data-color="#ec4899" onclick="selectColor(this)" title="Rose"></div>
+      <div class="color-chip" style="background:#06b6d4" data-color="#06b6d4" onclick="selectColor(this)" title="Cyan"></div>
+    </div>
+  </div>
+
+  <div class="btns">
+    <button class="btn btn-ok"    onclick="valider()">✓ Enregistrer</button>
+    <button class="btn btn-gantt" onclick="scrollToGantt()">↓ Voir Gantt</button>
+    <button class="btn btn-full"  onclick="clearAll()">Tout effacer (nouvelle séance)</button>
+  </div>
+
+  <div id="task-list"></div>
+  <div class="sync-info" id="sync-info"></div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ══ GANTT ══ -->
+<div class="gantt-section" id="gantt-section">
+  <div class="gantt-header-block">
+    <div class="gantt-logo"><span>SGD<br>Pharma</span></div>
+    <div class="gantt-title">
+      <h2>Changement – Temp/Machine</h2>
+      <p>SGD Pharma – Sucy-en-Brie</p>
+    </div>
+  </div>
+
+  <!-- Barre comparaison -->
+  <div class="cmp-bar" id="cmp-bar">
+    <div class="cmp-bar-info">
+      2 tâches sélectionnées
+      <span id="cmp-bar-names"></span>
+    </div>
+    <button class="cmp-bar-btn" onclick="doCompare()">Comparer ▶</button>
+  </div>
+
+  <!-- Résultat comparaison -->
+  <div class="cmp-result" id="cmp-result">
+    <div class="cmp-result-hd">
+      <h3 id="cmp-result-title">Comparaison</h3>
+      <span class="cmp-close" onclick="closeCompare()">Fermer</span>
+    </div>
+    <div class="cmp-cards" id="cmp-cards"></div>
+    <div class="cmp-diff">
+      <div class="cmp-diff-title">Analyse des écarts</div>
+      <div id="cmp-rows"></div>
+    </div>
+  </div>
+
+  <div class="gantt-scroll">
+    <div id="gantt-container"><div class="empty-gantt">Aucune tâche enregistrée</div></div>
+  </div>
+</div>
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+  import { getDatabase, ref, push, set, remove, onValue }
+    from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+
+  const app = initializeApp({
+    apiKey:            "AIzaSyDi9y4PmgvUHvnxDNu4kwpRvB9b-h7Dquk",
+    authDomain:        "gantt-sgd.firebaseapp.com",
+    databaseURL:       "https://gantt-sgd-default-rtdb.europe-west1.firebasedatabase.app",
+    projectId:         "gantt-sgd",
+    storageBucket:     "gantt-sgd.firebasestorage.app",
+    messagingSenderId: "363250513679",
+    appId:             "1:363250513679:web:bdf947bd2800614d7a307a"
+  });
+  const db       = getDatabase(app);
+  const tasksRef = ref(db, "tasks");
+
+  let tasks = {}, editId = null, selColor = "#f59e0b";
+  let selectedIds = [];
+
+  document.getElementById("f-date").value = new Date().toISOString().slice(0,10);
+
+  onValue(tasksRef, snap => {
+    tasks = snap.val() || {};
+    selectedIds = selectedIds.filter(id => tasks[id]);
+    renderTaskList();
+    renderGantt();
+    updateCmpBar();
+    const n = Object.keys(tasks).length;
+    document.getElementById("sync-status").textContent = "Connecté – " + n + " tâche(s)";
+    document.getElementById("sync-info").textContent   = n + " tâche(s) synchronisée(s)";
+  });
+
+  /* Scroll vers Gantt */
+  window.scrollToGantt = () => {
+    document.getElementById("gantt-section").scrollIntoView({ behavior: "smooth" });
+  };
+
+  /* Validation heure */
+  function setupTime(hId, mId, prevId) {
+    const hEl = document.getElementById(hId);
+    const mEl = document.getElementById(mId);
+    const prev = document.getElementById(prevId);
+
+    function upd() {
+      const h = hEl.value, m = mEl.value;
+      const hv = parseInt(h), mv = parseInt(m);
+      const hValid = h !== "" && hv >= 0 && hv <= 23;
+      const mValid = m !== "" && mv >= 0 && mv <= 59;
+      hEl.style.background  = h===""?"#f7f7f8":hValid?"#f7f7f8":"#fff0f0";
+      hEl.style.borderColor = h===""?"#e0e0e5":hValid?"#e0e0e5":"#ef4444";
+      mEl.style.background  = m===""?"#f7f7f8":mValid?"#f7f7f8":"#fff0f0";
+      mEl.style.borderColor = m===""?"#e0e0e5":mValid?"#e0e0e5":"#ef4444";
+      if (hValid&&mValid)       prev.textContent = String(hv).padStart(2,"0")+":"+String(mv).padStart(2,"0");
+      else if (hValid&&m==="")  prev.textContent = String(hv).padStart(2,"0")+":__";
+      else if ((!hValid&&h!=="") || (!mValid&&m!=="")) prev.textContent = "⚠ invalide";
+      else prev.textContent = "";
+    }
+    hEl.addEventListener("input", function(){ this.value=this.value.replace(/\D/g,"").slice(0,2); if(this.value.length===2){if(parseInt(this.value)>23)this.value="23"; mEl.focus();} upd(); });
+    hEl.addEventListener("blur",  function(){ if(this.value!==""){const v=parseInt(this.value);if(v>23)this.value="23";if(v<0)this.value="00";} upd(); });
+    mEl.addEventListener("input", function(){ this.value=this.value.replace(/\D/g,"").slice(0,2); if(this.value.length===2&&parseInt(this.value)>59)this.value="59"; upd(); });
+    mEl.addEventListener("blur",  function(){ if(this.value!==""){const v=parseInt(this.value);if(v>59)this.value="59";if(v<0)this.value="00";} upd(); });
+  }
+  setupTime("s-h","s-m","s-prev");
+  setupTime("e-h","e-m","e-prev");
+
+  function getTime(hId, mId) {
+    const h=document.getElementById(hId).value.trim(), m=document.getElementById(mId).value.trim();
+    if(!h) return "";
+    const hv=parseInt(h), mv=parseInt(m)||0;
+    if(hv<0||hv>23||mv<0||mv>59) return "";
+    return String(hv).padStart(2,"0")+":"+String(mv).padStart(2,"0");
+  }
+  function setTime(hId, mId, prevId, val) {
+    if(val&&val.includes(":")){
+      const[h,m]=val.split(":");
+      document.getElementById(hId).value=h;
+      document.getElementById(mId).value=m;
+      document.getElementById(prevId).textContent=val;
+    } else {
+      document.getElementById(hId).value="";
+      document.getElementById(mId).value="";
+      document.getElementById(prevId).textContent="";
+    }
+    [hId,mId].forEach(id=>{ document.getElementById(id).style.background="#f7f7f8"; document.getElementById(id).style.borderColor="#e0e0e5"; });
+  }
+
+  window.selectColor = el => {
+    document.querySelectorAll(".color-chip").forEach(c=>c.classList.remove("selected"));
+    el.classList.add("selected"); selColor=el.dataset.color;
+  };
+
+  window.showSugg = () => {
+    const q=document.getElementById("f-qui").value.toLowerCase(); let any=false;
+    document.querySelectorAll(".suggestion-item").forEach(item=>{ const s=item.textContent.toLowerCase().includes(q); item.style.display=s?"block":"none"; if(s)any=true; });
+    document.getElementById("suggestions").classList.toggle("open",any);
+  };
+  window.hideSugg = () => setTimeout(()=>document.getElementById("suggestions").classList.remove("open"),150);
+  window.pickSugg = v => { document.getElementById("f-qui").value=v; document.getElementById("suggestions").classList.remove("open"); };
+
+  function getVals() {
+    return {
+      date:    document.getElementById("f-date").value,
+      machine: document.getElementById("f-machine").value.trim(),
+      qui:     document.getElementById("f-qui").value.trim(),
+      start:   getTime("s-h","s-m"),
+      end:     getTime("e-h","e-m"),
+      remark:  document.getElementById("f-remark").value.trim(),
+      color:   selColor
+    };
+  }
+
+  window.valider = async () => {
+    const v=getVals();
+    if(!v.machine&&!v.qui&&!v.start&&!v.end){ alert("Remplissez au moins un champ."); return; }
+    if(editId){ await set(ref(db,"tasks/"+editId),v); editId=null; document.getElementById("edit-banner").classList.remove("visible"); }
+    else { await push(tasksRef,v); }
+    showRecall(v); resetForm(false);
+  };
+
+  window.resetForm = (clr=true) => {
+    document.getElementById("f-machine").value="";
+    document.getElementById("f-qui").value="";
+    document.getElementById("f-remark").value="";
+    document.getElementById("f-date").value=new Date().toISOString().slice(0,10);
+    setTime("s-h","s-m","s-prev","");
+    setTime("e-h","e-m","e-prev","");
+    editId=null; document.getElementById("edit-banner").classList.remove("visible");
+    if(clr) dismissRecall();
+  };
+
+  window.clearAll = async () => {
+    if(!confirm("Effacer TOUTES les tâches ?")) return;
+    await remove(tasksRef); resetForm(); dismissRecall();
+    selectedIds=[]; updateCmpBar(); closeCompare();
+  };
+
+  window.editTask = id => {
+    const t=tasks[id]; if(!t) return;
+    document.getElementById("f-machine").value=t.machine||"";
+    document.getElementById("f-qui").value=t.qui||"";
+    document.getElementById("f-remark").value=t.remark||"";
+    document.getElementById("f-date").value=t.date||new Date().toISOString().slice(0,10);
+    setTime("s-h","s-m","s-prev",t.start||"");
+    setTime("e-h","e-m","e-prev",t.end||"");
+    selColor=t.color||"#f59e0b";
+    document.querySelectorAll(".color-chip").forEach(c=>c.classList.toggle("selected",c.dataset.color===selColor));
+    editId=id; document.getElementById("edit-banner").classList.add("visible");
+    dismissRecall(); window.scrollTo({top:0,behavior:"smooth"});
+  };
+
+  window.deleteTask = async id => {
+    if(!confirm("Supprimer cette tâche ?")) return;
+    await remove(ref(db,"tasks/"+id));
+  };
+
+  function showRecall(t){
+    const chips=[
+      t.date    ?`<span class="recall-chip"><b>Date</b> ${t.date}</span>`:"",
+      t.machine ?`<span class="recall-chip"><b>Machine</b> ${t.machine}</span>`:"",
+      t.qui     ?`<span class="recall-chip"><b>Qui</b> ${t.qui}</span>`:"",
+      t.start   ?`<span class="recall-chip"><b>Début</b> ${t.start}</span>`:"",
+      t.end     ?`<span class="recall-chip"><b>Fin</b> ${t.end}</span>`:"",
+    ].filter(Boolean).join("");
+    document.getElementById("recall-chips").innerHTML=chips;
+    document.getElementById("recall-box").classList.add("visible");
+  }
+  window.dismissRecall = () => document.getElementById("recall-box").classList.remove("visible");
+
+  function renderTaskList(){
+    const list=document.getElementById("task-list");
+    const arr=Object.entries(tasks);
+    if(!arr.length){list.innerHTML="";return;}
+    list.innerHTML=arr.map(([id,t])=>{
+      const dateLabel=t.date?new Date(t.date+"T00:00:00").toLocaleDateString("fr-FR",{weekday:"long",day:"2-digit",month:"long"}):"";
+      return `<div class="task-card">
+        <div class="task-card-hd">
+          <div class="task-color-dot" style="background:${t.color||"#f59e0b"}"></div>
+          <span class="task-name">${t.machine||"—"}</span>
+          <span class="task-who">${t.qui||""}</span>
+        </div>
+        <div class="task-card-body">
+          ${dateLabel?`<span><b>Date :</b> ${dateLabel}</span>`:""}
+          <span><b>Début :</b> ${t.start||"?"}</span>
+          <span><b>Fin :</b> ${t.end||"?"}</span>
+        </div>
+        ${t.remark?`<div class="task-remark">${t.remark}</div>`:""}
+        <div class="task-actions">
+          <button class="act-btn btn-edit" onclick="editTask('${id}')">Modifier</button>
+          <button class="act-btn btn-del"  onclick="deleteTask('${id}')">Supprimer</button>
+        </div>
+      </div>`;
+    }).join("");
+  }
+
+  /* ══ COMPARAISON ══ */
+  const toMin  = s => { if(!s||!s.includes(":"))return null; const[h,m]=s.split(":").map(Number); return h*60+(m||0); };
+  const fmtDur = (s,e) => { const d=e-s; if(d<=0)return "—"; const h=Math.floor(d/60),m=d%60; return h&&m?h+"h "+m+"min":h?h+"h":m+"min"; };
+  const fmtDiff= d => { if(d===0)return "Identique"; const abs=Math.abs(d),h=Math.floor(abs/60),m=abs%60; return (d>0?"+":"-")+(h&&m?h+"h "+m+"min":h?h+"h":m+"min"); };
+
+  window.toggleSelect = id => {
+    const idx=selectedIds.indexOf(id);
+    if(idx>-1){ selectedIds.splice(idx,1); }
+    else {
+      if(selectedIds.length>=2){ selectedIds.shift(); }
+      selectedIds.push(id);
+    }
+    updateCmpBar();
+    renderGantt();
+  };
+
+  function updateCmpBar(){
+    const bar=document.getElementById("cmp-bar");
+    if(selectedIds.length===2){
+      bar.classList.add("visible");
+      const names=selectedIds.map(id=>tasks[id]?tasks[id].machine||"—":"—").join(" vs ");
+      document.getElementById("cmp-bar-names").textContent=names;
+    } else {
+      bar.classList.remove("visible");
+    }
+  }
+
+  window.doCompare = () => {
+    if(selectedIds.length!==2) return;
+    const [idA,idB]=selectedIds;
+    const A=tasks[idA], B=tasks[idB];
+    const sA=toMin(A.start),eA=toMin(A.end),sB=toMin(B.start),eB=toMin(B.end);
+    const durA=(sA!==null&&eA!==null&&eA>sA)?eA-sA:null;
+    const durB=(sB!==null&&eB!==null&&eB>sB)?eB-sB:null;
+
+    document.getElementById("cmp-result-title").textContent=(A.machine||"—")+" vs "+(B.machine||"—");
+
+    document.getElementById("cmp-cards").innerHTML=`
+      <div class="cmp-card">
+        <div class="cmp-card-badge a">🟡 Tâche A</div>
+        <div class="cmp-card-name">${A.machine||"—"}</div>
+        <div class="cmp-card-info">${A.qui||""}</div>
+        <div class="cmp-card-info">${A.start||"?"}  →  ${A.end||"?"}</div>
+        <div class="cmp-card-dur">${durA!==null?"Durée : "+fmtDur(sA,eA):"—"}</div>
+      </div>
+      <div class="cmp-card">
+        <div class="cmp-card-badge b">🟢 Tâche B</div>
+        <div class="cmp-card-name">${B.machine||"—"}</div>
+        <div class="cmp-card-info">${B.qui||""}</div>
+        <div class="cmp-card-info">${B.start||"?"}  →  ${B.end||"?"}</div>
+        <div class="cmp-card-dur">${durB!==null?"Durée : "+fmtDur(sB,eB):"—"}</div>
+      </div>`;
+
+    const rows=[];
+    if(sA!==null&&sB!==null){ const d=sB-sA; rows.push({lbl:"Écart démarrage (B − A)",val:fmtDiff(d),cls:d===0?"neu":"neg"}); }
+    if(eA!==null&&eB!==null){ const d=eB-eA; rows.push({lbl:"Écart de fin (B − A)",val:fmtDiff(d),cls:d===0?"neu":"neg"}); }
+    if(durA!==null&&durB!==null){ const d=durB-durA; rows.push({lbl:"Différence de durée (B − A)",val:fmtDiff(d),cls:d===0?"neu":d>0?"neg":"pos"}); }
+    if(sA!==null&&eA!==null&&sB!==null&&eB!==null){
+      const oStart=Math.max(sA,sB),oEnd=Math.min(eA,eB);
+      if(oEnd>oStart) rows.push({lbl:"Chevauchement",val:fmtDur(oStart,oEnd),cls:"neg"});
+      else rows.push({lbl:"Intervalle entre les deux",val:fmtDur(0,oStart-oEnd),cls:"neu"});
+    }
+
+    document.getElementById("cmp-rows").innerHTML=rows.map(r=>`
+      <div class="cmp-row">
+        <span class="cmp-row-lbl">${r.lbl}</span>
+        <span class="cmp-row-val ${r.cls}">${r.val}</span>
+      </div>`).join("");
+
+    document.getElementById("cmp-result").classList.add("visible");
+    document.getElementById("cmp-result").scrollIntoView({behavior:"smooth",block:"nearest"});
+  };
+
+  window.closeCompare = () => {
+    document.getElementById("cmp-result").classList.remove("visible");
+  };
+
+  /* ══ GANTT ══ */
+  const TT=document.getElementById("tooltip");
+  const ttMove=e=>{ let x=e.clientX+16,y=e.clientY+16; if(x+300>window.innerWidth)x=e.clientX-300; if(y+220>window.innerHeight)y=e.clientY-220; TT.style.left=x+"px"; TT.style.top=y+"px"; };
+  document.addEventListener("mousemove",e=>{ if(TT.classList.contains("visible"))ttMove(e); });
+
+  window.barEnter=(e,id)=>{
+    const t=tasks[id]; if(!t)return;
+    document.getElementById("tt-dot").style.background=t.color||"#f59e0b";
+    document.getElementById("tt-title").textContent=t.machine||"—";
+    const dl=t.date?new Date(t.date+"T00:00:00").toLocaleDateString("fr-FR",{weekday:"short",day:"2-digit",month:"short",year:"numeric"}):"—";
+    document.getElementById("tt-date").textContent=dl;
+    document.getElementById("tt-qui").textContent=t.qui||"—";
+    document.getElementById("tt-start").textContent=t.start||"—";
+    document.getElementById("tt-end").textContent=t.end||"—";
+    const s=toMin(t.start),en=toMin(t.end);
+    document.getElementById("tt-dur").textContent=(s!==null&&en!==null)?"⏱ Durée : "+fmtDur(s,en):"";
+    const rb=document.getElementById("tt-remark-box");
+    document.getElementById("tt-rem").textContent=t.remark||"";
+    rb.style.display=t.remark?"block":"none";
+    TT.classList.add("visible"); ttMove(e);
+  };
+  window.barLeave=()=>TT.classList.remove("visible");
+
+  function renderGantt(){
+    const container=document.getElementById("gantt-container");
+    const arr=Object.entries(tasks);
+    if(!arr.length){container.innerHTML='<div class="empty-gantt">Aucune tâche enregistrée</div>';return;}
+
+    let minT=Infinity,maxT=-Infinity;
+    arr.forEach(([,t])=>{ const s=toMin(t.start),e=toMin(t.end); if(s!==null)minT=Math.min(minT,s); if(e!==null)maxT=Math.max(maxT,e); });
+    if(!isFinite(minT))minT=480; if(!isFinite(maxT))maxT=minT+120;
+    minT=Math.floor(minT/60)*60; maxT=Math.ceil(maxT/60)*60+60;
+    const total=maxT-minT,slotMin=10,slots=total/slotMin;
+    const BAR_W=600,slotW=BAR_W/slots;
+
+    let h=`<table class="gantt">`;
+    h+=`<tr><th colspan="6"></th>`;
+    for(let m=minT;m<maxT;m+=60) h+=`<th colspan="${60/slotMin}" style="background:#1a3a6b;color:#fff">60 min</th>`;
+    h+=`</tr>`;
+    h+=`<tr>
+      <th class="chk-cell"></th>
+      <th style="width:150px;text-align:left;padding-left:8px">MACHINE / SECTEUR</th>
+      <th style="width:85px">QUI</th>
+      <th style="width:85px">DATE</th>
+      <th style="width:65px">Démarrage</th>
+      <th style="width:55px">Fin</th>`;
+    for(let m=minT;m<maxT;m+=slotMin){
+      const hh=Math.floor(m/60).toString().padStart(2,"0"),mm=(m%60).toString().padStart(2,"0");
+      h+=`<th style="width:${slotW}px;font-size:10px;color:#555;font-weight:400">${mm==="00"?hh+"h":mm}</th>`;
+    }
+    h+=`</tr>`;
+    h+=`<tr class="section-row"><td colspan="${6+slots}" class="info" style="padding-left:10px">SGD Pharma – Sucy-en-Brie</td></tr>`;
+
+    arr.forEach(([id,t])=>{
+      const s=toMin(t.start),e=toMin(t.end);
+      let barHtml="";
+      if(s!==null&&e!==null&&e>s){
+        const lp=((s-minT)/total)*100,wp=((e-s)/total)*100;
+        barHtml=`<div class="gantt-bar" style="left:${lp}%;width:${wp}%;background:${t.color||"#f59e0b"}"
+          onmouseenter="barEnter(event,'${id}')" onmouseleave="barLeave()"></div>`;
+      }
+      const dl=t.date?new Date(t.date+"T00:00:00").toLocaleDateString("fr-FR",{weekday:"short",day:"2-digit",month:"2-digit"}):"—";
+      const isSelA=selectedIds[0]===id, isSelB=selectedIds[1]===id;
+      const rowCls=isSelA?"sel-a":isSelB?"sel-b":"";
+      const checked=selectedIds.includes(id)?"checked":"";
+
+      h+=`<tr data-id="${id}" class="${rowCls}">
+        <td class="chk-cell info"><input type="checkbox" ${checked} onchange="toggleSelect('${id}')"></td>
+        <td class="info machine-name">${t.machine||"—"}</td>
+        <td class="info who-cell">${t.qui||""}</td>
+        <td class="info" style="text-align:center;font-size:11px;color:#6c6c70">${dl}</td>
+        <td class="info time-cell">${t.start||"?"}</td>
+        <td class="info time-cell">${t.end||"?"}</td>
+        <td colspan="${slots}" class="bar-cell"><div class="bar-inner">${barHtml}</div></td>
+      </tr>`;
     });
 
-    let html = `
-        <tr>
-            <th>Lig</th><th>Heure</th><th>ARTICLE</th><th>CODE</th>
-            <th colspan="2">VITESSE</th>
-            <th>PDS</th>
-            <th colspan="3">FEEDER</th>
-            <th colspan="3">CONDUITS</th>
-            <th>BE</th>
-            <th colspan="3">MOULERIE</th>
-            <th colspan="3">INDICES</th>
-            <th>Tps</th><th>Trait</th><th>OBS</th><th>CdS</th><th>Prod</th>
-        </tr>
-        <tr>
-            <td>${values.lig}</td>
-            <td>${values.heure}</td>
-            <td>${values.article}</td>
-            <td>${values.code}</td>
-
-            <td>${values.vstd}</td>
-            <td>${values.vfab}</td>
-
-            <td>${values.pds}</td>
-
-            <td>${values.cuv}</td>
-            <td>${values.vc}</td>
-            <td>${values.cp}</td>
-
-            <td>${values.cuil}</td>
-            <td>${values.int}</td>
-            <td>${values.def}</td>
-
-            <td>${values.be}</td>
-
-            <td>${values.serie}</td>
-            <td>${values.fabfin}</td>
-            <td>${values.finsa}</td>
-
-            <td>${values.i1}</td>
-            <td>${values.i2}</td>
-            <td>${values.i3}</td>
-
-            <td>${values.tps}</td>
-            <td>${values.trait}</td>
-            <td>${values.obs}</td>
-            <td>${values.cds}</td>
-            <td>${values.prod}</td>
-        </tr>
-    `;
-
-    document.getElementById("final-table").innerHTML = html;
-
-    document.getElementById("form-section").classList.add("hidden");
-    document.getElementById("table-section").classList.remove("hidden");
-}
-
-function retour() {
-    document.getElementById("table-section").classList.add("hidden");
-    document.getElementById("form-section").classList.remove("hidden");
-}
+    h+=`</table>`;
+    container.innerHTML=h;
+  }
 </script>
-
 </body>
 </html>
