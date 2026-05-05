@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Changement de Fabrication</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+    }
+
+    h2 {
+        text-align: center;
+        margin-bottom: 10px;
+    }
+
+    .hidden {
+        display: none;
+    }
+
+    table {
+        border-collapse: collapse;
+        width: 100%;
+        margin-top: 15px;
+    }
+
+    th, td {
+        border: 1px solid #444;
+        padding: 6px;
+        text-align: center;
+    }
+
+    th {
+        background: #e6e6e6;
+        font-weight: bold;
+    }
+
+    .group-header {
+        background: #dcdcdc;
+        font-weight: bold;
+    }
+
+    input {
+        width: 95%;
+        padding: 4px;
+        text-align: center;
+    }
+
+    .none-value {
+        color: #6c7a89; /* Gris bleuté visible mais pas agressif */
+        font-style: italic;
+    }
+
+    .button {
+        margin-top: 15px;
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+    }
+</style>
+</head>
+<body>
+
+<h2 id="header"></h2>
+
+<!-- FORMULAIRE -->
+<div id="form-section">
+
+    <table>
+        <tr>
+            <th>Lig</th>
+            <th>Heure Chgt</th>
+            <th>ARTICLE</th>
+            <th>CODE</th>
+        </tr>
+        <tr>
+            <td><input id="lig"></td>
+            <td><input id="heure"></td>
+            <td><input id="article"></td>
+            <td><input id="code"></td>
+        </tr>
+    </table>
+
+    <table>
+        <tr><th colspan="2" class="group-header">VITESSE</th></tr>
+        <tr>
+            <td><input id="vstd" placeholder="STD"></td>
+            <td><input id="vfab" placeholder="FAB"></td>
+        </tr>
+    </table>
+
+    <table>
+        <tr><th>PDS</th></tr>
+        <tr><td><input id="pds"></td></tr>
+    </table>
+
+    <table>
+        <tr><th colspan="3" class="group-header">FEEDER</th></tr>
+        <tr>
+            <td><input id="cuv" placeholder="CUV"></td>
+            <td><input id="vc" placeholder="VC"></td>
+            <td><input id="cp" placeholder="CP"></td>
+        </tr>
+    </table>
+
+    <table>
+        <tr><th colspan="3" class="group-header">CONDUITS</th></tr>
+        <tr>
+            <td><input id="cuil" placeholder="CUIL"></td>
+            <td><input id="int" placeholder="INT"></td>
+            <td><input id="def" placeholder="DEF"></td>
+        </tr>
+    </table>
+
+    <table>
+        <tr><th>BE</th></tr>
+        <tr><td><input id="be"></td></tr>
+    </table>
+
+    <table>
+        <tr><th colspan="3" class="group-header">MOULERIE</th></tr>
+        <tr>
+            <td><input id="serie" placeholder="Série"></td>
+            <td><input id="fabfin" placeholder="FAB FIN"></td>
+            <td><input id="finsa" placeholder="FIN SA"></td>
+        </tr>
+    </table>
+
+    <table>
+        <tr><th colspan="3" class="group-header">INDICES / DATES</th></tr>
+        <tr>
+            <td><input id="i1" placeholder="1er"></td>
+            <td><input id="i2" placeholder="2ème"></td>
+            <td><input id="i3" placeholder="3ème"></td>
+        </tr>
+    </table>
+
+    <table>
+        <tr><th>Tps de barre</th></tr>
+        <tr><td><input id="tps"></td></tr>
+    </table>
+
+    <table>
+        <tr><th>Trait</th></tr>
+        <tr><td><input id="trait"></td></tr>
+    </table>
+
+    <table>
+        <tr><th>OBSERVATIONS</th></tr>
+        <tr><td><input id="obs"></td></tr>
+    </table>
+
+    <table>
+        <tr><th>CdS</th></tr>
+        <tr><td><input id="cds"></td></tr>
+    </table>
+
+    <table>
+        <tr><th>Dernière Prod</th></tr>
+        <tr><td><input id="prod"></td></tr>
+    </table>
+
+    <button class="button" onclick="valider()">Valider</button>
+</div>
+
+<!-- TABLEAU FINAL -->
+<div id="table-section" class="hidden">
+    <table id="final-table"></table>
+    <button class="button" onclick="retour()">Retour</button>
+</div>
+
+<script>
+function bandeau() {
+    const jours = ["DIMANCHE","LUNDI","MARDI","MERCREDI","JEUDI","VENDREDI","SAMEDI"];
+    const d = new Date();
+    const jour = jours[d.getDay()];
+    const date = d.toLocaleDateString("fr-FR");
+    const semaine = Math.ceil((d.getDate() - d.getDay() + 10) / 7);
+
+    document.getElementById("header").textContent =
+        "PRÉPARATION CHANGEMENT DE FABRICATION BOUT CHAUD — Semaine " + semaine + " — " + jour + " " + date;
+}
+
+bandeau();
+
+function valider() {
+    const ids = [
+        "lig","heure","article","code","vstd","vfab","pds","cuv","vc","cp",
+        "cuil","int","def","be","serie","fabfin","finsa","i1","i2","i3",
+        "tps","trait","obs","cds","prod"
+    ];
+
+    let values = {};
+    ids.forEach(id => {
+        let v = document.getElementById(id).value.trim();
+        values[id] = v === "" ? "<span class='none-value'>None</span>" : v;
+    });
+
+    let html = `
+        <tr>
+            <th>Lig</th><th>Heure</th><th>ARTICLE</th><th>CODE</th>
+            <th colspan="2">VITESSE</th>
+            <th>PDS</th>
+            <th colspan="3">FEEDER</th>
+            <th colspan="3">CONDUITS</th>
+            <th>BE</th>
+            <th colspan="3">MOULERIE</th>
+            <th colspan="3">INDICES</th>
+            <th>Tps</th><th>Trait</th><th>OBS</th><th>CdS</th><th>Prod</th>
+        </tr>
+        <tr>
+            <td>${values.lig}</td>
+            <td>${values.heure}</td>
+            <td>${values.article}</td>
+            <td>${values.code}</td>
+
+            <td>${values.vstd}</td>
+            <td>${values.vfab}</td>
+
+            <td>${values.pds}</td>
+
+            <td>${values.cuv}</td>
+            <td>${values.vc}</td>
+            <td>${values.cp}</td>
+
+            <td>${values.cuil}</td>
+            <td>${values.int}</td>
+            <td>${values.def}</td>
+
+            <td>${values.be}</td>
+
+            <td>${values.serie}</td>
+            <td>${values.fabfin}</td>
+            <td>${values.finsa}</td>
+
+            <td>${values.i1}</td>
+            <td>${values.i2}</td>
+            <td>${values.i3}</td>
+
+            <td>${values.tps}</td>
+            <td>${values.trait}</td>
+            <td>${values.obs}</td>
+            <td>${values.cds}</td>
+            <td>${values.prod}</td>
+        </tr>
+    `;
+
+    document.getElementById("final-table").innerHTML = html;
+
+    document.getElementById("form-section").classList.add("hidden");
+    document.getElementById("table-section").classList.remove("hidden");
+}
+
+function retour() {
+    document.getElementById("table-section").classList.add("hidden");
+    document.getElementById("form-section").classList.remove("hidden");
+}
+</script>
+
+</body>
+</html>
