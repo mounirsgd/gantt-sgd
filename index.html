@@ -6,312 +6,194 @@
 <title>Changement – Temp/Machine</title>
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: Arial, sans-serif; background: #f2f2f7; color: #1c1c1e; min-height: 100vh; }
 
-  body {
-    font-family: Arial, sans-serif;
-    background: #f2f2f7;
-    color: #1c1c1e;
-    min-height: 100vh;
-  }
-
-  .hdr {
-    background: #fff;
-    border-bottom: 1px solid #d1d1d6;
-    padding: 10px 14px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    position: sticky;
-    top: 0;
-    z-index: 200;
-  }
-  .logo {
-    width: 44px; height: 44px;
-    background: #1a3a6b;
-    border-radius: 8px;
-    display: flex; align-items: center; justify-content: center;
-    flex-shrink: 0;
-  }
-  .logo span { color: #fff; font-size: 11px; font-weight: 700; line-height: 1.2; text-align: center; }
-  .hdr-text h1 { font-size: 15px; font-weight: 700; color: #1c1c1e; }
-  .hdr-text p  { font-size: 11px; color: #6c6c70; margin-top: 1px; }
-
-  .form-wrap { padding: 10px; }
-
-  .machine-banner {
-    background: #1a3a6b; color: #fff;
-    border-radius: 10px; padding: 10px 14px;
-    margin-bottom: 10px; font-size: 13px;
-    font-weight: 700; text-align: center;
-  }
-
-  .sec {
-    background: #fff; border-radius: 12px;
-    border: 1px solid #e0e0e5; margin-bottom: 10px;
-    overflow: visible;
-  }
-  .sec-hd {
-    font-size: 11px; font-weight: 700; color: #6c6c70;
-    padding: 7px 12px; background: #f7f7f8;
-    border-bottom: 1px solid #e0e0e5;
-    text-transform: uppercase; letter-spacing: 0.5px;
-    border-radius: 12px 12px 0 0;
-  }
-  .row {
-    display: flex; align-items: center;
-    padding: 11px 12px; border-bottom: 1px solid #f0f0f2;
-    min-height: 46px; position: relative;
-  }
-  .row:last-child { border-bottom: none; }
-  .row label { font-size: 13px; color: #6c6c70; min-width: 110px; flex-shrink: 0; }
-  .row input {
-    flex: 1; border: none; background: transparent;
-    font-size: 15px; color: #1c1c1e;
-    font-family: Arial, sans-serif; outline: none;
-    text-align: left; min-width: 0; direction: ltr;
-  }
-  .row input::placeholder { color: #c7c7cc; font-size: 14px; }
-  .row textarea {
-    flex: 1; border: none; background: transparent;
-    font-size: 14px; color: #1c1c1e;
-    font-family: Arial, sans-serif; outline: none;
-    resize: none; min-height: 64px;
-    padding: 4px 0; text-align: left; direction: ltr;
-  }
-  .row textarea::placeholder { color: #c7c7cc; font-size: 13px; }
-
-  .time-input-wrap { flex: 1; display: flex; align-items: center; gap: 4px; }
-  .time-input-wrap input {
-    flex: unset; border: 1px solid #e0e0e5; border-radius: 8px;
-    background: #f7f7f8; font-size: 18px; font-weight: 700;
-    color: #1c1c1e; text-align: center; outline: none; padding: 4px 0;
-  }
-  .time-input-wrap input.t-h { width: 48px; }
-  .time-input-wrap input.t-m { width: 48px; }
-  .time-sep { font-size: 20px; font-weight: 700; color: #1a3a6b; line-height: 1; }
-  .time-preview { font-size: 12px; color: #6c6c70; margin-left: 8px; }
-
-  .suggestions {
-    display: none; position: absolute;
-    top: 100%; left: 0; right: 0;
-    background: #fff; border: 1px solid #d1d1d6;
-    border-radius: 10px; z-index: 500; overflow: hidden;
-    box-shadow: 0 4px 16px rgba(0,0,0,0.12);
-  }
-  .suggestions.open { display: block; }
-  .suggestion-item { padding: 12px 14px; font-size: 14px; color: #1c1c1e; cursor: pointer; border-bottom: 1px solid #f0f0f2; }
-  .suggestion-item:last-child { border-bottom: none; }
-  .suggestion-item:hover { background: #f2f2f7; }
-
-  .color-row { display: flex; align-items: center; padding: 10px 12px; gap: 10px; flex-wrap: wrap; border-radius: 0 0 12px 12px; }
-  .color-row label { font-size: 13px; color: #6c6c70; min-width: 80px; }
-  .color-chip { width: 32px; height: 32px; border-radius: 50%; cursor: pointer; border: 3px solid transparent; transition: border 0.15s, transform 0.1s; }
-  .color-chip.selected { border-color: #1c1c1e; transform: scale(1.15); }
-
-  .btns { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 0 0 10px; }
-  .btn {
-    padding: 14px; border-radius: 10px; font-size: 15px;
-    font-weight: 700; cursor: pointer; border: 1px solid #d1d1d6;
-    background: #fff; color: #1c1c1e; font-family: Arial, sans-serif;
-  }
-  .btn:active { opacity: 0.7; transform: scale(0.98); }
-  .btn-ok      { background: #34c759; color: #fff; border-color: #2dae4d; }
-  .btn-gantt   { background: #1a3a6b; color: #fff; border-color: #1a3a6b; }
-  .btn-full    { grid-column: 1/-1; color: #ff3b30; border-color: #ffb3b0; }
-
-  .recall-box {
-    display: none; background: #fffbe6;
-    border: 1px solid #ffe58f; border-radius: 10px;
-    margin-bottom: 10px; padding: 10px 12px;
-  }
-  .recall-box.visible { display: block; }
-  .recall-title { font-size: 11px; font-weight: 700; color: #856404; margin-bottom: 6px; }
-  .recall-chips { display: flex; flex-wrap: wrap; gap: 6px; }
-  .recall-chip { background: #fff8dc; border: 1px solid #ffe58f; border-radius: 6px; padding: 3px 8px; font-size: 12px; color: #6b4e00; }
-  .recall-chip b { color: #3d2b00; }
-  .recall-dismiss { float: right; font-size: 12px; color: #856404; cursor: pointer; text-decoration: underline; }
-
-  .edit-banner {
-    display: none; background: #fff3cd;
-    border: 1px solid #ffc107; border-radius: 10px;
-    padding: 8px 14px; font-size: 12px; font-weight: 700;
-    color: #856404; text-align: center; margin-bottom: 10px;
-  }
-  .edit-banner.visible { display: block; }
-
-  .task-card { background: #fff; border-radius: 10px; border: 1px solid #e0e0e5; margin-bottom: 8px; overflow: hidden; }
-  .task-card-hd { display: flex; align-items: center; padding: 10px 12px; gap: 10px; border-bottom: 1px solid #f0f0f2; }
-  .task-color-dot { width: 14px; height: 14px; border-radius: 50%; flex-shrink: 0; }
-  .task-name { font-size: 14px; font-weight: 700; flex: 1; }
-  .task-who  { font-size: 12px; color: #6c6c70; }
-  .task-card-body { display: flex; padding: 8px 12px; gap: 16px; font-size: 12px; color: #6c6c70; flex-wrap: wrap; }
-  .task-card-body span b { color: #1c1c1e; }
-  .task-remark { padding: 0 12px 6px; font-size: 12px; color: #555; font-style: italic; }
-  .task-actions { display: flex; padding: 0 12px 8px; gap: 8px; }
-  .act-btn { padding: 5px 12px; border-radius: 6px; font-size: 12px; font-weight: 700; cursor: pointer; border: 1px solid; font-family: Arial, sans-serif; }
-  .act-btn:active { opacity: 0.6; }
-  .btn-edit { border-color: #007aff; color: #007aff; background: #e8f0fe; }
-  .btn-del  { border-color: #ff3b30; color: #ff3b30; background: #fff0f0; }
-
-  .sync-info { font-size: 11px; color: #6c6c70; text-align: center; padding: 8px; }
-
-  /* ══ GANTT ══ */
-  .gantt-section { padding: 10px; padding-bottom: 60px; }
-
-  .gantt-header-block {
-    display: flex; align-items: center; gap: 16px;
-    margin-bottom: 12px; background: #fff;
-    border-radius: 12px; padding: 14px 18px;
-    border: 1px solid #e0e0e5;
-  }
-  .gantt-logo { width: 52px; height: 52px; background: #1a3a6b; border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-  .gantt-logo span { color: #fff; font-size: 13px; font-weight: 700; text-align: center; line-height: 1.2; }
-  .gantt-title h2 { font-size: 18px; font-weight: 700; color: #1c1c1e; }
-  .gantt-title p  { font-size: 12px; color: #1a3a6b; font-weight: 700; margin-top: 2px; }
-
-  .gantt-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
-
-  table.gantt {
-    border-collapse: collapse; font-size: 12px;
-    background: #fff; border-radius: 12px;
-    border: 1px solid #d1d1d6;
-  }
-  table.gantt th {
-    background: #e8edf5; color: #1a3a6b; font-weight: 700;
-    padding: 8px; border: 1px solid #d1d1d6;
-    text-align: center; font-size: 11px; white-space: nowrap;
-  }
-  table.gantt td { border: 1px solid #e0e0e5; padding: 0; }
-  table.gantt td.info { padding: 6px 10px; font-size: 12px; white-space: nowrap; }
-  table.gantt td.machine-name { font-weight: 700; font-size: 13px; color: #1c1c1e; min-width: 160px; }
-  table.gantt td.who-cell { color: #3a3a4a; text-align: center; min-width: 90px; }
-  table.gantt td.time-cell { text-align: center; color: #1a3a6b; font-weight: 700; min-width: 60px; }
-  table.gantt tr:nth-child(odd) td  { background: #fff; }
-  table.gantt tr:nth-child(even) td { background: #fafafa; }
-  table.gantt .section-row td { background: #dce6f5 !important; font-weight: 700; color: #1a3a6b; }
-
-  /* Ligne sélectionnée */
-  table.gantt tr.sel-a td { background: #fff8e1 !important; }
-  table.gantt tr.sel-b td { background: #e8f5e9 !important; }
-
-  .bar-cell { position: relative; min-width: 400px; padding: 0 !important; }
-  .bar-inner { position: relative; height: 36px; }
-  .gantt-bar {
-    position: absolute; top: 5px; bottom: 5px;
-    border-radius: 5px; opacity: 0.88; cursor: pointer;
-    transition: opacity 0.15s;
-  }
-  .gantt-bar:hover { opacity: 1; top: 3px; bottom: 3px; }
-
-  /* Checkbox colonne */
-  .chk-cell { text-align: center; width: 36px; padding: 0 6px !important; }
-  .chk-cell input[type=checkbox] { width: 18px; height: 18px; cursor: pointer; accent-color: #1a3a6b; }
-
-  /* ══ PANNEAU COMPARAISON ══ */
-  .cmp-bar {
-    display: none;
-    background: #1a3a6b; color: #fff;
-    border-radius: 12px; padding: 10px 14px;
-    margin-bottom: 10px;
-    align-items: center; justify-content: space-between;
-    gap: 10px; flex-wrap: wrap;
-  }
-  .cmp-bar.visible { display: flex; }
-  .cmp-bar-info { font-size: 13px; font-weight: 700; }
-  .cmp-bar-info span { font-size: 11px; font-weight: 400; opacity: 0.8; display: block; margin-top: 2px; }
-  .cmp-bar-btn {
-    padding: 8px 16px; border-radius: 8px;
-    background: #fff; color: #1a3a6b;
-    border: none; font-size: 13px; font-weight: 700;
-    cursor: pointer; font-family: Arial, sans-serif;
-    white-space: nowrap;
-  }
-  .cmp-bar-btn:active { opacity: 0.8; }
-
-  .cmp-result {
-    display: none;
-    background: #fff; border-radius: 12px;
-    border: 1px solid #e0e0e5; margin-bottom: 10px;
-    overflow: hidden;
-  }
-  .cmp-result.visible { display: block; }
-  .cmp-result-hd {
-    background: #f7f7f8; padding: 10px 14px;
-    border-bottom: 1px solid #e0e0e5;
-    display: flex; align-items: center; justify-content: space-between;
-  }
-  .cmp-result-hd h3 { font-size: 13px; font-weight: 700; color: #1a3a6b; }
-  .cmp-close { font-size: 12px; color: #6c6c70; cursor: pointer; text-decoration: underline; }
-
-  .cmp-cards { display: grid; grid-template-columns: 1fr 1fr; }
-  .cmp-card { padding: 10px 14px; border-right: 1px solid #f0f0f2; }
-  .cmp-card:last-child { border-right: none; }
-  .cmp-card-badge { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.4px; margin-bottom: 4px; }
-  .cmp-card-badge.a { color: #b45309; }
-  .cmp-card-badge.b { color: #15803d; }
-  .cmp-card-name { font-size: 13px; font-weight: 700; color: #1c1c1e; }
-  .cmp-card-info { font-size: 11px; color: #6c6c70; margin-top: 2px; }
-  .cmp-card-dur  { font-size: 12px; color: #1a3a6b; font-weight: 700; margin-top: 4px; }
-
-  .cmp-diff { border-top: 1px solid #f0f0f2; padding: 10px 14px; }
-  .cmp-diff-title { font-size: 11px; font-weight: 700; color: #6c6c70; text-transform: uppercase; letter-spacing: 0.4px; margin-bottom: 8px; }
-  .cmp-row { display: flex; justify-content: space-between; align-items: center; padding: 6px 0; border-bottom: 1px solid #f7f7f8; font-size: 13px; }
-  .cmp-row:last-child { border-bottom: none; }
-  .cmp-row-lbl { color: #555; }
-  .cmp-row-val { font-weight: 700; }
-  .cmp-row-val.pos { color: #22c55e; }
-  .cmp-row-val.neg { color: #ef4444; }
-  .cmp-row-val.neu { color: #6c6c70; }
-
-  /* ══ TOOLTIP ══ */
-  #tooltip {
-    display: none; position: fixed;
-    background: #1c1c1e; color: #fff;
-    border-radius: 14px; padding: 14px 16px;
-    font-size: 12px; line-height: 1.9;
-    z-index: 9999; pointer-events: none;
-    min-width: 210px; max-width: 290px;
-    box-shadow: 0 8px 30px rgba(0,0,0,0.30);
-  }
-  #tooltip.visible { display: block; }
-  .tt-header { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; padding-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.15); }
-  .tt-dot    { width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0; }
-  .tt-title  { font-size: 14px; font-weight: 700; }
-  .tt-row    { display: flex; justify-content: space-between; gap: 14px; }
-  .tt-lbl    { color: #aaa; }
-  .tt-val    { font-weight: 700; }
-  .tt-dur    { margin-top: 8px; padding-top: 7px; border-top: 1px solid rgba(255,255,255,0.15); color: #ffd60a; font-weight: 700; font-size: 13px; }
-  .tt-remark-box { margin-top: 8px; padding: 8px 10px; background: rgba(255,255,255,0.12); border-radius: 8px; border-left: 3px solid #ffd60a; font-size: 12px; color: #fff; font-style: italic; line-height: 1.5; }
-  .tt-remark-label { font-size: 10px; font-weight: 700; color: #ffd60a; text-transform: uppercase; margin-bottom: 3px; font-style: normal; }
-
-  .empty-gantt { text-align: center; padding: 48px 24px; color: #c7c7cc; font-size: 14px; background: #fff; border-radius: 12px; border: 1px solid #e0e0e5; }
-
-  .status-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #34c759; margin-right: 5px; animation: pulse 1.5s infinite; }
+  .hdr { background:#fff; border-bottom:1px solid #d1d1d6; padding:10px 14px; display:flex; align-items:center; gap:12px; position:sticky; top:0; z-index:200; }
+  .logo { width:44px; height:44px; background:#1a3a6b; border-radius:8px; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .logo span { color:#fff; font-size:11px; font-weight:700; line-height:1.2; text-align:center; }
+  .hdr-text h1 { font-size:15px; font-weight:700; color:#1c1c1e; }
+  .hdr-text p  { font-size:11px; color:#6c6c70; margin-top:1px; }
+  .status-dot { display:inline-block; width:8px; height:8px; border-radius:50%; background:#34c759; margin-right:5px; animation:pulse 1.5s infinite; }
   @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
 
-  .divider { height: 1px; background: #d1d1d6; margin: 6px 10px 14px; }
+  .form-wrap { padding:10px; }
+  .machine-banner { background:#1a3a6b; color:#fff; border-radius:10px; padding:10px 14px; margin-bottom:10px; font-size:13px; font-weight:700; text-align:center; }
+
+  /* TYPE SELECTOR */
+  .type-selector { background:#fff; border-radius:12px; border:1px solid #e0e0e5; margin-bottom:10px; overflow:hidden; }
+  .type-selector-hd { font-size:11px; font-weight:700; color:#6c6c70; padding:7px 12px; background:#f7f7f8; border-bottom:1px solid #e0e0e5; text-transform:uppercase; letter-spacing:0.5px; }
+  .type-btns { display:grid; grid-template-columns:1fr 1fr 1fr; }
+  .type-btn { padding:12px 8px; text-align:center; font-size:12px; font-weight:700; cursor:pointer; border:none; background:#fff; color:#1c1c1e; border-right:1px solid #e0e0e5; font-family:Arial,sans-serif; line-height:1.4; transition:all 0.15s; }
+  .type-btn:last-child { border-right:none; }
+  .type-btn[data-type="small_t1"].active { background:#e07b54; color:#fff; }
+  .type-btn[data-type="grand_t1"].active { background:#c0392b; color:#fff; }
+  .type-btn[data-type="rondelle"].active { background:#7d3c98; color:#fff; }
+
+  /* MACHINE INFO */
+  .info-sec { background:#fff; border-radius:12px; border:1px solid #e0e0e5; margin-bottom:10px; overflow:hidden; }
+  .info-sec-hd { font-size:11px; font-weight:700; color:#6c6c70; padding:7px 12px; background:#f7f7f8; border-bottom:1px solid #e0e0e5; text-transform:uppercase; }
+  .info-row { display:flex; align-items:center; padding:10px 12px; border-bottom:1px solid #f0f0f2; }
+  .info-row:last-child { border-bottom:none; }
+  .info-row label { font-size:13px; color:#6c6c70; min-width:110px; flex-shrink:0; }
+  .info-row input { flex:1; border:none; background:transparent; font-size:15px; color:#1c1c1e; font-family:Arial,sans-serif; outline:none; direction:ltr; }
+  .info-row input::placeholder { color:#c7c7cc; }
+
+  /* TASKS */
+  .tasks-sec { background:#fff; border-radius:12px; border:1px solid #e0e0e5; margin-bottom:10px; overflow:hidden; }
+  .tasks-sec-hd { font-size:12px; font-weight:700; color:#fff; padding:9px 12px; }
+  .task-row { border-bottom:1px solid #f0f0f2; padding:10px 12px; }
+  .task-row:last-child { border-bottom:none; }
+  .task-row-top { display:flex; align-items:center; gap:8px; margin-bottom:8px; }
+  .task-color-bar { width:4px; height:32px; border-radius:3px; flex-shrink:0; }
+  .task-row-label { font-size:13px; font-weight:700; color:#1c1c1e; flex:1; }
+  .task-row-who { font-size:11px; color:#6c6c70; background:#f7f7f8; padding:2px 8px; border-radius:6px; white-space:nowrap; }
+  .task-row-times { display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+  .task-time-group { display:flex; align-items:center; gap:4px; }
+  .task-time-group label { font-size:11px; color:#6c6c70; min-width:42px; }
+  .tw { display:flex; align-items:center; gap:3px; }
+  .tw input { border:1px solid #e0e0e5; border-radius:6px; background:#f7f7f8; font-size:14px; font-weight:700; color:#1c1c1e; text-align:center; outline:none; padding:4px 0; width:42px; transition:border-color 0.15s, background 0.15s; }
+  .tw input.invalid { border-color:#ef4444; background:#fff0f0; }
+  .tw-sep { font-size:16px; font-weight:700; color:#1a3a6b; }
+  .tw-prev { font-size:11px; color:#6c6c70; margin-left:4px; min-width:60px; }
+  .task-comment-wrap { margin-top:8px; }
+  .task-comment-wrap input { width:100%; border:1px solid #e0e0e5; border-radius:8px; background:#f7f7f8; font-size:13px; color:#1c1c1e; padding:7px 10px; outline:none; font-family:Arial,sans-serif; }
+  .task-comment-wrap input::placeholder { color:#c7c7cc; }
+
+  /* TARGET OBJECTIF */
+  .target-wrap { margin:8px; border-radius:10px; overflow:hidden; border:2px solid #f59e0b; }
+  .target-hd { padding:8px 12px; font-size:12px; font-weight:700; display:flex; align-items:center; justify-content:space-between; }
+  .target-body { padding:10px 12px; display:flex; align-items:center; gap:8px; flex-wrap:wrap; background:#fff; }
+  .target-body label { font-size:13px; color:#6c6c70; }
+  .target-sep { font-size:18px; font-weight:700; color:#f59e0b; }
+  .target-prev { font-size:12px; color:#6c6c70; margin-left:4px; }
+
+  /* INDICATEURS */
+  .indic-sec { background:#fff; border-radius:12px; border:2px solid #ef4444; margin-bottom:10px; overflow:hidden; }
+  .indic-hd { background:#ef4444; color:#fff; padding:8px 12px; font-size:12px; font-weight:700; display:flex; align-items:center; justify-content:space-between; }
+  .indic-add-btn { background:rgba(255,255,255,0.25); border:none; color:#fff; padding:4px 10px; border-radius:6px; font-size:12px; cursor:pointer; font-family:Arial,sans-serif; }
+  .indic-item { padding:10px 12px; border-bottom:1px solid #f0f0f2; }
+  .indic-item:last-child { border-bottom:none; }
+  .indic-row1 { display:flex; align-items:center; gap:8px; margin-bottom:8px; flex-wrap:wrap; }
+  .indic-select { flex:1; border:1px solid #e0e0e5; border-radius:8px; background:#f7f7f8; font-size:13px; color:#1c1c1e; padding:6px 8px; outline:none; font-family:Arial,sans-serif; min-width:120px; }
+  .indic-arrow { font-size:16px; color:#ef4444; font-weight:700; flex-shrink:0; }
+  .indic-del { background:none; border:none; color:#ef4444; font-size:18px; cursor:pointer; padding:0 4px; flex-shrink:0; }
+  .indic-row2 { display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
+  .indic-time-opt { font-size:11px; color:#6c6c70; }
+  .indic-comment { flex:1; border:1px solid #e0e0e5; border-radius:8px; background:#f7f7f8; font-size:13px; color:#1c1c1e; padding:6px 10px; outline:none; font-family:Arial,sans-serif; }
+  .indic-comment::placeholder { color:#c7c7cc; }
+  .indic-empty { padding:12px; font-size:12px; color:#c7c7cc; text-align:center; }
+
+  /* HISTORIQUE */
+  .history-sec { background:#fff; border-radius:12px; border:1px solid #e0e0e5; margin-bottom:10px; overflow:hidden; }
+  .history-hd { font-size:11px; font-weight:700; color:#6c6c70; padding:7px 12px; background:#f7f7f8; border-bottom:1px solid #e0e0e5; text-transform:uppercase; display:flex; align-items:center; justify-content:space-between; }
+  .history-list { max-height:180px; overflow-y:auto; }
+  .history-item { display:flex; align-items:center; justify-content:space-between; padding:10px 12px; border-bottom:1px solid #f0f0f2; cursor:pointer; }
+  .history-item:last-child { border-bottom:none; }
+  .history-item:hover { background:#f7f7f8; }
+  .history-item-info { font-size:13px; font-weight:700; color:#1c1c1e; }
+  .history-item-sub  { font-size:11px; color:#6c6c70; margin-top:2px; }
+  .history-item-btn  { font-size:11px; color:#1a3a6b; font-weight:700; white-space:nowrap; margin-left:8px; }
+  .history-empty { padding:16px; text-align:center; font-size:13px; color:#c7c7cc; }
+
+  /* BTNS */
+  .btns { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin:0 0 10px; }
+  .btn { padding:14px; border-radius:10px; font-size:15px; font-weight:700; cursor:pointer; border:1px solid #d1d1d6; background:#fff; color:#1c1c1e; font-family:Arial,sans-serif; }
+  .btn:active { opacity:0.7; transform:scale(0.98); }
+  .btn-ok    { background:#34c759; color:#fff; border-color:#2dae4d; }
+  .btn-gantt { background:#1a3a6b; color:#fff; border-color:#1a3a6b; }
+  .btn-full  { grid-column:1/-1; color:#ff3b30; border-color:#ffb3b0; font-size:13px; padding:10px; }
+  .sync-info { font-size:11px; color:#6c6c70; text-align:center; padding:6px; }
+  .divider { height:1px; background:#d1d1d6; margin:6px 10px 14px; }
+
+  /* GANTT */
+  .gantt-section { padding:10px; padding-bottom:80px; }
+  .gantt-header-block { display:flex; align-items:center; gap:16px; margin-bottom:12px; background:#fff; border-radius:12px; padding:14px 18px; border:1px solid #e0e0e5; }
+  .gantt-logo { width:52px; height:52px; background:#1a3a6b; border-radius:8px; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .gantt-logo span { color:#fff; font-size:13px; font-weight:700; text-align:center; line-height:1.2; }
+  .gantt-title h2 { font-size:18px; font-weight:700; color:#1c1c1e; }
+  .gantt-title p  { font-size:12px; color:#1a3a6b; font-weight:700; margin-top:2px; }
+  .gantt-scroll { overflow-x:auto; -webkit-overflow-scrolling:touch; }
+
+  table.gantt { border-collapse:collapse; font-size:12px; background:#fff; border:1px solid #d1d1d6; }
+  table.gantt th { background:#e8edf5; color:#1a3a6b; font-weight:700; padding:7px 8px; border:1px solid #d1d1d6; text-align:center; font-size:11px; white-space:nowrap; }
+  table.gantt td { border:1px solid #e0e0e5; padding:0; }
+  table.gantt td.info { padding:5px 8px; font-size:12px; white-space:nowrap; }
+  table.gantt td.machine-name { font-weight:700; font-size:12px; color:#1c1c1e; min-width:150px; }
+  table.gantt td.who-cell { color:#3a3a4a; text-align:center; min-width:80px; font-size:11px; }
+  table.gantt td.time-cell { text-align:center; color:#1a3a6b; font-weight:700; min-width:52px; font-size:11px; }
+  table.gantt tr.odd td  { background:#fff; }
+  table.gantt tr.even td { background:#fafafa; }
+  table.gantt tr.target-row td { background:#fff8e1 !important; }
+  table.gantt tr.indic-gantt-row td { background:#fff0f0 !important; }
+  table.gantt tr.sel-a td { background:#fff8e1 !important; outline:2px solid #f59e0b; }
+  table.gantt tr.sel-b td { background:#e8f5e9 !important; outline:2px solid #22c55e; }
+
+  .bar-cell { position:relative; min-width:400px; padding:0 !important; height:36px; }
+  .bar-inner { position:relative; width:100%; height:100%; }
+  .gantt-bar { position:absolute; top:5px; bottom:5px; border-radius:5px; opacity:0.88; cursor:pointer; transition:opacity 0.15s; }
+  .gantt-bar:hover { opacity:1; top:3px; bottom:3px; }
+  .gantt-bar-target { position:absolute; top:6px; bottom:6px; border-radius:4px; background:#f59e0b; opacity:0.9; cursor:pointer; }
+  .gantt-bar-target:hover { opacity:1; }
+  .gantt-comment-dot { position:absolute; top:3px; right:3px; width:7px; height:7px; background:#fff; border-radius:50%; border:1.5px solid rgba(0,0,0,0.3); }
+
+  /* FLÈCHE INDICATEUR */
+  .gantt-arrow-svg { position:absolute; top:0; bottom:0; pointer-events:none; overflow:visible; }
+
+  /* COMPARAISON */
+  .cmp-bar { display:none; background:#1a3a6b; color:#fff; border-radius:12px; padding:10px 14px; margin-bottom:10px; align-items:center; justify-content:space-between; gap:10px; }
+  .cmp-bar.visible { display:flex; }
+  .cmp-bar-info { font-size:13px; font-weight:700; }
+  .cmp-bar-info span { font-size:11px; font-weight:400; opacity:0.8; display:block; margin-top:2px; }
+  .cmp-bar-btn { padding:8px 16px; border-radius:8px; background:#fff; color:#1a3a6b; border:none; font-size:13px; font-weight:700; cursor:pointer; font-family:Arial,sans-serif; }
+  .cmp-result { display:none; background:#fff; border-radius:12px; border:1px solid #e0e0e5; margin-bottom:10px; overflow:hidden; }
+  .cmp-result.visible { display:block; }
+  .cmp-result-hd { background:#f7f7f8; padding:10px 14px; border-bottom:1px solid #e0e0e5; display:flex; align-items:center; justify-content:space-between; }
+  .cmp-result-hd h3 { font-size:13px; font-weight:700; color:#1a3a6b; }
+  .cmp-close { font-size:12px; color:#6c6c70; cursor:pointer; text-decoration:underline; }
+  .cmp-body { padding:14px; }
+  .cmp-cards { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:12px; }
+  .cmp-card { background:#f7f7f8; border-radius:10px; padding:10px 12px; }
+  .cmp-card.a { border-left:4px solid #f59e0b; }
+  .cmp-card.b { border-left:4px solid #22c55e; }
+  .cmp-card-badge { font-size:10px; font-weight:700; text-transform:uppercase; margin-bottom:4px; }
+  .cmp-card-badge.a { color:#b45309; } .cmp-card-badge.b { color:#15803d; }
+  .cmp-card-name { font-size:13px; font-weight:700; color:#1c1c1e; }
+  .cmp-card-time { font-size:12px; color:#6c6c70; margin-top:3px; }
+  .cmp-diff-box { background:#f0f4ff; border-radius:10px; padding:12px 14px; text-align:center; }
+  .cmp-diff-label { font-size:11px; color:#6c6c70; text-transform:uppercase; font-weight:700; margin-bottom:6px; }
+  .cmp-diff-value { font-size:22px; font-weight:700; color:#1a3a6b; }
+  .cmp-diff-sub { font-size:11px; color:#6c6c70; margin-top:4px; }
+  .chk-cell { text-align:center; width:30px; padding:0 4px !important; }
+  .chk-cell input { width:15px; height:15px; cursor:pointer; accent-color:#1a3a6b; }
+
+  /* TOOLTIP */
+  #tooltip { display:none; position:fixed; background:#1c1c1e; color:#fff; border-radius:14px; padding:14px 16px; font-size:12px; line-height:1.9; z-index:9999; pointer-events:none; min-width:200px; max-width:280px; box-shadow:0 8px 30px rgba(0,0,0,0.30); }
+  #tooltip.visible { display:block; }
+  .tt-header { display:flex; align-items:center; gap:8px; margin-bottom:8px; padding-bottom:8px; border-bottom:1px solid rgba(255,255,255,0.15); }
+  .tt-dot { width:12px; height:12px; border-radius:50%; flex-shrink:0; }
+  .tt-title { font-size:14px; font-weight:700; }
+  .tt-row { display:flex; justify-content:space-between; gap:14px; }
+  .tt-lbl { color:#aaa; } .tt-val { font-weight:700; }
+  .tt-dur { margin-top:8px; padding-top:7px; border-top:1px solid rgba(255,255,255,0.15); color:#ffd60a; font-weight:700; }
+  .tt-comment-box { margin-top:8px; padding:8px 10px; background:rgba(255,255,255,0.12); border-radius:8px; border-left:3px solid #ffd60a; font-size:12px; font-style:italic; line-height:1.5; }
+  .tt-comment-label { font-size:10px; font-weight:700; color:#ffd60a; text-transform:uppercase; margin-bottom:3px; font-style:normal; }
+  .empty-gantt { text-align:center; padding:40px 24px; color:#c7c7cc; font-size:14px; background:#fff; border-radius:12px; border:1px solid #e0e0e5; }
 </style>
 </head>
 <body>
 
-<!-- TOOLTIP -->
 <div id="tooltip">
-  <div class="tt-header">
-    <div class="tt-dot" id="tt-dot"></div>
-    <div class="tt-title" id="tt-title"></div>
-  </div>
-  <div class="tt-row"><span class="tt-lbl">Date</span><span class="tt-val" id="tt-date"></span></div>
+  <div class="tt-header"><div class="tt-dot" id="tt-dot"></div><div class="tt-title" id="tt-title"></div></div>
   <div class="tt-row"><span class="tt-lbl">Qui</span><span class="tt-val" id="tt-qui"></span></div>
   <div class="tt-row"><span class="tt-lbl">Démarrage</span><span class="tt-val" id="tt-start"></span></div>
   <div class="tt-row"><span class="tt-lbl">Fin</span><span class="tt-val" id="tt-end"></span></div>
   <div class="tt-dur" id="tt-dur"></div>
-  <div class="tt-remark-box" id="tt-remark-box" style="display:none">
-    <div class="tt-remark-label">Remarque</div>
-    <div id="tt-rem"></div>
+  <div class="tt-comment-box" id="tt-comment-box" style="display:none">
+    <div class="tt-comment-label">Commentaire</div>
+    <div id="tt-comment"></div>
   </div>
 </div>
 
-<!-- HEADER -->
 <div class="hdr">
   <div class="logo"><span>SGD<br>Pharma</span></div>
   <div class="hdr-text">
@@ -320,484 +202,670 @@
   </div>
 </div>
 
-<!-- ══ SAISIE ══ -->
 <div class="form-wrap">
-
   <div class="machine-banner">SGD Pharma – Sucy-en-Brie</div>
-  <div class="edit-banner" id="edit-banner">✏️ Mode modification – corrigez puis Enregistrer</div>
 
-  <div class="recall-box" id="recall-box">
-    <span class="recall-dismiss" onclick="dismissRecall()">Masquer</span>
-    <div class="recall-title">Dernière tâche enregistrée</div>
-    <div class="recall-chips" id="recall-chips"></div>
+  <div class="info-sec">
+    <div class="info-sec-hd">Informations séance</div>
+    <div class="info-row"><label>Date</label><input id="f-date" type="date"></div>
+    <div class="info-row"><label>Machine</label><input id="f-machine-name" placeholder="ex: Machine 32B" autocomplete="off"></div>
   </div>
 
-  <div class="sec">
-    <div class="sec-hd">Informations</div>
-    <div class="row">
-      <label>Date</label>
-      <input id="f-date" type="date">
-    </div>
-    <div class="row">
-      <label>Machine / Secteur</label>
-      <input id="f-machine" placeholder="ex: Mold side" autocomplete="off">
-    </div>
-    <div class="row" style="overflow:visible;z-index:100">
-      <label>Qui</label>
-      <input id="f-qui" placeholder="Libre ou choisir…" autocomplete="off"
-             oninput="showSugg()" onblur="hideSugg()">
-      <div class="suggestions" id="suggestions">
-        <div class="suggestion-item" onmousedown="pickSugg('IS')">IS</div>
-        <div class="suggestion-item" onmousedown="pickSugg('Feedermen')">Feedermen</div>
-        <div class="suggestion-item" onmousedown="pickSugg('Section Chief')">Section Chief</div>
-        <div class="suggestion-item" onmousedown="pickSugg('Maintenance')">Maintenance</div>
-        <div class="suggestion-item" onmousedown="pickSugg('Qualité')">Qualité</div>
-      </div>
-    </div>
-    <div class="row">
-      <label>Démarrage</label>
-      <div class="time-input-wrap">
-        <input class="t-h" id="s-h" inputmode="numeric" maxlength="2" placeholder="HH">
-        <span class="time-sep">:</span>
-        <input class="t-m" id="s-m" inputmode="numeric" maxlength="2" placeholder="MM">
-        <span class="time-preview" id="s-prev"></span>
-      </div>
-    </div>
-    <div class="row">
-      <label>Fin</label>
-      <div class="time-input-wrap">
-        <input class="t-h" id="e-h" inputmode="numeric" maxlength="2" placeholder="HH">
-        <span class="time-sep">:</span>
-        <input class="t-m" id="e-m" inputmode="numeric" maxlength="2" placeholder="MM">
-        <span class="time-preview" id="e-prev"></span>
-      </div>
+  <div class="type-selector">
+    <div class="type-selector-hd">Type de changement</div>
+    <div class="type-btns">
+      <button class="type-btn" data-type="small_t1" onclick="selectType('small_t1',this)">TARGET<br>Petit t1</button>
+      <button class="type-btn" data-type="grand_t1" onclick="selectType('grand_t1',this)">TARGET<br>Grand T1</button>
+      <button class="type-btn" data-type="rondelle" onclick="selectType('rondelle',this)">TARGET<br>Rondelle</button>
     </div>
   </div>
 
-  <div class="sec">
-    <div class="sec-hd">Remarque / Info</div>
-    <div class="row" style="align-items:flex-start;padding-top:10px">
-      <label style="padding-top:2px">Remarque</label>
-      <textarea id="f-remark" placeholder="Informations complémentaires…"></textarea>
+  <div id="dynamic-sections"></div>
+
+  <div class="indic-sec">
+    <div class="indic-hd">
+      ➤ Indicateurs (flèches)
+      <button class="indic-add-btn" onclick="addIndicator()">+ Ajouter</button>
     </div>
+    <div id="indic-list"><div class="indic-empty">Aucun indicateur — cliquez + Ajouter</div></div>
   </div>
 
-  <div class="sec">
-    <div class="sec-hd">Couleur de la barre Gantt</div>
-    <div class="color-row">
-      <label>Couleur</label>
-      <div class="color-chip selected" style="background:#f59e0b" data-color="#f59e0b" onclick="selectColor(this)" title="Orange"></div>
-      <div class="color-chip" style="background:#ef4444" data-color="#ef4444" onclick="selectColor(this)" title="Rouge"></div>
-      <div class="color-chip" style="background:#22c55e" data-color="#22c55e" onclick="selectColor(this)" title="Vert"></div>
-      <div class="color-chip" style="background:#3b82f6" data-color="#3b82f6" onclick="selectColor(this)" title="Bleu"></div>
-      <div class="color-chip" style="background:#8b5cf6" data-color="#8b5cf6" onclick="selectColor(this)" title="Violet"></div>
-      <div class="color-chip" style="background:#1c1c1e" data-color="#1c1c1e" onclick="selectColor(this)" title="Noir"></div>
-      <div class="color-chip" style="background:#ec4899" data-color="#ec4899" onclick="selectColor(this)" title="Rose"></div>
-      <div class="color-chip" style="background:#06b6d4" data-color="#06b6d4" onclick="selectColor(this)" title="Cyan"></div>
+  <div class="history-sec">
+    <div class="history-hd">
+      Historique des séances
+      <span id="history-count" style="font-weight:400;font-size:10px"></span>
     </div>
+    <div class="history-list" id="history-list"><div class="history-empty">Aucune séance archivée</div></div>
   </div>
 
   <div class="btns">
-    <button class="btn btn-ok"    onclick="valider()">✓ Enregistrer</button>
+    <button class="btn btn-ok"    onclick="saveSession()">✓ Enregistrer</button>
     <button class="btn btn-gantt" onclick="scrollToGantt()">↓ Voir Gantt</button>
-    <button class="btn btn-full"  onclick="clearAll()">Tout effacer (nouvelle séance)</button>
+    <button class="btn btn-full"  onclick="newSession()">Nouvelle séance (archiver et repartir)</button>
   </div>
-
-  <div id="task-list"></div>
   <div class="sync-info" id="sync-info"></div>
 </div>
 
 <div class="divider"></div>
 
-<!-- ══ GANTT ══ -->
 <div class="gantt-section" id="gantt-section">
   <div class="gantt-header-block">
     <div class="gantt-logo"><span>SGD<br>Pharma</span></div>
     <div class="gantt-title">
       <h2>Changement – Temp/Machine</h2>
-      <p>SGD Pharma – Sucy-en-Brie</p>
+      <p id="gantt-subtitle">SGD Pharma – Sucy-en-Brie</p>
     </div>
   </div>
 
-  <!-- Barre comparaison -->
   <div class="cmp-bar" id="cmp-bar">
-    <div class="cmp-bar-info">
-      2 tâches sélectionnées
-      <span id="cmp-bar-names"></span>
-    </div>
+    <div class="cmp-bar-info">2 tâches sélectionnées<span id="cmp-bar-names"></span></div>
     <button class="cmp-bar-btn" onclick="doCompare()">Comparer ▶</button>
   </div>
-
-  <!-- Résultat comparaison -->
   <div class="cmp-result" id="cmp-result">
-    <div class="cmp-result-hd">
-      <h3 id="cmp-result-title">Comparaison</h3>
-      <span class="cmp-close" onclick="closeCompare()">Fermer</span>
-    </div>
-    <div class="cmp-cards" id="cmp-cards"></div>
-    <div class="cmp-diff">
-      <div class="cmp-diff-title">Analyse des écarts</div>
-      <div id="cmp-rows"></div>
+    <div class="cmp-result-hd"><h3 id="cmp-result-title">Comparaison</h3><span class="cmp-close" onclick="closeCompare()">Fermer</span></div>
+    <div class="cmp-body">
+      <div class="cmp-cards" id="cmp-cards"></div>
+      <div class="cmp-diff-box" id="cmp-diff-box"></div>
     </div>
   </div>
 
   <div class="gantt-scroll">
-    <div id="gantt-container"><div class="empty-gantt">Aucune tâche enregistrée</div></div>
+    <div id="gantt-container"><div class="empty-gantt">Sélectionnez un type et enregistrez pour voir le Gantt</div></div>
   </div>
 </div>
 
 <script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-  import { getDatabase, ref, push, set, remove, onValue }
-    from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getDatabase, ref, set, get, onValue, remove }
+  from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 
-  const app = initializeApp({
-    apiKey:            "AIzaSyDi9y4PmgvUHvnxDNu4kwpRvB9b-h7Dquk",
-    authDomain:        "gantt-sgd.firebaseapp.com",
-    databaseURL:       "https://gantt-sgd-default-rtdb.europe-west1.firebasedatabase.app",
-    projectId:         "gantt-sgd",
-    storageBucket:     "gantt-sgd.firebasestorage.app",
-    messagingSenderId: "363250513679",
-    appId:             "1:363250513679:web:bdf947bd2800614d7a307a"
+const app = initializeApp({
+  apiKey:            "AIzaSyDi9y4PmgvUHvnxDNu4kwpRvB9b-h7Dquk",
+  authDomain:        "gantt-sgd.firebaseapp.com",
+  databaseURL:       "https://gantt-sgd-default-rtdb.europe-west1.firebasedatabase.app",
+  projectId:         "gantt-sgd",
+  storageBucket:     "gantt-sgd.firebasestorage.app",
+  messagingSenderId: "363250513679",
+  appId:             "1:363250513679:web:bdf947bd2800614d7a307a"
+});
+const db = getDatabase(app);
+
+/* ══ COULEURS UNIQUES PAR TÂCHE ══ */
+const TASK_COLORS = [
+  "#3b82f6","#8b5cf6","#06b6d4","#22c55e","#f59e0b",
+  "#ec4899","#14b8a6","#a855f7","#0ea5e9","#84cc16",
+  "#f97316","#6366f1","#10b981","#eab308","#64748b"
+];
+
+const TYPE_DATA = {
+  small_t1: {
+    label:"TARGET (Petit t1)", color:"#e07b54",
+    tasks:[
+      {id:"st1_1", machine:"Orifice ring exchange",    qui:"Feedermen"},
+      {id:"st1_2", machine:"Mold side",                qui:"IS"},
+      {id:"st1_3", machine:"Blank side",               qui:"IS"},
+      {id:"st1_4", machine:"Funnel IN",                qui:"Feedermen"},
+      {id:"st1_5", machine:"Gob IN",                   qui:"Feedermen"},
+      {id:"st1_6", machine:"Start sections w/o glass", qui:"Section Chief"},
+      {id:"st1_7", machine:"Start sections w/ glass",  qui:"Section Chief"},
+      {id:"st1_8", machine:"All machine w/ glass",     qui:"Section Chief"},
+      {id:"st1_9", machine:"Glass to Lehr",            qui:"Section Chief"},
+    ]
+  },
+  grand_t1: {
+    label:"TARGET (Grand T1)", color:"#c0392b",
+    tasks:[
+      {id:"gt1_1", machine:"Fin Production précédente au bout froid", qui:"???"},
+      {id:"gt1_2", machine:"Vide de ligne au bout froid",              qui:"???"},
+      {id:"gt1_3", machine:"Arrivée flacons au bout froid",            qui:"???"},
+      {id:"gt1_4", machine:"Réglage ligne et machines d'inspections",  qui:"???"},
+      {id:"gt1_5", machine:"Qualité TOP – approuvée",                  qui:"???"},
+      {id:"gt1_6", machine:"Emballage TOP – palettisé",                qui:"???"},
+    ]
+  },
+  rondelle: {
+    label:"TARGET (Rondelle)", color:"#7d3c98",
+    tasks:[
+      {id:"ron_1",  machine:"Nettoyage machine",              qui:"Production"},
+      {id:"ron_2",  machine:"Changement cuvette",             qui:"Feedermen"},
+      {id:"ron_3",  machine:"Côte Finisseur",                 qui:"Atelier IS"},
+      {id:"ron_4",  machine:"Côte Ebaucheur",                 qui:"Atelier IS"},
+      {id:"ron_5",  machine:"Entonnoir sous verre",           qui:"Feedermen"},
+      {id:"ron_6",  machine:"Distributeur sous verre",        qui:"Feedermen"},
+      {id:"ron_7",  machine:"Démarrage section sans flacon",  qui:"Section Chief"},
+      {id:"ron_8",  machine:"Début section avec flacon",      qui:"Section Chief"},
+      {id:"ron_9",  machine:"Machine complète avec flacon",   qui:"Section Chief"},
+      {id:"ron_10", machine:"Mise à l'arche",                 qui:"Section Chief"},
+    ]
+  }
+};
+
+/* ══ ÉTAT ══ */
+let activeType  = null;
+let sessionData = {date:"",machine:"",type:null,typeData:{},indicators:[]};
+let indicators  = [];
+let selectedIds = [];
+let allTasks    = {};
+
+document.getElementById("f-date").value = new Date().toISOString().slice(0,10);
+
+/* ══ FIREBASE ══ */
+onValue(ref(db,"current"), snap => {
+  const d = snap.val();
+  if (!d) { document.getElementById("sync-status").textContent="Connecté"; return; }
+  loadSession(d);
+  document.getElementById("sync-status").textContent="Connecté";
+});
+onValue(ref(db,"sessions"), snap => renderHistory(snap.val()||{}));
+
+function loadSession(d) {
+  document.getElementById("f-date").value         = d.date    || new Date().toISOString().slice(0,10);
+  document.getElementById("f-machine-name").value = d.machine || "";
+  activeType   = d.type || null;
+  sessionData  = d;
+  indicators   = d.indicators || [];
+  document.querySelectorAll(".type-btn").forEach(btn => {
+    btn.classList.toggle("active", btn.dataset.type === activeType);
   });
-  const db       = getDatabase(app);
-  const tasksRef = ref(db, "tasks");
+  renderDynamicSections();
+  renderIndicators();
+  renderGantt();
+}
 
-  let tasks = {}, editId = null, selColor = "#f59e0b";
-  let selectedIds = [];
-
-  document.getElementById("f-date").value = new Date().toISOString().slice(0,10);
-
-  onValue(tasksRef, snap => {
-    tasks = snap.val() || {};
-    selectedIds = selectedIds.filter(id => tasks[id]);
-    renderTaskList();
-    renderGantt();
-    updateCmpBar();
-    const n = Object.keys(tasks).length;
-    document.getElementById("sync-status").textContent = "Connecté – " + n + " tâche(s)";
-    document.getElementById("sync-info").textContent   = n + " tâche(s) synchronisée(s)";
-  });
-
-  /* Scroll vers Gantt */
-  window.scrollToGantt = () => {
-    document.getElementById("gantt-section").scrollIntoView({ behavior: "smooth" });
-  };
-
-  /* Validation heure */
-  function setupTime(hId, mId, prevId) {
-    const hEl = document.getElementById(hId);
-    const mEl = document.getElementById(mId);
-    const prev = document.getElementById(prevId);
-
-    function upd() {
-      const h = hEl.value, m = mEl.value;
-      const hv = parseInt(h), mv = parseInt(m);
-      const hValid = h !== "" && hv >= 0 && hv <= 23;
-      const mValid = m !== "" && mv >= 0 && mv <= 59;
-      hEl.style.background  = h===""?"#f7f7f8":hValid?"#f7f7f8":"#fff0f0";
-      hEl.style.borderColor = h===""?"#e0e0e5":hValid?"#e0e0e5":"#ef4444";
-      mEl.style.background  = m===""?"#f7f7f8":mValid?"#f7f7f8":"#fff0f0";
-      mEl.style.borderColor = m===""?"#e0e0e5":mValid?"#e0e0e5":"#ef4444";
-      if (hValid&&mValid)       prev.textContent = String(hv).padStart(2,"0")+":"+String(mv).padStart(2,"0");
-      else if (hValid&&m==="")  prev.textContent = String(hv).padStart(2,"0")+":__";
-      else if ((!hValid&&h!=="") || (!mValid&&m!=="")) prev.textContent = "⚠ invalide";
-      else prev.textContent = "";
-    }
-    hEl.addEventListener("input", function(){ this.value=this.value.replace(/\D/g,"").slice(0,2); if(this.value.length===2){if(parseInt(this.value)>23)this.value="23"; mEl.focus();} upd(); });
-    hEl.addEventListener("blur",  function(){ if(this.value!==""){const v=parseInt(this.value);if(v>23)this.value="23";if(v<0)this.value="00";} upd(); });
-    mEl.addEventListener("input", function(){ this.value=this.value.replace(/\D/g,"").slice(0,2); if(this.value.length===2&&parseInt(this.value)>59)this.value="59"; upd(); });
-    mEl.addEventListener("blur",  function(){ if(this.value!==""){const v=parseInt(this.value);if(v>59)this.value="59";if(v<0)this.value="00";} upd(); });
+/* ══ CORRECTION 1 : SÉLECTEUR EXCLUSIF ══ */
+window.selectType = (type, btn) => {
+  if (activeType === type) {
+    activeType = null;
+    btn.classList.remove("active");
+  } else {
+    activeType = type;
+    document.querySelectorAll(".type-btn").forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
   }
-  setupTime("s-h","s-m","s-prev");
-  setupTime("e-h","e-m","e-prev");
+  renderDynamicSections();
+  renderIndicators();
+  // Gantt reste affiché — ne pas appeler renderGantt() ici
+};
 
-  function getTime(hId, mId) {
-    const h=document.getElementById(hId).value.trim(), m=document.getElementById(mId).value.trim();
-    if(!h) return "";
-    const hv=parseInt(h), mv=parseInt(m)||0;
-    if(hv<0||hv>23||mv<0||mv>59) return "";
-    return String(hv).padStart(2,"0")+":"+String(mv).padStart(2,"0");
-  }
-  function setTime(hId, mId, prevId, val) {
-    if(val&&val.includes(":")){
-      const[h,m]=val.split(":");
-      document.getElementById(hId).value=h;
-      document.getElementById(mId).value=m;
-      document.getElementById(prevId).textContent=val;
-    } else {
-      document.getElementById(hId).value="";
-      document.getElementById(mId).value="";
-      document.getElementById(prevId).textContent="";
-    }
-    [hId,mId].forEach(id=>{ document.getElementById(id).style.background="#f7f7f8"; document.getElementById(id).style.borderColor="#e0e0e5"; });
-  }
+function renderDynamicSections() {
+  const container = document.getElementById("dynamic-sections");
+  container.innerHTML = "";
+  if (!activeType) return;
+  const def = TYPE_DATA[activeType]; if (!def) return;
+  const typeVals = (sessionData.typeData && sessionData.typeData[activeType]) || {};
 
-  window.selectColor = el => {
-    document.querySelectorAll(".color-chip").forEach(c=>c.classList.remove("selected"));
-    el.classList.add("selected"); selColor=el.dataset.color;
-  };
+  const sec = document.createElement("div");
+  sec.className = "tasks-sec";
+  sec.style.borderColor = def.color;
 
-  window.showSugg = () => {
-    const q=document.getElementById("f-qui").value.toLowerCase(); let any=false;
-    document.querySelectorAll(".suggestion-item").forEach(item=>{ const s=item.textContent.toLowerCase().includes(q); item.style.display=s?"block":"none"; if(s)any=true; });
-    document.getElementById("suggestions").classList.toggle("open",any);
-  };
-  window.hideSugg = () => setTimeout(()=>document.getElementById("suggestions").classList.remove("open"),150);
-  window.pickSugg = v => { document.getElementById("f-qui").value=v; document.getElementById("suggestions").classList.remove("open"); };
+  const hd = document.createElement("div");
+  hd.className = "tasks-sec-hd";
+  hd.style.background = def.color;
+  hd.textContent = def.label;
+  sec.appendChild(hd);
 
-  function getVals() {
-    return {
-      date:    document.getElementById("f-date").value,
-      machine: document.getElementById("f-machine").value.trim(),
-      qui:     document.getElementById("f-qui").value.trim(),
-      start:   getTime("s-h","s-m"),
-      end:     getTime("e-h","e-m"),
-      remark:  document.getElementById("f-remark").value.trim(),
-      color:   selColor
-    };
-  }
-
-  window.valider = async () => {
-    const v=getVals();
-    if(!v.machine&&!v.qui&&!v.start&&!v.end){ alert("Remplissez au moins un champ."); return; }
-    if(editId){ await set(ref(db,"tasks/"+editId),v); editId=null; document.getElementById("edit-banner").classList.remove("visible"); }
-    else { await push(tasksRef,v); }
-    showRecall(v); resetForm(false);
-  };
-
-  window.resetForm = (clr=true) => {
-    document.getElementById("f-machine").value="";
-    document.getElementById("f-qui").value="";
-    document.getElementById("f-remark").value="";
-    document.getElementById("f-date").value=new Date().toISOString().slice(0,10);
-    setTime("s-h","s-m","s-prev","");
-    setTime("e-h","e-m","e-prev","");
-    editId=null; document.getElementById("edit-banner").classList.remove("visible");
-    if(clr) dismissRecall();
-  };
-
-  window.clearAll = async () => {
-    if(!confirm("Effacer TOUTES les tâches ?")) return;
-    await remove(tasksRef); resetForm(); dismissRecall();
-    selectedIds=[]; updateCmpBar(); closeCompare();
-  };
-
-  window.editTask = id => {
-    const t=tasks[id]; if(!t) return;
-    document.getElementById("f-machine").value=t.machine||"";
-    document.getElementById("f-qui").value=t.qui||"";
-    document.getElementById("f-remark").value=t.remark||"";
-    document.getElementById("f-date").value=t.date||new Date().toISOString().slice(0,10);
-    setTime("s-h","s-m","s-prev",t.start||"");
-    setTime("e-h","e-m","e-prev",t.end||"");
-    selColor=t.color||"#f59e0b";
-    document.querySelectorAll(".color-chip").forEach(c=>c.classList.toggle("selected",c.dataset.color===selColor));
-    editId=id; document.getElementById("edit-banner").classList.add("visible");
-    dismissRecall(); window.scrollTo({top:0,behavior:"smooth"});
-  };
-
-  window.deleteTask = async id => {
-    if(!confirm("Supprimer cette tâche ?")) return;
-    await remove(ref(db,"tasks/"+id));
-  };
-
-  function showRecall(t){
-    const chips=[
-      t.date    ?`<span class="recall-chip"><b>Date</b> ${t.date}</span>`:"",
-      t.machine ?`<span class="recall-chip"><b>Machine</b> ${t.machine}</span>`:"",
-      t.qui     ?`<span class="recall-chip"><b>Qui</b> ${t.qui}</span>`:"",
-      t.start   ?`<span class="recall-chip"><b>Début</b> ${t.start}</span>`:"",
-      t.end     ?`<span class="recall-chip"><b>Fin</b> ${t.end}</span>`:"",
-    ].filter(Boolean).join("");
-    document.getElementById("recall-chips").innerHTML=chips;
-    document.getElementById("recall-box").classList.add("visible");
-  }
-  window.dismissRecall = () => document.getElementById("recall-box").classList.remove("visible");
-
-  function renderTaskList(){
-    const list=document.getElementById("task-list");
-    const arr=Object.entries(tasks);
-    if(!arr.length){list.innerHTML="";return;}
-    list.innerHTML=arr.map(([id,t])=>{
-      const dateLabel=t.date?new Date(t.date+"T00:00:00").toLocaleDateString("fr-FR",{weekday:"long",day:"2-digit",month:"long"}):"";
-      return `<div class="task-card">
-        <div class="task-card-hd">
-          <div class="task-color-dot" style="background:${t.color||"#f59e0b"}"></div>
-          <span class="task-name">${t.machine||"—"}</span>
-          <span class="task-who">${t.qui||""}</span>
-        </div>
-        <div class="task-card-body">
-          ${dateLabel?`<span><b>Date :</b> ${dateLabel}</span>`:""}
-          <span><b>Début :</b> ${t.start||"?"}</span>
-          <span><b>Fin :</b> ${t.end||"?"}</span>
-        </div>
-        ${t.remark?`<div class="task-remark">${t.remark}</div>`:""}
-        <div class="task-actions">
-          <button class="act-btn btn-edit" onclick="editTask('${id}')">Modifier</button>
-          <button class="act-btn btn-del"  onclick="deleteTask('${id}')">Supprimer</button>
-        </div>
-      </div>`;
-    }).join("");
-  }
-
-  /* ══ COMPARAISON ══ */
-  const toMin  = s => { if(!s||!s.includes(":"))return null; const[h,m]=s.split(":").map(Number); return h*60+(m||0); };
-  const fmtDur = (s,e) => { const d=e-s; if(d<=0)return "—"; const h=Math.floor(d/60),m=d%60; return h&&m?h+"h "+m+"min":h?h+"h":m+"min"; };
-  const fmtDiff= d => { if(d===0)return "Identique"; const abs=Math.abs(d),h=Math.floor(abs/60),m=abs%60; return (d>0?"+":"-")+(h&&m?h+"h "+m+"min":h?h+"h":m+"min"); };
-
-  window.toggleSelect = id => {
-    const idx=selectedIds.indexOf(id);
-    if(idx>-1){ selectedIds.splice(idx,1); }
-    else {
-      if(selectedIds.length>=2){ selectedIds.shift(); }
-      selectedIds.push(id);
-    }
-    updateCmpBar();
-    renderGantt();
-  };
-
-  function updateCmpBar(){
-    const bar=document.getElementById("cmp-bar");
-    if(selectedIds.length===2){
-      bar.classList.add("visible");
-      const names=selectedIds.map(id=>tasks[id]?tasks[id].machine||"—":"—").join(" vs ");
-      document.getElementById("cmp-bar-names").textContent=names;
-    } else {
-      bar.classList.remove("visible");
-    }
-  }
-
-  window.doCompare = () => {
-    if(selectedIds.length!==2) return;
-    const [idA,idB]=selectedIds;
-    const A=tasks[idA], B=tasks[idB];
-    const sA=toMin(A.start),eA=toMin(A.end),sB=toMin(B.start),eB=toMin(B.end);
-    const durA=(sA!==null&&eA!==null&&eA>sA)?eA-sA:null;
-    const durB=(sB!==null&&eB!==null&&eB>sB)?eB-sB:null;
-
-    document.getElementById("cmp-result-title").textContent=(A.machine||"—")+" vs "+(B.machine||"—");
-
-    document.getElementById("cmp-cards").innerHTML=`
-      <div class="cmp-card">
-        <div class="cmp-card-badge a">🟡 Tâche A</div>
-        <div class="cmp-card-name">${A.machine||"—"}</div>
-        <div class="cmp-card-info">${A.qui||""}</div>
-        <div class="cmp-card-info">${A.start||"?"}  →  ${A.end||"?"}</div>
-        <div class="cmp-card-dur">${durA!==null?"Durée : "+fmtDur(sA,eA):"—"}</div>
+  // TARGET objectif
+  const tgt = typeVals.target || {};
+  const tDiv = document.createElement("div");
+  tDiv.innerHTML = `
+    <div class="target-wrap" style="border-color:${def.color}">
+      <div class="target-hd" style="background:${def.color}20;color:${def.color}">
+        🎯 Objectif TARGET
+        <span style="font-size:11px;opacity:0.7">Plage horaire visée</span>
       </div>
-      <div class="cmp-card">
-        <div class="cmp-card-badge b">🟢 Tâche B</div>
-        <div class="cmp-card-name">${B.machine||"—"}</div>
-        <div class="cmp-card-info">${B.qui||""}</div>
-        <div class="cmp-card-info">${B.start||"?"}  →  ${B.end||"?"}</div>
-        <div class="cmp-card-dur">${durB!==null?"Durée : "+fmtDur(sB,eB):"—"}</div>
+      <div class="target-body">
+        <label>Début</label>
+        <div class="tw">
+          <input class="t-h" id="tgt_sh" inputmode="numeric" maxlength="2" placeholder="HH" value="${tgt.sh||""}">
+          <span class="target-sep" style="color:${def.color}">:</span>
+          <input class="t-m" id="tgt_sm" inputmode="numeric" maxlength="2" placeholder="MM" value="${tgt.sm||""}">
+        </div>
+        <label style="margin-left:8px">Fin</label>
+        <div class="tw">
+          <input class="t-h" id="tgt_eh" inputmode="numeric" maxlength="2" placeholder="HH" value="${tgt.eh||""}">
+          <span class="target-sep" style="color:${def.color}">:</span>
+          <input class="t-m" id="tgt_em" inputmode="numeric" maxlength="2" placeholder="MM" value="${tgt.em||""}">
+        </div>
+        <span class="target-prev" id="tgt_prev"></span>
+      </div>
+    </div>`;
+  sec.appendChild(tDiv);
+  setupTimeGroup("tgt_sh","tgt_sm","tgt_eh","tgt_em","tgt_prev");
+
+  // Lignes tâches
+  def.tasks.forEach((task, idx) => {
+    const tv   = (typeVals.tasks && typeVals.tasks[task.id]) || {};
+    const color = TASK_COLORS[idx % TASK_COLORS.length];
+    const row   = document.createElement("div");
+    row.className = "task-row";
+    row.id = "row_"+task.id;
+    row.innerHTML = `
+      <div class="task-row-top">
+        <div class="task-color-bar" style="background:${color}"></div>
+        <span class="task-row-label">${task.machine}</span>
+        <span class="task-row-who">${task.qui}</span>
+      </div>
+      <div class="task-row-times">
+        <div class="task-time-group">
+          <label>Début</label>
+          <div class="tw">
+            <input class="t-h" id="${task.id}_sh" inputmode="numeric" maxlength="2" placeholder="HH" value="${tv.sh||""}">
+            <span class="tw-sep">:</span>
+            <input class="t-m" id="${task.id}_sm" inputmode="numeric" maxlength="2" placeholder="MM" value="${tv.sm||""}">
+          </div>
+        </div>
+        <div class="task-time-group">
+          <label>Fin</label>
+          <div class="tw">
+            <input class="t-h" id="${task.id}_eh" inputmode="numeric" maxlength="2" placeholder="HH" value="${tv.eh||""}">
+            <span class="tw-sep">:</span>
+            <input class="t-m" id="${task.id}_em" inputmode="numeric" maxlength="2" placeholder="MM" value="${tv.em||""}">
+          </div>
+        </div>
+        <span class="tw-prev" id="${task.id}_prev"></span>
+      </div>
+      <div class="task-comment-wrap">
+        <input id="cmt_${task.id}" placeholder="Commentaire…" value="${(tv.comment||"").replace(/"/g,'&quot;')}">
       </div>`;
+    sec.appendChild(row);
+    setupTimeGroup(`${task.id}_sh`,`${task.id}_sm`,`${task.id}_eh`,`${task.id}_em`,`${task.id}_prev`);
+  });
 
-    const rows=[];
-    if(sA!==null&&sB!==null){ const d=sB-sA; rows.push({lbl:"Écart démarrage (B − A)",val:fmtDiff(d),cls:d===0?"neu":"neg"}); }
-    if(eA!==null&&eB!==null){ const d=eB-eA; rows.push({lbl:"Écart de fin (B − A)",val:fmtDiff(d),cls:d===0?"neu":"neg"}); }
-    if(durA!==null&&durB!==null){ const d=durB-durA; rows.push({lbl:"Différence de durée (B − A)",val:fmtDiff(d),cls:d===0?"neu":d>0?"neg":"pos"}); }
-    if(sA!==null&&eA!==null&&sB!==null&&eB!==null){
-      const oStart=Math.max(sA,sB),oEnd=Math.min(eA,eB);
-      if(oEnd>oStart) rows.push({lbl:"Chevauchement",val:fmtDur(oStart,oEnd),cls:"neg"});
-      else rows.push({lbl:"Intervalle entre les deux",val:fmtDur(0,oStart-oEnd),cls:"neu"});
+  container.appendChild(sec);
+}
+
+/* ══ CORRECTION 2 : VALIDATION HEURES ══ */
+function setupHourMin(el, maxVal, nextEl) {
+  el.addEventListener("input", function(){
+    this.value = this.value.replace(/\D/g,"").slice(0,2);
+    const v = parseInt(this.value);
+    if (this.value.length===2) {
+      if (v > maxVal) { this.value = String(maxVal); this.classList.add("invalid"); }
+      else { this.classList.remove("invalid"); if(nextEl) nextEl.focus(); }
+    } else if (this.value.length < 2) { this.classList.remove("invalid"); }
+  });
+  el.addEventListener("blur", function(){
+    if (this.value!=="") {
+      const v=parseInt(this.value);
+      if (v>maxVal||v<0) { this.value=String(Math.min(maxVal,Math.max(0,v))); this.classList.add("invalid"); }
+      else this.classList.remove("invalid");
+    } else this.classList.remove("invalid");
+  });
+}
+
+function setupTimeGroup(shId, smId, ehId, emId, prevId) {
+  const sh=document.getElementById(shId), sm=document.getElementById(smId);
+  const eh=document.getElementById(ehId), em=document.getElementById(emId);
+  const prev=prevId?document.getElementById(prevId):null;
+  if(!sh) return;
+  setupHourMin(sh, 23, sm);
+  setupHourMin(sm, 59, eh);
+  setupHourMin(eh, 23, em);
+  setupHourMin(em, 59, null);
+  const upd = () => {
+    if (!prev) return;
+    const s=getTV(sh.value,sm.value), e=getTV(eh.value,em.value);
+    prev.textContent = s&&e?s+" → "+e:s?s+" → ?":"";
+  };
+  [sh,sm,eh,em].forEach(el=>el.addEventListener("input",upd));
+  upd();
+}
+
+function getTV(h,m) {
+  if (!h||h==="") return "";
+  const hv=parseInt(h), mv=parseInt(m)||0;
+  if (isNaN(hv)||hv<0||hv>23||mv<0||mv>59) return "";
+  return String(hv).padStart(2,"0")+":"+String(mv).padStart(2,"0");
+}
+
+/* ══ INDICATEURS ══ */
+function getTaskOptions(selectedVal) {
+  if (!activeType) return '<option value="">— Sélectionner un type d\'abord —</option>';
+  const def = TYPE_DATA[activeType];
+  if (!def) return "";
+  return '<option value="">— Choisir une tâche —</option>' +
+    def.tasks.map(t => `<option value="${t.id}" ${selectedVal===t.id?"selected":""}>${t.machine}</option>`).join("");
+}
+
+window.addIndicator = () => {
+  indicators.push({ from:"", to:"", sh:"", sm:"", comment:"" });
+  renderIndicators();
+};
+
+function renderIndicators() {
+  const list = document.getElementById("indic-list");
+  if (!indicators.length) {
+    list.innerHTML = '<div class="indic-empty">Aucun indicateur — cliquez + Ajouter</div>';
+    return;
+  }
+  list.innerHTML = indicators.map((ind,i) => `
+    <div class="indic-item">
+      <div class="indic-row1">
+        <select class="indic-select" onchange="indicators[${i}].from=this.value">${getTaskOptions(ind.from)}</select>
+        <span class="indic-arrow">➤</span>
+        <select class="indic-select" onchange="indicators[${i}].to=this.value">${getTaskOptions(ind.to)}</select>
+        <button class="indic-del" onclick="removeIndicator(${i})">✕</button>
+      </div>
+      <div class="indic-row2">
+        <span class="indic-time-opt">Heure (optionnel)</span>
+        <div class="tw">
+          <input inputmode="numeric" maxlength="2" placeholder="HH" value="${ind.sh||""}"
+            style="width:36px;font-size:13px;border:1px solid #e0e0e5;border-radius:6px;background:#f7f7f8;text-align:center;outline:none;padding:3px 0"
+            oninput="this.value=this.value.replace(/\\D/g,'').slice(0,2);if(parseInt(this.value)>23)this.value='23';indicators[${i}].sh=this.value">
+          <span class="tw-sep" style="font-size:14px">:</span>
+          <input inputmode="numeric" maxlength="2" placeholder="MM" value="${ind.sm||""}"
+            style="width:36px;font-size:13px;border:1px solid #e0e0e5;border-radius:6px;background:#f7f7f8;text-align:center;outline:none;padding:3px 0"
+            oninput="this.value=this.value.replace(/\\D/g,'').slice(0,2);if(parseInt(this.value)>59)this.value='59';indicators[${i}].sm=this.value">
+        </div>
+        <input class="indic-comment" placeholder="Commentaire…" value="${ind.comment||""}" oninput="indicators[${i}].comment=this.value">
+      </div>
+    </div>`).join("");
+}
+
+window.removeIndicator = i => { indicators.splice(i,1); renderIndicators(); };
+
+/* ══ COLLECTE ══ */
+function collectData() {
+  const typeData = {};
+  if (activeType) {
+    const def = TYPE_DATA[activeType]; if(def){
+      typeData[activeType] = { target:{}, tasks:{} };
+      typeData[activeType].target = {
+        sh: document.getElementById("tgt_sh")?.value||"",
+        sm: document.getElementById("tgt_sm")?.value||"",
+        eh: document.getElementById("tgt_eh")?.value||"",
+        em: document.getElementById("tgt_em")?.value||""
+      };
+      def.tasks.forEach(task => {
+        typeData[activeType].tasks[task.id] = {
+          sh:      document.getElementById(`${task.id}_sh`)?.value||"",
+          sm:      document.getElementById(`${task.id}_sm`)?.value||"",
+          eh:      document.getElementById(`${task.id}_eh`)?.value||"",
+          em:      document.getElementById(`${task.id}_em`)?.value||"",
+          comment: document.getElementById(`cmt_${task.id}`)?.value||""
+        };
+      });
+    }
+  }
+  return {
+    date:       document.getElementById("f-date").value,
+    machine:    document.getElementById("f-machine-name").value.trim(),
+    type:       activeType,
+    typeData:   typeData,
+    indicators: indicators,
+    savedAt:    Date.now()
+  };
+}
+
+window.saveSession = async () => {
+  const data = collectData();
+  sessionData = data;
+  await set(ref(db,"current"), data);
+  renderGantt(); // Gantt se met à jour seulement après Enregistrer
+  document.getElementById("sync-status").textContent = "Enregistré ✓";
+  setTimeout(()=>document.getElementById("sync-status").textContent="Connecté",2000);
+};
+
+window.newSession = async () => {
+  if (!confirm("Archiver la séance en cours et repartir à zéro ?")) return;
+  const data = collectData();
+  if (data.machine||data.type) await set(ref(db,"sessions/sess_"+Date.now()), data);
+  await remove(ref(db,"current"));
+  activeType=[]; indicators=[]; sessionData={date:"",machine:"",type:null,typeData:{},indicators:[]};
+  document.getElementById("f-date").value         = new Date().toISOString().slice(0,10);
+  document.getElementById("f-machine-name").value = "";
+  document.querySelectorAll(".type-btn").forEach(b=>b.classList.remove("active"));
+  activeType = null;
+  renderDynamicSections(); renderIndicators(); renderGantt();
+};
+
+function renderHistory(sessions) {
+  const list = document.getElementById("history-list");
+  const arr  = Object.entries(sessions).sort((a,b)=>(b[1].savedAt||0)-(a[1].savedAt||0));
+  document.getElementById("history-count").textContent = arr.length?arr.length+" séance(s)":"";
+  if (!arr.length) { list.innerHTML='<div class="history-empty">Aucune séance archivée</div>'; return; }
+  list.innerHTML = arr.map(([id,s]) => {
+    const dl = s.date?new Date(s.date+"T00:00:00").toLocaleDateString("fr-FR",{weekday:"long",day:"2-digit",month:"long",year:"numeric"}):"Date inconnue";
+    const typeLabel = s.type&&TYPE_DATA[s.type]?TYPE_DATA[s.type].label:"—";
+    return `<div class="history-item" onclick="loadHistorySession('${id}')">
+      <div>
+        <div class="history-item-info">${s.machine||"Séance"} — ${dl}</div>
+        <div class="history-item-sub">${typeLabel}</div>
+      </div>
+      <span class="history-item-btn">Charger →</span>
+    </div>`;
+  }).join("");
+}
+
+window.loadHistorySession = async id => {
+  if (!confirm("Charger cette séance ?")) return;
+  const snap = await get(ref(db,"sessions/"+id));
+  const d=snap.val(); if(!d) return;
+  await set(ref(db,"current"),d);
+};
+
+/* ══ GANTT ══ */
+const toMin  = s => { if(!s||!s.includes(":"))return null; const[h,m]=s.split(":").map(Number); return h*60+(m||0); };
+const fmtDur = (s,e) => { const d=e-s; if(d<=0)return "—"; const h=Math.floor(d/60),m=d%60; return h&&m?h+"h "+m+"min":h?h+"h":m+"min"; };
+
+window.scrollToGantt = () => document.getElementById("gantt-section").scrollIntoView({behavior:"smooth"});
+
+const TT=document.getElementById("tooltip");
+const ttMove=e=>{let x=e.clientX+16,y=e.clientY+16;if(x+300>window.innerWidth)x=e.clientX-300;if(y+220>window.innerHeight)y=e.clientY-220;TT.style.left=x+"px";TT.style.top=y+"px";};
+document.addEventListener("mousemove",e=>{if(TT.classList.contains("visible"))ttMove(e);});
+
+window.showTT=(e,label,qui,start,end,color,comment)=>{
+  document.getElementById("tt-dot").style.background=color||"#3b82f6";
+  document.getElementById("tt-title").textContent=label||"—";
+  document.getElementById("tt-qui").textContent=qui||"—";
+  document.getElementById("tt-start").textContent=start||"—";
+  document.getElementById("tt-end").textContent=end||"—";
+  const s=toMin(start),en=toMin(end);
+  document.getElementById("tt-dur").textContent=(s!==null&&en!==null)?"⏱ "+fmtDur(s,en):"";
+  const cb=document.getElementById("tt-comment-box");
+  document.getElementById("tt-comment").textContent=comment||"";
+  cb.style.display=comment?"block":"none";
+  TT.classList.add("visible"); ttMove(e);
+};
+window.hideTT=()=>TT.classList.remove("visible");
+
+/* ══ CORRECTION 4 : COMPARAISON SIMPLIFIÉE ══ */
+window.toggleSelect=id=>{
+  const idx=selectedIds.indexOf(id);
+  if(idx>-1)selectedIds.splice(idx,1);
+  else{if(selectedIds.length>=2)selectedIds.shift();selectedIds.push(id);}
+  updateCmpBar(); renderGantt();
+};
+
+function updateCmpBar(){
+  const bar=document.getElementById("cmp-bar");
+  if(selectedIds.length===2){
+    bar.classList.add("visible");
+    document.getElementById("cmp-bar-names").textContent=selectedIds.map(id=>allTasks[id]?allTasks[id].machine||"—":"—").join(" vs ");
+  } else bar.classList.remove("visible");
+}
+
+window.doCompare=()=>{
+  if(selectedIds.length!==2)return;
+  const[idA,idB]=selectedIds, A=allTasks[idA], B=allTasks[idB];
+  if(!A||!B)return;
+  const sA=toMin(A.start), sB=toMin(B.start);
+  const eA=toMin(A.end),   eB=toMin(B.end);
+
+  document.getElementById("cmp-result-title").textContent=(A.machine||"—")+" vs "+(B.machine||"—");
+  document.getElementById("cmp-cards").innerHTML=`
+    <div class="cmp-card a">
+      <div class="cmp-card-badge a">🟡 Tâche A</div>
+      <div class="cmp-card-name">${A.machine||"—"}</div>
+      <div class="cmp-card-time">${A.start||"?"}  →  ${A.end||"?"}</div>
+    </div>
+    <div class="cmp-card b">
+      <div class="cmp-card-badge b">🟢 Tâche B</div>
+      <div class="cmp-card-name">${B.machine||"—"}</div>
+      <div class="cmp-card-time">${B.start||"?"}  →  ${B.end||"?"}</div>
+    </div>`;
+
+  // Correction 4 : une seule valeur — différence de démarrage
+  let diffText="—", diffSub="";
+  if(sA!==null&&sB!==null){
+    const d=Math.abs(sB-sA);
+    const h=Math.floor(d/60), m=d%60;
+    diffText = h&&m?h+"h "+m+"min":h?h+"h":m+"min";
+    diffSub  = sB>sA?"B démarre "+diffText+" après A":sB<sA?"B démarre "+diffText+" avant A":"Même heure de démarrage";
+  } else if(eA!==null&&eB!==null){
+    const d=Math.abs(eB-eA);
+    const h=Math.floor(d/60), m=d%60;
+    diffText = h&&m?h+"h "+m+"min":h?h+"h":m+"min";
+    diffSub  = "Écart entre les fins";
+  }
+
+  document.getElementById("cmp-diff-box").innerHTML=`
+    <div class="cmp-diff-label">Écart entre les deux tâches</div>
+    <div class="cmp-diff-value">${diffText}</div>
+    <div class="cmp-diff-sub">${diffSub}</div>`;
+
+  document.getElementById("cmp-result").classList.add("visible");
+  document.getElementById("cmp-result").scrollIntoView({behavior:"smooth",block:"nearest"});
+};
+window.closeCompare=()=>document.getElementById("cmp-result").classList.remove("visible");
+
+/* ══ RENDER GANTT ══ */
+function renderGantt(){
+  const container=document.getElementById("gantt-container");
+  const data=sessionData;
+
+  if(!data.type||!TYPE_DATA[data.type]){
+    container.innerHTML='<div class="empty-gantt">Sélectionnez un type et enregistrez pour voir le Gantt</div>';
+    return;
+  }
+
+  allTasks={};
+  let minT=Infinity, maxT=-Infinity;
+  const def=TYPE_DATA[data.type];
+  const tv=(data.typeData&&data.typeData[data.type])||{};
+  const tgt=tv.target||{};
+
+  function regT(sh,sm,eh,em){
+    const s=toMin(getTV(sh,sm)), e=toMin(getTV(eh,em));
+    if(s!==null)minT=Math.min(minT,s); if(e!==null)maxT=Math.max(maxT,e);
+  }
+  regT(tgt.sh||"",tgt.sm||"",tgt.eh||"",tgt.em||"");
+  def.tasks.forEach(task=>{
+    const t=(tv.tasks&&tv.tasks[task.id])||{};
+    regT(t.sh||"",t.sm||"",t.eh||"",t.em||"");
+  });
+  (data.indicators||[]).forEach(ind=>{
+    if(ind.sh&&ind.sm){ const s=toMin(getTV(ind.sh,ind.sm)); if(s!==null)minT=Math.min(minT,s); }
+  });
+
+  if(!isFinite(minT))minT=480; if(!isFinite(maxT))maxT=minT+120;
+  minT=Math.floor(minT/60)*60; maxT=Math.ceil(maxT/60)*60+60;
+  const total=maxT-minT, slotMin=10, slots=total/slotMin, slotW=600/slots;
+
+  const dateStr=data.date?new Date(data.date+"T00:00:00").toLocaleDateString("fr-FR",{weekday:"long",day:"2-digit",month:"long",year:"numeric"}):"";
+  document.getElementById("gantt-subtitle").textContent=(data.machine||"SGD Pharma")+(dateStr?" — "+dateStr:"");
+
+  let h=`<table class="gantt">`;
+  h+=`<tr><th colspan="5"></th>`;
+  for(let m=minT;m<maxT;m+=60) h+=`<th colspan="${60/slotMin}" style="background:#1a3a6b;color:#fff">60 min</th>`;
+  h+=`</tr><tr><th class="chk-cell"></th><th style="width:150px;text-align:left;padding-left:8px">MACHINE / SECTEUR</th><th style="width:80px">QUI</th><th style="width:60px">Début</th><th style="width:55px">Fin</th>`;
+  for(let m=minT;m<maxT;m+=slotMin){
+    const hh=Math.floor(m/60).toString().padStart(2,"0"),mm=(m%60).toString().padStart(2,"0");
+    h+=`<th style="width:${slotW}px;font-size:10px;color:#555;font-weight:400">${mm==="00"?hh+"h":mm}</th>`;
+  }
+  h+=`</tr>`;
+
+  // Header type
+  h+=`<tr><td colspan="${5+slots}" style="background:${def.color};color:#fff;font-weight:700;font-size:13px;padding:7px 10px;border:1px solid ${def.color}">${def.label} ════════════════▶▶▶</td></tr>`;
+
+  // TARGET jaune
+  const tStart=getTV(tgt.sh||"",tgt.sm||""), tEnd=getTV(tgt.eh||"",tgt.em||"");
+  const tS=toMin(tStart), tE=toMin(tEnd);
+  let tBar="";
+  if(tS!==null&&tE!==null&&tE>tS){
+    const lp=((tS-minT)/total)*100, wp=((tE-tS)/total)*100;
+    tBar=`<div class="gantt-bar-target" style="left:${lp}%;width:${wp}%" onmouseenter="showTT(event,'Objectif TARGET','—','${tStart}','${tEnd}','#f59e0b','')" onmouseleave="hideTT()"></div>`;
+  }
+  h+=`<tr class="target-row"><td class="chk-cell info"></td><td class="info machine-name" style="color:#b45309;font-style:italic">🎯 Objectif TARGET</td><td class="info who-cell">—</td><td class="info time-cell">${tStart||"—"}</td><td class="info time-cell">${tEnd||"—"}</td><td colspan="${slots}" class="bar-cell"><div class="bar-inner">${tBar}</div></td></tr>`;
+
+  // Tâches avec couleurs uniques
+  def.tasks.forEach((task,idx)=>{
+    const t=(tv.tasks&&tv.tasks[task.id])||{};
+    const start=getTV(t.sh||"",t.sm||""), end=getTV(t.eh||"",t.em||"");
+    const s=toMin(start), e=toMin(end);
+    const color=TASK_COLORS[idx%TASK_COLORS.length];
+    const uid=data.type+"_"+task.id;
+    allTasks[uid]={machine:task.machine,qui:task.qui,start,end,color};
+
+    let bar="";
+    if(s!==null&&e!==null&&e>s){
+      const lp=((s-minT)/total)*100, wp=((e-s)/total)*100;
+      const mach=task.machine.replace(/'/g,"&#39;"), cmt=(t.comment||"").replace(/'/g,"&#39;");
+      bar=`<div class="gantt-bar" style="left:${lp}%;width:${wp}%;background:${color}"
+        onmouseenter="showTT(event,'${mach}','${task.qui}','${start}','${end}','${color}','${cmt}')"
+        onmouseleave="hideTT()">
+        ${t.comment?`<div class="gantt-comment-dot"></div>`:""}
+      </div>`;
     }
 
-    document.getElementById("cmp-rows").innerHTML=rows.map(r=>`
-      <div class="cmp-row">
-        <span class="cmp-row-lbl">${r.lbl}</span>
-        <span class="cmp-row-val ${r.cls}">${r.val}</span>
-      </div>`).join("");
+    const isSelA=selectedIds[0]===uid, isSelB=selectedIds[1]===uid;
+    const rowCls=isSelA?"sel-a":isSelB?"sel-b":idx%2===0?"odd":"even";
+    const checked=selectedIds.includes(uid)?"checked":"";
 
-    document.getElementById("cmp-result").classList.add("visible");
-    document.getElementById("cmp-result").scrollIntoView({behavior:"smooth",block:"nearest"});
-  };
+    h+=`<tr class="${rowCls}" data-id="${uid}">
+      <td class="chk-cell info"><input type="checkbox" ${checked} onchange="toggleSelect('${uid}')"></td>
+      <td class="info machine-name">
+        <span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:${color};margin-right:6px;vertical-align:middle"></span>
+        ${task.machine}
+      </td>
+      <td class="info who-cell">${task.qui}</td>
+      <td class="info time-cell">${start||"—"}</td>
+      <td class="info time-cell">${end||"—"}</td>
+      <td colspan="${slots}" class="bar-cell"><div class="bar-inner">${bar}</div></td>
+    </tr>`;
+  });
 
-  window.closeCompare = () => {
-    document.getElementById("cmp-result").classList.remove("visible");
-  };
+  // Indicateurs avec flèches
+  const validIndics = (data.indicators||[]).filter(ind=>ind.from&&ind.to);
+  if(validIndics.length){
+    h+=`<tr><td colspan="${5+slots}" style="background:#fff0f0;font-weight:700;font-size:11px;color:#ef4444;padding:5px 10px;border:1px solid #fecaca">➤ INDICATEURS</td></tr>`;
+    validIndics.forEach(ind=>{
+      const fromTask=def.tasks.find(t=>t.id===ind.from);
+      const toTask  =def.tasks.find(t=>t.id===ind.to);
+      if(!fromTask||!toTask) return;
+      const fromData=(tv.tasks&&tv.tasks[ind.from])||{};
+      const toData  =(tv.tasks&&tv.tasks[ind.to])||{};
+      const fromEnd =getTV(fromData.eh||"",fromData.em||"");
+      const toStart =getTV(toData.sh||"",toData.sm||"");
+      const fE=toMin(fromEnd), tS2=toMin(toStart);
+      const hTime=ind.sh&&ind.sm?getTV(ind.sh,ind.sm):"";
 
-  /* ══ GANTT ══ */
-  const TT=document.getElementById("tooltip");
-  const ttMove=e=>{ let x=e.clientX+16,y=e.clientY+16; if(x+300>window.innerWidth)x=e.clientX-300; if(y+220>window.innerHeight)y=e.clientY-220; TT.style.left=x+"px"; TT.style.top=y+"px"; };
-  document.addEventListener("mousemove",e=>{ if(TT.classList.contains("visible"))ttMove(e); });
-
-  window.barEnter=(e,id)=>{
-    const t=tasks[id]; if(!t)return;
-    document.getElementById("tt-dot").style.background=t.color||"#f59e0b";
-    document.getElementById("tt-title").textContent=t.machine||"—";
-    const dl=t.date?new Date(t.date+"T00:00:00").toLocaleDateString("fr-FR",{weekday:"short",day:"2-digit",month:"short",year:"numeric"}):"—";
-    document.getElementById("tt-date").textContent=dl;
-    document.getElementById("tt-qui").textContent=t.qui||"—";
-    document.getElementById("tt-start").textContent=t.start||"—";
-    document.getElementById("tt-end").textContent=t.end||"—";
-    const s=toMin(t.start),en=toMin(t.end);
-    document.getElementById("tt-dur").textContent=(s!==null&&en!==null)?"⏱ Durée : "+fmtDur(s,en):"";
-    const rb=document.getElementById("tt-remark-box");
-    document.getElementById("tt-rem").textContent=t.remark||"";
-    rb.style.display=t.remark?"block":"none";
-    TT.classList.add("visible"); ttMove(e);
-  };
-  window.barLeave=()=>TT.classList.remove("visible");
-
-  function renderGantt(){
-    const container=document.getElementById("gantt-container");
-    const arr=Object.entries(tasks);
-    if(!arr.length){container.innerHTML='<div class="empty-gantt">Aucune tâche enregistrée</div>';return;}
-
-    let minT=Infinity,maxT=-Infinity;
-    arr.forEach(([,t])=>{ const s=toMin(t.start),e=toMin(t.end); if(s!==null)minT=Math.min(minT,s); if(e!==null)maxT=Math.max(maxT,e); });
-    if(!isFinite(minT))minT=480; if(!isFinite(maxT))maxT=minT+120;
-    minT=Math.floor(minT/60)*60; maxT=Math.ceil(maxT/60)*60+60;
-    const total=maxT-minT,slotMin=10,slots=total/slotMin;
-    const BAR_W=600,slotW=BAR_W/slots;
-
-    let h=`<table class="gantt">`;
-    h+=`<tr><th colspan="6"></th>`;
-    for(let m=minT;m<maxT;m+=60) h+=`<th colspan="${60/slotMin}" style="background:#1a3a6b;color:#fff">60 min</th>`;
-    h+=`</tr>`;
-    h+=`<tr>
-      <th class="chk-cell"></th>
-      <th style="width:150px;text-align:left;padding-left:8px">MACHINE / SECTEUR</th>
-      <th style="width:85px">QUI</th>
-      <th style="width:85px">DATE</th>
-      <th style="width:65px">Démarrage</th>
-      <th style="width:55px">Fin</th>`;
-    for(let m=minT;m<maxT;m+=slotMin){
-      const hh=Math.floor(m/60).toString().padStart(2,"0"),mm=(m%60).toString().padStart(2,"0");
-      h+=`<th style="width:${slotW}px;font-size:10px;color:#555;font-weight:400">${mm==="00"?hh+"h":mm}</th>`;
-    }
-    h+=`</tr>`;
-    h+=`<tr class="section-row"><td colspan="${6+slots}" class="info" style="padding-left:10px">SGD Pharma – Sucy-en-Brie</td></tr>`;
-
-    arr.forEach(([id,t])=>{
-      const s=toMin(t.start),e=toMin(t.end);
-      let barHtml="";
-      if(s!==null&&e!==null&&e>s){
-        const lp=((s-minT)/total)*100,wp=((e-s)/total)*100;
-        barHtml=`<div class="gantt-bar" style="left:${lp}%;width:${wp}%;background:${t.color||"#f59e0b"}"
-          onmouseenter="barEnter(event,'${id}')" onmouseleave="barLeave()"></div>`;
+      let arrowBar="";
+      if(fE!==null&&tS2!==null&&tS2>=fE){
+        const lp=((fE-minT)/total)*100, wp=((tS2-fE)/total)*100;
+        const lbl=`${fromTask.machine} ➤ ${toTask.machine}`.replace(/'/g,"&#39;");
+        const cmt=(ind.comment||"").replace(/'/g,"&#39;");
+        arrowBar=`<div style="position:absolute;left:${lp}%;width:${wp}%;top:10px;bottom:10px;background:#ef4444;opacity:0.85;border-radius:0 4px 4px 0;display:flex;align-items:center;justify-content:flex-end;padding-right:4px"
+          onmouseenter="showTT(event,'${lbl}','—','${fromEnd}','${toStart}','#ef4444','${cmt}')" onmouseleave="hideTT()">
+          <span style="color:#fff;font-size:14px;font-weight:900">▶</span>
+        </div>`;
       }
-      const dl=t.date?new Date(t.date+"T00:00:00").toLocaleDateString("fr-FR",{weekday:"short",day:"2-digit",month:"2-digit"}):"—";
-      const isSelA=selectedIds[0]===id, isSelB=selectedIds[1]===id;
-      const rowCls=isSelA?"sel-a":isSelB?"sel-b":"";
-      const checked=selectedIds.includes(id)?"checked":"";
 
-      h+=`<tr data-id="${id}" class="${rowCls}">
-        <td class="chk-cell info"><input type="checkbox" ${checked} onchange="toggleSelect('${id}')"></td>
-        <td class="info machine-name">${t.machine||"—"}</td>
-        <td class="info who-cell">${t.qui||""}</td>
-        <td class="info" style="text-align:center;font-size:11px;color:#6c6c70">${dl}</td>
-        <td class="info time-cell">${t.start||"?"}</td>
-        <td class="info time-cell">${t.end||"?"}</td>
-        <td colspan="${slots}" class="bar-cell"><div class="bar-inner">${barHtml}</div></td>
+      h+=`<tr class="indic-gantt-row">
+        <td class="chk-cell info"></td>
+        <td class="info machine-name" style="color:#ef4444;font-weight:700;font-size:11px">${fromTask.machine} ➤ ${toTask.machine}</td>
+        <td class="info who-cell">—</td>
+        <td class="info time-cell" style="color:#ef4444">${hTime||fromEnd||"—"}</td>
+        <td class="info time-cell" style="color:#ef4444">${toStart||"—"}</td>
+        <td colspan="${slots}" class="bar-cell"><div class="bar-inner">${arrowBar}</div></td>
       </tr>`;
     });
-
-    h+=`</table>`;
-    container.innerHTML=h;
   }
+
+  h+=`</table>`;
+  container.innerHTML=h;
+  updateCmpBar();
+}
 </script>
 </body>
 </html>
