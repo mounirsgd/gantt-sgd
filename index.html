@@ -19,7 +19,6 @@
   .form-wrap { padding:10px; }
   .machine-banner { background:#1a3a6b; color:#fff; border-radius:10px; padding:10px 14px; margin-bottom:10px; font-size:13px; font-weight:700; text-align:center; }
 
-  /* TYPE SELECTOR */
   .type-selector { background:#fff; border-radius:12px; border:1px solid #e0e0e5; margin-bottom:10px; overflow:hidden; }
   .type-selector-hd { font-size:11px; font-weight:700; color:#6c6c70; padding:7px 12px; background:#f7f7f8; border-bottom:1px solid #e0e0e5; text-transform:uppercase; letter-spacing:0.5px; }
   .type-btns { display:grid; grid-template-columns:1fr 1fr 1fr; }
@@ -27,9 +26,8 @@
   .type-btn:last-child { border-right:none; }
   .type-btn[data-type="small_t1"].active { background:#e07b54; color:#fff; }
   .type-btn[data-type="grand_t1"].active { background:#c0392b; color:#fff; }
-  .type-btn[data-type="rondelle"].active { background:#7d3c98; color:#fff; }
+  .type-btn[data-type="rondelle"].active  { background:#7d3c98; color:#fff; }
 
-  /* MACHINE INFO */
   .info-sec { background:#fff; border-radius:12px; border:1px solid #e0e0e5; margin-bottom:10px; overflow:hidden; }
   .info-sec-hd { font-size:11px; font-weight:700; color:#6c6c70; padding:7px 12px; background:#f7f7f8; border-bottom:1px solid #e0e0e5; text-transform:uppercase; }
   .info-row { display:flex; align-items:center; padding:10px 12px; border-bottom:1px solid #f0f0f2; }
@@ -38,7 +36,6 @@
   .info-row input { flex:1; border:none; background:transparent; font-size:15px; color:#1c1c1e; font-family:Arial,sans-serif; outline:none; direction:ltr; }
   .info-row input::placeholder { color:#c7c7cc; }
 
-  /* TASKS */
   .tasks-sec { background:#fff; border-radius:12px; border:1px solid #e0e0e5; margin-bottom:10px; overflow:hidden; }
   .tasks-sec-hd { font-size:12px; font-weight:700; color:#fff; padding:9px 12px; }
   .task-row { border-bottom:1px solid #f0f0f2; padding:10px 12px; }
@@ -47,61 +44,64 @@
   .task-color-bar { width:4px; height:32px; border-radius:3px; flex-shrink:0; }
   .task-row-label { font-size:13px; font-weight:700; color:#1c1c1e; flex:1; }
   .task-row-who { font-size:11px; color:#6c6c70; background:#f7f7f8; padding:2px 8px; border-radius:6px; white-space:nowrap; }
-  .task-row-times { display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
-  .task-time-group { display:flex; align-items:center; gap:4px; }
-  .task-time-group label { font-size:11px; color:#6c6c70; min-width:42px; }
-  .tw { display:flex; align-items:center; gap:3px; }
-  .tw input { border:1px solid #e0e0e5; border-radius:6px; background:#f7f7f8; font-size:14px; font-weight:700; color:#1c1c1e; text-align:center; outline:none; padding:4px 0; width:42px; transition:border-color 0.15s, background 0.15s; }
-  .tw input.invalid { border-color:#ef4444; background:#fff0f0; }
-  .tw-sep { font-size:16px; font-weight:700; color:#1a3a6b; }
-  .tw-prev { font-size:11px; color:#6c6c70; margin-left:4px; min-width:60px; }
-  .task-comment-wrap { margin-top:8px; }
-  .task-comment-wrap input { width:100%; border:1px solid #e0e0e5; border-radius:8px; background:#f7f7f8; font-size:13px; color:#1c1c1e; padding:7px 10px; outline:none; font-family:Arial,sans-serif; }
-  .task-comment-wrap input::placeholder { color:#c7c7cc; }
+  .task-row-times { display:flex; align-items:center; gap:12px; flex-wrap:wrap; margin-bottom:8px; }
+  .time-group { display:flex; align-items:center; gap:6px; }
+  .time-group label { font-size:11px; color:#6c6c70; min-width:38px; }
 
-  /* TARGET OBJECTIF */
+  .time-field { display:flex; align-items:center; gap:3px; background:#f7f7f8; border:1px solid #e0e0e5; border-radius:8px; padding:4px 8px; }
+  .time-field input { border:none; background:transparent; font-size:14px; font-weight:700; color:#1c1c1e; outline:none; text-align:center; }
+  .time-field input.h-inp { width:28px; }
+  .time-field input.m-inp { width:28px; }
+  .time-field input.invalid { color:#ef4444; }
+  .time-field-sep { font-size:15px; font-weight:700; color:#1a3a6b; }
+  .time-preview { font-size:11px; color:#34c759; font-weight:700; margin-left:4px; }
+
+  .task-comment-wrap { position:relative; }
+  .task-comment-wrap textarea {
+    width:100%; border:1px solid #e0e0e5; border-radius:8px;
+    background:#f7f7f8; font-size:13px; color:#1c1c1e;
+    padding:8px 10px; outline:none; font-family:Arial,sans-serif;
+    resize:none; overflow:hidden; min-height:36px;
+    line-height:1.5; transition:border-color 0.15s;
+  }
+  .task-comment-wrap textarea:focus { border-color:#1a3a6b; background:#fff; }
+  .task-comment-wrap textarea::placeholder { color:#c7c7cc; }
+
   .target-wrap { margin:8px; border-radius:10px; overflow:hidden; border:2px solid #f59e0b; }
   .target-hd { padding:8px 12px; font-size:12px; font-weight:700; display:flex; align-items:center; justify-content:space-between; }
-  .target-body { padding:10px 12px; display:flex; align-items:center; gap:8px; flex-wrap:wrap; background:#fff; }
-  .target-body label { font-size:13px; color:#6c6c70; }
-  .target-sep { font-size:18px; font-weight:700; color:#f59e0b; }
-  .target-prev { font-size:12px; color:#6c6c70; margin-left:4px; }
-
-  /* INDICATEURS */
-  .indic-sec { background:#fff; border-radius:12px; border:2px solid #ef4444; margin-bottom:10px; overflow:hidden; }
-  .indic-hd { background:#ef4444; color:#fff; padding:8px 12px; font-size:12px; font-weight:700; display:flex; align-items:center; justify-content:space-between; }
-  .indic-add-btn { background:rgba(255,255,255,0.25); border:none; color:#fff; padding:4px 10px; border-radius:6px; font-size:12px; cursor:pointer; font-family:Arial,sans-serif; }
-  .indic-item { padding:10px 12px; border-bottom:1px solid #f0f0f2; }
-  .indic-item:last-child { border-bottom:none; }
-  .indic-row1 { display:flex; align-items:center; gap:8px; margin-bottom:8px; flex-wrap:wrap; }
-  .indic-select { flex:1; border:1px solid #e0e0e5; border-radius:8px; background:#f7f7f8; font-size:13px; color:#1c1c1e; padding:6px 8px; outline:none; font-family:Arial,sans-serif; min-width:120px; }
-  .indic-arrow { font-size:16px; color:#ef4444; font-weight:700; flex-shrink:0; }
-  .indic-del { background:none; border:none; color:#ef4444; font-size:18px; cursor:pointer; padding:0 4px; flex-shrink:0; }
-  .indic-row2 { display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
-  .indic-time-opt { font-size:11px; color:#6c6c70; }
-  .indic-comment { flex:1; border:1px solid #e0e0e5; border-radius:8px; background:#f7f7f8; font-size:13px; color:#1c1c1e; padding:6px 10px; outline:none; font-family:Arial,sans-serif; }
-  .indic-comment::placeholder { color:#c7c7cc; }
-  .indic-empty { padding:12px; font-size:12px; color:#c7c7cc; text-align:center; }
+  .target-body { padding:10px 12px; background:#fff; display:flex; flex-direction:column; gap:8px; }
+  .target-times { display:flex; align-items:center; gap:12px; flex-wrap:wrap; }
+  .target-comment textarea {
+    width:100%; border:1px solid #e0e0e5; border-radius:8px;
+    background:#f7f7f8; font-size:13px; color:#1c1c1e;
+    padding:8px 10px; outline:none; font-family:Arial,sans-serif;
+    resize:none; overflow:hidden; min-height:36px; line-height:1.5;
+  }
+  .target-comment textarea:focus { border-color:#f59e0b; background:#fff; }
+  .target-comment textarea::placeholder { color:#c7c7cc; }
 
   /* HISTORIQUE */
   .history-sec { background:#fff; border-radius:12px; border:1px solid #e0e0e5; margin-bottom:10px; overflow:hidden; }
   .history-hd { font-size:11px; font-weight:700; color:#6c6c70; padding:7px 12px; background:#f7f7f8; border-bottom:1px solid #e0e0e5; text-transform:uppercase; display:flex; align-items:center; justify-content:space-between; }
-  .history-list { max-height:180px; overflow-y:auto; }
-  .history-item { display:flex; align-items:center; justify-content:space-between; padding:10px 12px; border-bottom:1px solid #f0f0f2; cursor:pointer; }
+  .history-del-all { font-size:11px; color:#ff3b30; cursor:pointer; font-weight:700; text-decoration:underline; }
+  .history-list { max-height:220px; overflow-y:auto; }
+  .history-item { display:flex; align-items:center; justify-content:space-between; padding:10px 12px; border-bottom:1px solid #f0f0f2; }
   .history-item:last-child { border-bottom:none; }
-  .history-item:hover { background:#f7f7f8; }
-  .history-item-info { font-size:13px; font-weight:700; color:#1c1c1e; }
-  .history-item-sub  { font-size:11px; color:#6c6c70; margin-top:2px; }
-  .history-item-btn  { font-size:11px; color:#1a3a6b; font-weight:700; white-space:nowrap; margin-left:8px; }
+  .history-item-left { flex:1; cursor:pointer; }
+  .history-item-left:hover .history-item-title { color:#1a3a6b; }
+  .history-item-title { font-size:13px; font-weight:700; color:#1c1c1e; }
+  .history-item-sub   { font-size:11px; color:#6c6c70; margin-top:2px; }
+  .history-item-actions { display:flex; align-items:center; gap:8px; margin-left:8px; }
+  .history-load-btn { font-size:11px; color:#1a3a6b; font-weight:700; cursor:pointer; white-space:nowrap; }
+  .history-del-btn  { font-size:11px; color:#ff3b30; font-weight:700; cursor:pointer; white-space:nowrap; }
   .history-empty { padding:16px; text-align:center; font-size:13px; color:#c7c7cc; }
+  .history-badge { display:inline-block; font-size:10px; font-weight:700; color:#fff; padding:1px 6px; border-radius:4px; margin-right:4px; vertical-align:middle; }
 
-  /* BTNS */
-  .btns { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin:0 0 10px; }
+  .btns { display:grid; grid-template-columns:1fr; gap:10px; margin:0 0 10px; }
   .btn { padding:14px; border-radius:10px; font-size:15px; font-weight:700; cursor:pointer; border:1px solid #d1d1d6; background:#fff; color:#1c1c1e; font-family:Arial,sans-serif; }
   .btn:active { opacity:0.7; transform:scale(0.98); }
-  .btn-ok    { background:#34c759; color:#fff; border-color:#2dae4d; }
-  .btn-gantt { background:#1a3a6b; color:#fff; border-color:#1a3a6b; }
-  .btn-full  { grid-column:1/-1; color:#ff3b30; border-color:#ffb3b0; font-size:13px; padding:10px; }
+  .btn-ok   { background:#34c759; color:#fff; border-color:#2dae4d; }
+  .btn-full { color:#ff3b30; border-color:#ffb3b0; font-size:13px; padding:10px; }
   .sync-info { font-size:11px; color:#6c6c70; text-align:center; padding:6px; }
   .divider { height:1px; background:#d1d1d6; margin:6px 10px 14px; }
 
@@ -121,25 +121,27 @@
   table.gantt td.machine-name { font-weight:700; font-size:12px; color:#1c1c1e; min-width:150px; }
   table.gantt td.who-cell { color:#3a3a4a; text-align:center; min-width:80px; font-size:11px; }
   table.gantt td.time-cell { text-align:center; color:#1a3a6b; font-weight:700; min-width:52px; font-size:11px; }
+  /* Correction 3 : commentaire lisible dans le tableau */
+  table.gantt td.comment-cell {
+    font-size:11px; color:#555; font-style:italic;
+    max-width:200px; white-space:pre-wrap;
+    word-break:break-word; padding:5px 8px;
+    line-height:1.5; vertical-align:top;
+  }
   table.gantt tr.odd td  { background:#fff; }
   table.gantt tr.even td { background:#fafafa; }
   table.gantt tr.target-row td { background:#fff8e1 !important; }
-  table.gantt tr.indic-gantt-row td { background:#fff0f0 !important; }
   table.gantt tr.sel-a td { background:#fff8e1 !important; outline:2px solid #f59e0b; }
   table.gantt tr.sel-b td { background:#e8f5e9 !important; outline:2px solid #22c55e; }
 
-  .bar-cell { position:relative; min-width:400px; padding:0 !important; height:36px; }
-  .bar-inner { position:relative; width:100%; height:100%; }
+  .bar-cell { position:relative; min-width:400px; padding:0 !important; }
+  .bar-inner { position:relative; width:100%; height:34px; }
   .gantt-bar { position:absolute; top:5px; bottom:5px; border-radius:5px; opacity:0.88; cursor:pointer; transition:opacity 0.15s; }
   .gantt-bar:hover { opacity:1; top:3px; bottom:3px; }
   .gantt-bar-target { position:absolute; top:6px; bottom:6px; border-radius:4px; background:#f59e0b; opacity:0.9; cursor:pointer; }
   .gantt-bar-target:hover { opacity:1; }
   .gantt-comment-dot { position:absolute; top:3px; right:3px; width:7px; height:7px; background:#fff; border-radius:50%; border:1.5px solid rgba(0,0,0,0.3); }
 
-  /* FLÈCHE INDICATEUR */
-  .gantt-arrow-svg { position:absolute; top:0; bottom:0; pointer-events:none; overflow:visible; }
-
-  /* COMPARAISON */
   .cmp-bar { display:none; background:#1a3a6b; color:#fff; border-radius:12px; padding:10px 14px; margin-bottom:10px; align-items:center; justify-content:space-between; gap:10px; }
   .cmp-bar.visible { display:flex; }
   .cmp-bar-info { font-size:13px; font-weight:700; }
@@ -153,21 +155,19 @@
   .cmp-body { padding:14px; }
   .cmp-cards { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:12px; }
   .cmp-card { background:#f7f7f8; border-radius:10px; padding:10px 12px; }
-  .cmp-card.a { border-left:4px solid #f59e0b; }
-  .cmp-card.b { border-left:4px solid #22c55e; }
+  .cmp-card.a { border-left:4px solid #f59e0b; } .cmp-card.b { border-left:4px solid #22c55e; }
   .cmp-card-badge { font-size:10px; font-weight:700; text-transform:uppercase; margin-bottom:4px; }
   .cmp-card-badge.a { color:#b45309; } .cmp-card-badge.b { color:#15803d; }
   .cmp-card-name { font-size:13px; font-weight:700; color:#1c1c1e; }
   .cmp-card-time { font-size:12px; color:#6c6c70; margin-top:3px; }
-  .cmp-diff-box { background:#f0f4ff; border-radius:10px; padding:12px 14px; text-align:center; }
+  .cmp-diff-box { background:#f0f4ff; border-radius:10px; padding:14px; text-align:center; }
   .cmp-diff-label { font-size:11px; color:#6c6c70; text-transform:uppercase; font-weight:700; margin-bottom:6px; }
-  .cmp-diff-value { font-size:22px; font-weight:700; color:#1a3a6b; }
-  .cmp-diff-sub { font-size:11px; color:#6c6c70; margin-top:4px; }
+  .cmp-diff-value { font-size:24px; font-weight:700; color:#1a3a6b; }
+  .cmp-diff-sub { font-size:12px; color:#6c6c70; margin-top:4px; }
   .chk-cell { text-align:center; width:30px; padding:0 4px !important; }
   .chk-cell input { width:15px; height:15px; cursor:pointer; accent-color:#1a3a6b; }
 
-  /* TOOLTIP */
-  #tooltip { display:none; position:fixed; background:#1c1c1e; color:#fff; border-radius:14px; padding:14px 16px; font-size:12px; line-height:1.9; z-index:9999; pointer-events:none; min-width:200px; max-width:280px; box-shadow:0 8px 30px rgba(0,0,0,0.30); }
+  #tooltip { display:none; position:fixed; background:#1c1c1e; color:#fff; border-radius:14px; padding:14px 16px; font-size:12px; line-height:1.9; z-index:9999; pointer-events:none; min-width:200px; max-width:300px; box-shadow:0 8px 30px rgba(0,0,0,0.30); }
   #tooltip.visible { display:block; }
   .tt-header { display:flex; align-items:center; gap:8px; margin-bottom:8px; padding-bottom:8px; border-bottom:1px solid rgba(255,255,255,0.15); }
   .tt-dot { width:12px; height:12px; border-radius:50%; flex-shrink:0; }
@@ -175,8 +175,9 @@
   .tt-row { display:flex; justify-content:space-between; gap:14px; }
   .tt-lbl { color:#aaa; } .tt-val { font-weight:700; }
   .tt-dur { margin-top:8px; padding-top:7px; border-top:1px solid rgba(255,255,255,0.15); color:#ffd60a; font-weight:700; }
-  .tt-comment-box { margin-top:8px; padding:8px 10px; background:rgba(255,255,255,0.12); border-radius:8px; border-left:3px solid #ffd60a; font-size:12px; font-style:italic; line-height:1.5; }
-  .tt-comment-label { font-size:10px; font-weight:700; color:#ffd60a; text-transform:uppercase; margin-bottom:3px; font-style:normal; }
+  .tt-comment-box { margin-top:8px; padding:8px 10px; background:rgba(255,255,255,0.12); border-radius:8px; border-left:3px solid #ffd60a; line-height:1.6; }
+  .tt-comment-label { font-size:10px; font-weight:700; color:#ffd60a; text-transform:uppercase; margin-bottom:4px; }
+  .tt-comment-text { font-size:12px; color:#f0f0f0; white-space:pre-line; }
   .empty-gantt { text-align:center; padding:40px 24px; color:#c7c7cc; font-size:14px; background:#fff; border-radius:12px; border:1px solid #e0e0e5; }
 </style>
 </head>
@@ -185,12 +186,12 @@
 <div id="tooltip">
   <div class="tt-header"><div class="tt-dot" id="tt-dot"></div><div class="tt-title" id="tt-title"></div></div>
   <div class="tt-row"><span class="tt-lbl">Qui</span><span class="tt-val" id="tt-qui"></span></div>
-  <div class="tt-row"><span class="tt-lbl">Démarrage</span><span class="tt-val" id="tt-start"></span></div>
+  <div class="tt-row"><span class="tt-lbl">Début</span><span class="tt-val" id="tt-start"></span></div>
   <div class="tt-row"><span class="tt-lbl">Fin</span><span class="tt-val" id="tt-end"></span></div>
   <div class="tt-dur" id="tt-dur"></div>
   <div class="tt-comment-box" id="tt-comment-box" style="display:none">
     <div class="tt-comment-label">Commentaire</div>
-    <div id="tt-comment"></div>
+    <div class="tt-comment-text" id="tt-comment"></div>
   </div>
 </div>
 
@@ -206,42 +207,33 @@
   <div class="machine-banner">SGD Pharma – Sucy-en-Brie</div>
 
   <div class="info-sec">
-    <div class="info-sec-hd">Informations séance</div>
+    <div class="info-sec-hd">Informations de la séance</div>
     <div class="info-row"><label>Date</label><input id="f-date" type="date"></div>
-    <div class="info-row"><label>Machine</label><input id="f-machine-name" placeholder="ex: Machine 32B" autocomplete="off"></div>
+    <div class="info-row"><label>Machine</label><input id="f-machine-name" placeholder="ex : Machine 32B" autocomplete="off"></div>
   </div>
 
   <div class="type-selector">
     <div class="type-selector-hd">Type de changement</div>
     <div class="type-btns">
-      <button class="type-btn" data-type="small_t1" onclick="selectType('small_t1',this)">TARGET<br>Petit t1</button>
-      <button class="type-btn" data-type="grand_t1" onclick="selectType('grand_t1',this)">TARGET<br>Grand T1</button>
-      <button class="type-btn" data-type="rondelle" onclick="selectType('rondelle',this)">TARGET<br>Rondelle</button>
+      <button class="type-btn" data-type="small_t1" onclick="selectType('small_t1',this)">OBJECTIF<br>Petit t1</button>
+      <button class="type-btn" data-type="grand_t1" onclick="selectType('grand_t1',this)">OBJECTIF<br>Grand T1</button>
+      <button class="type-btn" data-type="rondelle" onclick="selectType('rondelle',this)">OBJECTIF<br>Rondelle</button>
     </div>
   </div>
 
   <div id="dynamic-sections"></div>
 
-  <div class="indic-sec">
-    <div class="indic-hd">
-      ➤ Indicateurs (flèches)
-      <button class="indic-add-btn" onclick="addIndicator()">+ Ajouter</button>
-    </div>
-    <div id="indic-list"><div class="indic-empty">Aucun indicateur — cliquez + Ajouter</div></div>
-  </div>
-
   <div class="history-sec">
     <div class="history-hd">
-      Historique des séances
-      <span id="history-count" style="font-weight:400;font-size:10px"></span>
+      Historique <span id="history-count" style="font-weight:400;font-size:10px"></span>
+      <span class="history-del-all" onclick="deleteAllHistory()">Tout supprimer</span>
     </div>
-    <div class="history-list" id="history-list"><div class="history-empty">Aucune séance archivée</div></div>
+    <div class="history-list" id="history-list"><div class="history-empty">Aucune séance enregistrée</div></div>
   </div>
 
   <div class="btns">
-    <button class="btn btn-ok"    onclick="saveSession()">✓ Enregistrer</button>
-    <button class="btn btn-gantt" onclick="scrollToGantt()">↓ Voir Gantt</button>
-    <button class="btn btn-full"  onclick="newSession()">Nouvelle séance (archiver et repartir)</button>
+    <button class="btn btn-ok"   onclick="saveSession()">✓ Enregistrer et afficher le Gantt</button>
+    <button class="btn btn-full" onclick="newSession()">Nouvelle séance (repartir à zéro)</button>
   </div>
   <div class="sync-info" id="sync-info"></div>
 </div>
@@ -252,13 +244,13 @@
   <div class="gantt-header-block">
     <div class="gantt-logo"><span>SGD<br>Pharma</span></div>
     <div class="gantt-title">
-      <h2>Changement – Temp/Machine</h2>
+      <h2 id="gantt-machine-title">Changement – Temp/Machine</h2>
       <p id="gantt-subtitle">SGD Pharma – Sucy-en-Brie</p>
     </div>
   </div>
 
   <div class="cmp-bar" id="cmp-bar">
-    <div class="cmp-bar-info">2 tâches sélectionnées<span id="cmp-bar-names"></span></div>
+    <div class="cmp-bar-info">2 éléments sélectionnés<span id="cmp-bar-names"></span></div>
     <button class="cmp-bar-btn" onclick="doCompare()">Comparer ▶</button>
   </div>
   <div class="cmp-result" id="cmp-result">
@@ -270,13 +262,13 @@
   </div>
 
   <div class="gantt-scroll">
-    <div id="gantt-container"><div class="empty-gantt">Sélectionnez un type et enregistrez pour voir le Gantt</div></div>
+    <div id="gantt-container"><div class="empty-gantt">Sélectionnez un type et enregistrez pour afficher le Gantt</div></div>
   </div>
 </div>
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-import { getDatabase, ref, set, get, onValue, remove }
+import { getDatabase, ref, set, get, onValue, remove, push }
   from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 
 const app = initializeApp({
@@ -290,368 +282,324 @@ const app = initializeApp({
 });
 const db = getDatabase(app);
 
-/* ══ COULEURS UNIQUES PAR TÂCHE ══ */
 const TASK_COLORS = [
-  "#3b82f6","#8b5cf6","#06b6d4","#22c55e","#f59e0b",
+  "#3b82f6","#8b5cf6","#06b6d4","#22c55e","#f97316",
   "#ec4899","#14b8a6","#a855f7","#0ea5e9","#84cc16",
-  "#f97316","#6366f1","#10b981","#eab308","#64748b"
+  "#6366f1","#10b981","#eab308","#64748b","#d946ef"
 ];
 
 const TYPE_DATA = {
-  small_t1: {
-    label:"TARGET (Petit t1)", color:"#e07b54",
-    tasks:[
-      {id:"st1_1", machine:"Orifice ring exchange",    qui:"Feedermen"},
-      {id:"st1_2", machine:"Mold side",                qui:"IS"},
-      {id:"st1_3", machine:"Blank side",               qui:"IS"},
-      {id:"st1_4", machine:"Funnel IN",                qui:"Feedermen"},
-      {id:"st1_5", machine:"Gob IN",                   qui:"Feedermen"},
-      {id:"st1_6", machine:"Start sections w/o glass", qui:"Section Chief"},
-      {id:"st1_7", machine:"Start sections w/ glass",  qui:"Section Chief"},
-      {id:"st1_8", machine:"All machine w/ glass",     qui:"Section Chief"},
-      {id:"st1_9", machine:"Glass to Lehr",            qui:"Section Chief"},
-    ]
-  },
-  grand_t1: {
-    label:"TARGET (Grand T1)", color:"#c0392b",
-    tasks:[
-      {id:"gt1_1", machine:"Fin Production précédente au bout froid", qui:"???"},
-      {id:"gt1_2", machine:"Vide de ligne au bout froid",              qui:"???"},
-      {id:"gt1_3", machine:"Arrivée flacons au bout froid",            qui:"???"},
-      {id:"gt1_4", machine:"Réglage ligne et machines d'inspections",  qui:"???"},
-      {id:"gt1_5", machine:"Qualité TOP – approuvée",                  qui:"???"},
-      {id:"gt1_6", machine:"Emballage TOP – palettisé",                qui:"???"},
-    ]
-  },
-  rondelle: {
-    label:"TARGET (Rondelle)", color:"#7d3c98",
-    tasks:[
-      {id:"ron_1",  machine:"Nettoyage machine",              qui:"Production"},
-      {id:"ron_2",  machine:"Changement cuvette",             qui:"Feedermen"},
-      {id:"ron_3",  machine:"Côte Finisseur",                 qui:"Atelier IS"},
-      {id:"ron_4",  machine:"Côte Ebaucheur",                 qui:"Atelier IS"},
-      {id:"ron_5",  machine:"Entonnoir sous verre",           qui:"Feedermen"},
-      {id:"ron_6",  machine:"Distributeur sous verre",        qui:"Feedermen"},
-      {id:"ron_7",  machine:"Démarrage section sans flacon",  qui:"Section Chief"},
-      {id:"ron_8",  machine:"Début section avec flacon",      qui:"Section Chief"},
-      {id:"ron_9",  machine:"Machine complète avec flacon",   qui:"Section Chief"},
-      {id:"ron_10", machine:"Mise à l'arche",                 qui:"Section Chief"},
-    ]
-  }
+  small_t1: { label:"OBJECTIF (Petit t1)", color:"#e07b54", tasks:[
+    {id:"st1_1", machine:"Échange bague orifice",         qui:"Alimenteurs"},
+    {id:"st1_2", machine:"Côté moule",                    qui:"IS"},
+    {id:"st1_3", machine:"Côté ébauche",                  qui:"IS"},
+    {id:"st1_4", machine:"Entonnoir entrée",              qui:"Alimenteurs"},
+    {id:"st1_5", machine:"Paraison entrée",               qui:"Alimenteurs"},
+    {id:"st1_6", machine:"Démarrage sections sans verre", qui:"Chef de section"},
+    {id:"st1_7", machine:"Démarrage sections avec verre", qui:"Chef de section"},
+    {id:"st1_8", machine:"Toutes machines avec verre",    qui:"Chef de section"},
+    {id:"st1_9", machine:"Verre vers le Lehr",            qui:"Chef de section"},
+  ]},
+  grand_t1: { label:"OBJECTIF (Grand T1)", color:"#c0392b", tasks:[
+    {id:"gt1_1", machine:"Fin production précédente bout froid", qui:"À définir"},
+    {id:"gt1_2", machine:"Vidage de ligne bout froid",           qui:"À définir"},
+    {id:"gt1_3", machine:"Arrivée flacons bout froid",           qui:"À définir"},
+    {id:"gt1_4", machine:"Réglage ligne et machines inspection",  qui:"À définir"},
+    {id:"gt1_5", machine:"Qualité validée – approuvée",          qui:"À définir"},
+    {id:"gt1_6", machine:"Emballage validé – palettisé",         qui:"À définir"},
+  ]},
+  rondelle: { label:"OBJECTIF (Rondelle)", color:"#7d3c98", tasks:[
+    {id:"ron_1",  machine:"Nettoyage machine",               qui:"Production"},
+    {id:"ron_2",  machine:"Changement cuvette",              qui:"Alimenteurs"},
+    {id:"ron_3",  machine:"Côté finisseur",                  qui:"Atelier IS"},
+    {id:"ron_4",  machine:"Côté ébauche",                    qui:"Atelier IS"},
+    {id:"ron_5",  machine:"Entonnoir sous verre",            qui:"Alimenteurs"},
+    {id:"ron_6",  machine:"Distributeur sous verre",         qui:"Alimenteurs"},
+    {id:"ron_7",  machine:"Démarrage section sans flacon",   qui:"Chef de section"},
+    {id:"ron_8",  machine:"Démarrage section avec flacon",   qui:"Chef de section"},
+    {id:"ron_9",  machine:"Machine complète avec flacon",    qui:"Chef de section"},
+    {id:"ron_10", machine:"Mise à l'arche",                  qui:"Chef de section"},
+  ]}
 };
 
-/* ══ ÉTAT ══ */
 let activeType  = null;
-let sessionData = {date:"",machine:"",type:null,typeData:{},indicators:[]};
-let indicators  = [];
+let typeStates  = { small_t1:{}, grand_t1:{}, rondelle:{} };
 let selectedIds = [];
 let allTasks    = {};
 
 document.getElementById("f-date").value = new Date().toISOString().slice(0,10);
 
 /* ══ FIREBASE ══ */
-onValue(ref(db,"current"), snap => {
-  const d = snap.val();
-  if (!d) { document.getElementById("sync-status").textContent="Connecté"; return; }
-  loadSession(d);
-  document.getElementById("sync-status").textContent="Connecté";
+["small_t1","grand_t1","rondelle"].forEach(type => {
+  onValue(ref(db,"types/"+type), snap => {
+    typeStates[type] = snap.val() || {};
+    if (type === activeType) renderDynamicSections();
+  });
 });
+
+onValue(ref(db,"global"), snap => {
+  const d = snap.val() || {};
+  if (d.date)    document.getElementById("f-date").value         = d.date;
+  if (d.machine) document.getElementById("f-machine-name").value = d.machine;
+  if (d.activeType) {
+    activeType = d.activeType;
+    document.querySelectorAll(".type-btn").forEach(b=>b.classList.toggle("active",b.dataset.type===activeType));
+    renderDynamicSections();
+  }
+  document.getElementById("sync-status").textContent = "Connecté";
+});
+
+/* HISTORIQUE — écoute temps réel */
 onValue(ref(db,"sessions"), snap => renderHistory(snap.val()||{}));
 
-function loadSession(d) {
-  document.getElementById("f-date").value         = d.date    || new Date().toISOString().slice(0,10);
-  document.getElementById("f-machine-name").value = d.machine || "";
-  activeType   = d.type || null;
-  sessionData  = d;
-  indicators   = d.indicators || [];
-  document.querySelectorAll(".type-btn").forEach(btn => {
-    btn.classList.toggle("active", btn.dataset.type === activeType);
-  });
-  renderDynamicSections();
-  renderIndicators();
-  renderGantt();
-}
-
-/* ══ CORRECTION 1 : SÉLECTEUR EXCLUSIF ══ */
+/* ══ TYPE SÉLECTEUR ══ */
 window.selectType = (type, btn) => {
-  if (activeType === type) {
-    activeType = null;
-    btn.classList.remove("active");
-  } else {
-    activeType = type;
-    document.querySelectorAll(".type-btn").forEach(b => b.classList.remove("active"));
+  if (activeType === type) { activeType=null; btn.classList.remove("active"); }
+  else {
+    activeType=type;
+    document.querySelectorAll(".type-btn").forEach(b=>b.classList.remove("active"));
     btn.classList.add("active");
   }
   renderDynamicSections();
-  renderIndicators();
-  // Gantt reste affiché — ne pas appeler renderGantt() ici
+  document.getElementById("gantt-container").innerHTML='<div class="empty-gantt">Sélectionnez un type et enregistrez pour afficher le Gantt</div>';
+  selectedIds=[]; updateCmpBar();
 };
 
-function renderDynamicSections() {
-  const container = document.getElementById("dynamic-sections");
-  container.innerHTML = "";
-  if (!activeType) return;
-  const def = TYPE_DATA[activeType]; if (!def) return;
-  const typeVals = (sessionData.typeData && sessionData.typeData[activeType]) || {};
+/* ══ CHAMP HEURE ══ */
+function makeTimeField(hVal, mVal) {
+  const wrap=document.createElement("div"); wrap.className="time-field";
+  const hInp=document.createElement("input");
+  hInp.className="h-inp"; hInp.inputMode="numeric"; hInp.maxLength=2;
+  hInp.placeholder="H"; hInp.value=hVal||"";
+  const sep=document.createElement("span"); sep.className="time-field-sep"; sep.textContent=":";
+  const mInp=document.createElement("input");
+  mInp.className="m-inp"; mInp.inputMode="numeric"; mInp.maxLength=2;
+  mInp.placeholder="mm"; mInp.value=mVal||"";
 
-  const sec = document.createElement("div");
-  sec.className = "tasks-sec";
-  sec.style.borderColor = def.color;
+  function validate(){
+    hInp.classList.toggle("invalid",hInp.value!==""&&(isNaN(parseInt(hInp.value))||parseInt(hInp.value)>23));
+    mInp.classList.toggle("invalid",mInp.value!==""&&(isNaN(parseInt(mInp.value))||parseInt(mInp.value)>59));
+  }
+  hInp.addEventListener("input",function(){
+    this.value=this.value.replace(/\D/g,"").slice(0,2);
+    if(this.value.length===2){if(parseInt(this.value)>23)this.value="23"; mInp.focus();}
+    validate();
+  });
+  hInp.addEventListener("blur",function(){if(this.value!==""){const v=parseInt(this.value);if(v>23)this.value="23";if(v<0)this.value="0";} validate();});
+  mInp.addEventListener("input",function(){
+    this.value=this.value.replace(/\D/g,"").slice(0,2);
+    if(this.value.length===2&&parseInt(this.value)>59)this.value="59";
+    validate();
+  });
+  mInp.addEventListener("blur",function(){if(this.value!==""){const v=parseInt(this.value);if(v>59)this.value="59";if(v<0)this.value="0";} validate();});
 
-  const hd = document.createElement("div");
-  hd.className = "tasks-sec-hd";
-  hd.style.background = def.color;
-  hd.textContent = def.label;
+  wrap.appendChild(hInp); wrap.appendChild(sep); wrap.appendChild(mInp);
+  wrap._getH=()=>hInp.value; wrap._getM=()=>mInp.value;
+  return wrap;
+}
+
+function getTV(h,m){
+  if(!h) return "";
+  const hv=parseInt(h),mv=parseInt(m)||0;
+  if(isNaN(hv)||hv<0||hv>23||mv<0||mv>59) return "";
+  return hv+":"+(mv<10?"0"+mv:mv);
+}
+
+/* TEXTAREA AUTO-RESIZE */
+function makeTextarea(placeholder, value){
+  const ta=document.createElement("textarea");
+  ta.placeholder=placeholder; ta.value=value||""; ta.rows=1;
+  function resize(){ ta.style.height="auto"; ta.style.height=ta.scrollHeight+"px"; }
+  ta.addEventListener("input",resize);
+  setTimeout(resize,0);
+  return ta;
+}
+
+/* ══ RENDU SECTIONS ══ */
+function renderDynamicSections(){
+  const container=document.getElementById("dynamic-sections");
+  container.innerHTML="";
+  if(!activeType) return;
+  const def=TYPE_DATA[activeType]; if(!def) return;
+  const saved=typeStates[activeType]||{};
+  const savedTasks=saved.tasks||{}, savedTarget=saved.target||{};
+
+  const sec=document.createElement("div"); sec.className="tasks-sec"; sec.style.borderColor=def.color;
+  const hd=document.createElement("div"); hd.className="tasks-sec-hd"; hd.style.background=def.color; hd.textContent=def.label;
   sec.appendChild(hd);
 
-  // TARGET objectif
-  const tgt = typeVals.target || {};
-  const tDiv = document.createElement("div");
-  tDiv.innerHTML = `
-    <div class="target-wrap" style="border-color:${def.color}">
-      <div class="target-hd" style="background:${def.color}20;color:${def.color}">
-        🎯 Objectif TARGET
-        <span style="font-size:11px;opacity:0.7">Plage horaire visée</span>
-      </div>
-      <div class="target-body">
-        <label>Début</label>
-        <div class="tw">
-          <input class="t-h" id="tgt_sh" inputmode="numeric" maxlength="2" placeholder="HH" value="${tgt.sh||""}">
-          <span class="target-sep" style="color:${def.color}">:</span>
-          <input class="t-m" id="tgt_sm" inputmode="numeric" maxlength="2" placeholder="MM" value="${tgt.sm||""}">
-        </div>
-        <label style="margin-left:8px">Fin</label>
-        <div class="tw">
-          <input class="t-h" id="tgt_eh" inputmode="numeric" maxlength="2" placeholder="HH" value="${tgt.eh||""}">
-          <span class="target-sep" style="color:${def.color}">:</span>
-          <input class="t-m" id="tgt_em" inputmode="numeric" maxlength="2" placeholder="MM" value="${tgt.em||""}">
-        </div>
-        <span class="target-prev" id="tgt_prev"></span>
-      </div>
-    </div>`;
-  sec.appendChild(tDiv);
-  setupTimeGroup("tgt_sh","tgt_sm","tgt_eh","tgt_em","tgt_prev");
+  // TARGET
+  const tWrap=document.createElement("div"); tWrap.className="target-wrap"; tWrap.style.borderColor=def.color;
+  tWrap.innerHTML=`<div class="target-hd" style="background:${def.color}20;color:${def.color}">🎯 Objectif <span style="font-size:11px;opacity:0.7">Plage horaire visée</span></div>`;
+  const tBody=document.createElement("div"); tBody.className="target-body";
+  const tTimesRow=document.createElement("div"); tTimesRow.className="target-times";
+  const tSlbl=document.createElement("label"); tSlbl.style.cssText="font-size:13px;color:#6c6c70"; tSlbl.textContent="Début";
+  const tSF=makeTimeField(savedTarget.sh||"",savedTarget.sm||"");
+  const tElbl=document.createElement("label"); tElbl.style.cssText="font-size:13px;color:#6c6c70;margin-left:8px"; tElbl.textContent="Fin";
+  const tEF=makeTimeField(savedTarget.eh||"",savedTarget.em||"");
+  const tPrev=document.createElement("span"); tPrev.className="time-preview";
+  function updTgtPrev(){ const s=getTV(tSF._getH(),tSF._getM()),e=getTV(tEF._getH(),tEF._getM()); tPrev.textContent=s&&e?s+" → "+e:s?s+" → ?":""; }
+  tSF.addEventListener("input",updTgtPrev); tEF.addEventListener("input",updTgtPrev); updTgtPrev();
+  tTimesRow.appendChild(tSlbl); tTimesRow.appendChild(tSF); tTimesRow.appendChild(tElbl); tTimesRow.appendChild(tEF); tTimesRow.appendChild(tPrev);
+  tBody.appendChild(tTimesRow);
+  const tCmtWrap=document.createElement("div"); tCmtWrap.className="target-comment";
+  const tCmtTA=makeTextarea("Commentaire sur l'objectif…",savedTarget.comment||"");
+  tCmtWrap.appendChild(tCmtTA); tBody.appendChild(tCmtWrap);
+  tWrap.appendChild(tBody); sec.appendChild(tWrap);
+  sec._tSF=tSF; sec._tEF=tEF; sec._tCmt=tCmtTA;
 
-  // Lignes tâches
-  def.tasks.forEach((task, idx) => {
-    const tv   = (typeVals.tasks && typeVals.tasks[task.id]) || {};
-    const color = TASK_COLORS[idx % TASK_COLORS.length];
-    const row   = document.createElement("div");
-    row.className = "task-row";
-    row.id = "row_"+task.id;
-    row.innerHTML = `
-      <div class="task-row-top">
-        <div class="task-color-bar" style="background:${color}"></div>
-        <span class="task-row-label">${task.machine}</span>
-        <span class="task-row-who">${task.qui}</span>
-      </div>
-      <div class="task-row-times">
-        <div class="task-time-group">
-          <label>Début</label>
-          <div class="tw">
-            <input class="t-h" id="${task.id}_sh" inputmode="numeric" maxlength="2" placeholder="HH" value="${tv.sh||""}">
-            <span class="tw-sep">:</span>
-            <input class="t-m" id="${task.id}_sm" inputmode="numeric" maxlength="2" placeholder="MM" value="${tv.sm||""}">
-          </div>
-        </div>
-        <div class="task-time-group">
-          <label>Fin</label>
-          <div class="tw">
-            <input class="t-h" id="${task.id}_eh" inputmode="numeric" maxlength="2" placeholder="HH" value="${tv.eh||""}">
-            <span class="tw-sep">:</span>
-            <input class="t-m" id="${task.id}_em" inputmode="numeric" maxlength="2" placeholder="MM" value="${tv.em||""}">
-          </div>
-        </div>
-        <span class="tw-prev" id="${task.id}_prev"></span>
-      </div>
-      <div class="task-comment-wrap">
-        <input id="cmt_${task.id}" placeholder="Commentaire…" value="${(tv.comment||"").replace(/"/g,'&quot;')}">
-      </div>`;
+  sec._taskFields={};
+  def.tasks.forEach((task,idx)=>{
+    const tv=savedTasks[task.id]||{};
+    const color=TASK_COLORS[idx%TASK_COLORS.length];
+    const row=document.createElement("div"); row.className="task-row";
+    const top=document.createElement("div"); top.className="task-row-top";
+    const bar=document.createElement("div"); bar.className="task-color-bar"; bar.style.background=color;
+    const lbl=document.createElement("span"); lbl.className="task-row-label"; lbl.textContent=task.machine;
+    const who=document.createElement("span"); who.className="task-row-who"; who.textContent=task.qui;
+    top.appendChild(bar); top.appendChild(lbl); top.appendChild(who); row.appendChild(top);
+
+    const timesRow=document.createElement("div"); timesRow.className="task-row-times";
+    const sGrp=document.createElement("div"); sGrp.className="time-group";
+    const sLbl=document.createElement("label"); sLbl.textContent="Début";
+    const sF=makeTimeField(tv.sh||"",tv.sm||"");
+    sGrp.appendChild(sLbl); sGrp.appendChild(sF);
+    const eGrp=document.createElement("div"); eGrp.className="time-group";
+    const eLbl=document.createElement("label"); eLbl.textContent="Fin";
+    const eF=makeTimeField(tv.eh||"",tv.em||"");
+    eGrp.appendChild(eLbl); eGrp.appendChild(eF);
+    const prev=document.createElement("span"); prev.className="time-preview";
+    function updPrev(){ const s=getTV(sF._getH(),sF._getM()),e=getTV(eF._getH(),eF._getM()); prev.textContent=s&&e?s+" → "+e:s?s+" → ?":""; }
+    sF.addEventListener("input",updPrev); eF.addEventListener("input",updPrev); updPrev();
+    timesRow.appendChild(sGrp); timesRow.appendChild(eGrp); timesRow.appendChild(prev);
+    row.appendChild(timesRow);
+
+    const cmtWrap=document.createElement("div"); cmtWrap.className="task-comment-wrap";
+    const cmtTA=makeTextarea("Commentaire… (plusieurs lignes possibles)",tv.comment||"");
+    cmtWrap.appendChild(cmtTA); row.appendChild(cmtWrap);
+
+    sec._taskFields[task.id]={sF,eF,cmtTA,color};
     sec.appendChild(row);
-    setupTimeGroup(`${task.id}_sh`,`${task.id}_sm`,`${task.id}_eh`,`${task.id}_em`,`${task.id}_prev`);
   });
-
   container.appendChild(sec);
 }
 
-/* ══ CORRECTION 2 : VALIDATION HEURES ══ */
-function setupHourMin(el, maxVal, nextEl) {
-  el.addEventListener("input", function(){
-    this.value = this.value.replace(/\D/g,"").slice(0,2);
-    const v = parseInt(this.value);
-    if (this.value.length===2) {
-      if (v > maxVal) { this.value = String(maxVal); this.classList.add("invalid"); }
-      else { this.classList.remove("invalid"); if(nextEl) nextEl.focus(); }
-    } else if (this.value.length < 2) { this.classList.remove("invalid"); }
-  });
-  el.addEventListener("blur", function(){
-    if (this.value!=="") {
-      const v=parseInt(this.value);
-      if (v>maxVal||v<0) { this.value=String(Math.min(maxVal,Math.max(0,v))); this.classList.add("invalid"); }
-      else this.classList.remove("invalid");
-    } else this.classList.remove("invalid");
-  });
-}
-
-function setupTimeGroup(shId, smId, ehId, emId, prevId) {
-  const sh=document.getElementById(shId), sm=document.getElementById(smId);
-  const eh=document.getElementById(ehId), em=document.getElementById(emId);
-  const prev=prevId?document.getElementById(prevId):null;
-  if(!sh) return;
-  setupHourMin(sh, 23, sm);
-  setupHourMin(sm, 59, eh);
-  setupHourMin(eh, 23, em);
-  setupHourMin(em, 59, null);
-  const upd = () => {
-    if (!prev) return;
-    const s=getTV(sh.value,sm.value), e=getTV(eh.value,em.value);
-    prev.textContent = s&&e?s+" → "+e:s?s+" → ?":"";
-  };
-  [sh,sm,eh,em].forEach(el=>el.addEventListener("input",upd));
-  upd();
-}
-
-function getTV(h,m) {
-  if (!h||h==="") return "";
-  const hv=parseInt(h), mv=parseInt(m)||0;
-  if (isNaN(hv)||hv<0||hv>23||mv<0||mv>59) return "";
-  return String(hv).padStart(2,"0")+":"+String(mv).padStart(2,"0");
-}
-
-/* ══ INDICATEURS ══ */
-function getTaskOptions(selectedVal) {
-  if (!activeType) return '<option value="">— Sélectionner un type d\'abord —</option>';
-  const def = TYPE_DATA[activeType];
-  if (!def) return "";
-  return '<option value="">— Choisir une tâche —</option>' +
-    def.tasks.map(t => `<option value="${t.id}" ${selectedVal===t.id?"selected":""}>${t.machine}</option>`).join("");
-}
-
-window.addIndicator = () => {
-  indicators.push({ from:"", to:"", sh:"", sm:"", comment:"" });
-  renderIndicators();
-};
-
-function renderIndicators() {
-  const list = document.getElementById("indic-list");
-  if (!indicators.length) {
-    list.innerHTML = '<div class="indic-empty">Aucun indicateur — cliquez + Ajouter</div>';
-    return;
-  }
-  list.innerHTML = indicators.map((ind,i) => `
-    <div class="indic-item">
-      <div class="indic-row1">
-        <select class="indic-select" onchange="indicators[${i}].from=this.value">${getTaskOptions(ind.from)}</select>
-        <span class="indic-arrow">➤</span>
-        <select class="indic-select" onchange="indicators[${i}].to=this.value">${getTaskOptions(ind.to)}</select>
-        <button class="indic-del" onclick="removeIndicator(${i})">✕</button>
-      </div>
-      <div class="indic-row2">
-        <span class="indic-time-opt">Heure (optionnel)</span>
-        <div class="tw">
-          <input inputmode="numeric" maxlength="2" placeholder="HH" value="${ind.sh||""}"
-            style="width:36px;font-size:13px;border:1px solid #e0e0e5;border-radius:6px;background:#f7f7f8;text-align:center;outline:none;padding:3px 0"
-            oninput="this.value=this.value.replace(/\\D/g,'').slice(0,2);if(parseInt(this.value)>23)this.value='23';indicators[${i}].sh=this.value">
-          <span class="tw-sep" style="font-size:14px">:</span>
-          <input inputmode="numeric" maxlength="2" placeholder="MM" value="${ind.sm||""}"
-            style="width:36px;font-size:13px;border:1px solid #e0e0e5;border-radius:6px;background:#f7f7f8;text-align:center;outline:none;padding:3px 0"
-            oninput="this.value=this.value.replace(/\\D/g,'').slice(0,2);if(parseInt(this.value)>59)this.value='59';indicators[${i}].sm=this.value">
-        </div>
-        <input class="indic-comment" placeholder="Commentaire…" value="${ind.comment||""}" oninput="indicators[${i}].comment=this.value">
-      </div>
-    </div>`).join("");
-}
-
-window.removeIndicator = i => { indicators.splice(i,1); renderIndicators(); };
-
 /* ══ COLLECTE ══ */
-function collectData() {
-  const typeData = {};
-  if (activeType) {
-    const def = TYPE_DATA[activeType]; if(def){
-      typeData[activeType] = { target:{}, tasks:{} };
-      typeData[activeType].target = {
-        sh: document.getElementById("tgt_sh")?.value||"",
-        sm: document.getElementById("tgt_sm")?.value||"",
-        eh: document.getElementById("tgt_eh")?.value||"",
-        em: document.getElementById("tgt_em")?.value||""
-      };
-      def.tasks.forEach(task => {
-        typeData[activeType].tasks[task.id] = {
-          sh:      document.getElementById(`${task.id}_sh`)?.value||"",
-          sm:      document.getElementById(`${task.id}_sm`)?.value||"",
-          eh:      document.getElementById(`${task.id}_eh`)?.value||"",
-          em:      document.getElementById(`${task.id}_em`)?.value||"",
-          comment: document.getElementById(`cmt_${task.id}`)?.value||""
-        };
-      });
-    }
-  }
-  return {
-    date:       document.getElementById("f-date").value,
-    machine:    document.getElementById("f-machine-name").value.trim(),
-    type:       activeType,
-    typeData:   typeData,
-    indicators: indicators,
-    savedAt:    Date.now()
+function collectTypeData(){
+  const sec=document.querySelector("#dynamic-sections .tasks-sec");
+  if(!sec||!activeType) return {};
+  const def=TYPE_DATA[activeType]; if(!def) return {};
+  const out={target:{},tasks:{}};
+  out.target={
+    sh:sec._tSF?sec._tSF._getH():"", sm:sec._tSF?sec._tSF._getM():"",
+    eh:sec._tEF?sec._tEF._getH():"", em:sec._tEF?sec._tEF._getM():"",
+    comment:sec._tCmt?sec._tCmt.value:""
   };
+  def.tasks.forEach(task=>{
+    const f=sec._taskFields&&sec._taskFields[task.id]; if(!f) return;
+    out.tasks[task.id]={sh:f.sF._getH(),sm:f.sF._getM(),eh:f.eF._getH(),em:f.eF._getM(),comment:f.cmtTA.value};
+  });
+  return out;
 }
 
+/* ══ SAVE — historique automatique à chaque enregistrement ══ */
 window.saveSession = async () => {
-  const data = collectData();
-  sessionData = data;
-  await set(ref(db,"current"), data);
-  renderGantt(); // Gantt se met à jour seulement après Enregistrer
+  const typeData = collectTypeData();
+  const date    = document.getElementById("f-date").value;
+  const machine = document.getElementById("f-machine-name").value.trim();
+
+  // Sauvegarder le type actif
+  if (activeType) await set(ref(db,"types/"+activeType), typeData);
+
+  // Sauvegarder global
+  await set(ref(db,"global"), { date, machine, activeType, savedAt: Date.now() });
+  if (activeType) typeStates[activeType] = typeData;
+
+  // ══ CORRECTION 1 : Historique auto à chaque enregistrement ══
+  if (activeType) {
+    const def    = TYPE_DATA[activeType];
+    const typeLbl = def ? def.label : "";
+    const dl     = date ? new Date(date+"T00:00:00").toLocaleDateString("fr-FR",{weekday:"short",day:"2-digit",month:"short",year:"numeric"}) : "";
+    const sessId = "sess_"+activeType+"_"+Date.now();
+    await set(ref(db,"sessions/"+sessId), {
+      date, machine, activeType, typeData,
+      title: [(machine||"Séance"), typeLbl, dl].filter(Boolean).join(" — "),
+      savedAt: Date.now()
+    });
+  }
+
   document.getElementById("sync-status").textContent = "Enregistré ✓";
-  setTimeout(()=>document.getElementById("sync-status").textContent="Connecté",2000);
+  setTimeout(()=>document.getElementById("sync-status").textContent="Connecté", 2000);
+
+  renderGantt(date, machine, typeData);
+  setTimeout(()=>document.getElementById("gantt-section").scrollIntoView({behavior:"smooth"}), 100);
 };
 
+/* ══ NOUVELLE SÉANCE ══ */
 window.newSession = async () => {
-  if (!confirm("Archiver la séance en cours et repartir à zéro ?")) return;
-  const data = collectData();
-  if (data.machine||data.type) await set(ref(db,"sessions/sess_"+Date.now()), data);
-  await remove(ref(db,"current"));
-  activeType=[]; indicators=[]; sessionData={date:"",machine:"",type:null,typeData:{},indicators:[]};
+  if (!confirm("Repartir à zéro ? La séance en cours reste dans l'historique.")) return;
+  await remove(ref(db,"global"));
+  for (const t of ["small_t1","grand_t1","rondelle"]) await remove(ref(db,"types/"+t));
+  activeType=null; typeStates={small_t1:{},grand_t1:{},rondelle:{}};
   document.getElementById("f-date").value         = new Date().toISOString().slice(0,10);
   document.getElementById("f-machine-name").value = "";
   document.querySelectorAll(".type-btn").forEach(b=>b.classList.remove("active"));
-  activeType = null;
-  renderDynamicSections(); renderIndicators(); renderGantt();
+  renderDynamicSections();
+  document.getElementById("gantt-container").innerHTML='<div class="empty-gantt">Sélectionnez un type et enregistrez pour afficher le Gantt</div>';
 };
 
-function renderHistory(sessions) {
-  const list = document.getElementById("history-list");
-  const arr  = Object.entries(sessions).sort((a,b)=>(b[1].savedAt||0)-(a[1].savedAt||0));
-  document.getElementById("history-count").textContent = arr.length?arr.length+" séance(s)":"";
-  if (!arr.length) { list.innerHTML='<div class="history-empty">Aucune séance archivée</div>'; return; }
-  list.innerHTML = arr.map(([id,s]) => {
-    const dl = s.date?new Date(s.date+"T00:00:00").toLocaleDateString("fr-FR",{weekday:"long",day:"2-digit",month:"long",year:"numeric"}):"Date inconnue";
-    const typeLabel = s.type&&TYPE_DATA[s.type]?TYPE_DATA[s.type].label:"—";
-    return `<div class="history-item" onclick="loadHistorySession('${id}')">
-      <div>
-        <div class="history-item-info">${s.machine||"Séance"} — ${dl}</div>
-        <div class="history-item-sub">${typeLabel}</div>
+/* ══ HISTORIQUE ══ */
+function renderHistory(sessions){
+  const list=document.getElementById("history-list");
+  const arr=Object.entries(sessions).sort((a,b)=>(b[1].savedAt||0)-(a[1].savedAt||0));
+  document.getElementById("history-count").textContent=arr.length?arr.length+" séance(s)":"";
+  if(!arr.length){list.innerHTML='<div class="history-empty">Aucune séance enregistrée</div>';return;}
+  list.innerHTML=arr.map(([id,s])=>{
+    const def=s.activeType&&TYPE_DATA[s.activeType]?TYPE_DATA[s.activeType]:null;
+    const color=def?def.color:"#6c6c70";
+    const typeLbl=def?def.label:"";
+    const dl=s.date?new Date(s.date+"T00:00:00").toLocaleDateString("fr-FR",{weekday:"short",day:"2-digit",month:"short",year:"numeric"}):"";
+    const title=[(s.machine||"Séance"),dl].filter(Boolean).join(" — ");
+    return `<div class="history-item">
+      <div class="history-item-left" onclick="loadHistorySession('${id}')">
+        <div class="history-item-title">
+          <span class="history-badge" style="background:${color}">${typeLbl}</span>
+          ${title}
+        </div>
+        <div class="history-item-sub">${dl}</div>
       </div>
-      <span class="history-item-btn">Charger →</span>
+      <div class="history-item-actions">
+        <span class="history-load-btn" onclick="loadHistorySession('${id}')">Charger</span>
+        <span class="history-del-btn"  onclick="deleteSession('${id}')">Supprimer</span>
+      </div>
     </div>`;
   }).join("");
 }
 
 window.loadHistorySession = async id => {
   if (!confirm("Charger cette séance ?")) return;
-  const snap = await get(ref(db,"sessions/"+id));
+  const snap=await get(ref(db,"sessions/"+id));
   const d=snap.val(); if(!d) return;
-  await set(ref(db,"current"),d);
+  if (d.activeType&&d.typeData) await set(ref(db,"types/"+d.activeType),d.typeData);
+  await set(ref(db,"global"),{date:d.date,machine:d.machine,activeType:d.activeType,savedAt:Date.now()});
+};
+
+window.deleteSession = async id => {
+  if (!confirm("Supprimer cette séance ?")) return;
+  await remove(ref(db,"sessions/"+id));
+};
+
+window.deleteAllHistory = async () => {
+  if (!confirm("Supprimer TOUT l'historique ?")) return;
+  await remove(ref(db,"sessions"));
 };
 
 /* ══ GANTT ══ */
-const toMin  = s => { if(!s||!s.includes(":"))return null; const[h,m]=s.split(":").map(Number); return h*60+(m||0); };
-const fmtDur = (s,e) => { const d=e-s; if(d<=0)return "—"; const h=Math.floor(d/60),m=d%60; return h&&m?h+"h "+m+"min":h?h+"h":m+"min"; };
-
-window.scrollToGantt = () => document.getElementById("gantt-section").scrollIntoView({behavior:"smooth"});
+const toMin=(s)=>{ if(!s||!s.includes(":"))return null; const[h,m]=s.split(":").map(Number); return h*60+(m||0); };
+const fmtDur=(s,e)=>{ const d=e-s; if(d<=0)return "—"; const h=Math.floor(d/60),m=d%60; return h&&m?h+"h "+m+"min":h?h+"h":m+"min"; };
 
 const TT=document.getElementById("tooltip");
-const ttMove=e=>{let x=e.clientX+16,y=e.clientY+16;if(x+300>window.innerWidth)x=e.clientX-300;if(y+220>window.innerHeight)y=e.clientY-220;TT.style.left=x+"px";TT.style.top=y+"px";};
+const ttMove=e=>{let x=e.clientX+16,y=e.clientY+16;if(x+310>window.innerWidth)x=e.clientX-310;if(y+230>window.innerHeight)y=e.clientY-230;TT.style.left=x+"px";TT.style.top=y+"px";};
 document.addEventListener("mousemove",e=>{if(TT.classList.contains("visible"))ttMove(e);});
 
 window.showTT=(e,label,qui,start,end,color,comment)=>{
@@ -663,18 +611,22 @@ window.showTT=(e,label,qui,start,end,color,comment)=>{
   const s=toMin(start),en=toMin(end);
   document.getElementById("tt-dur").textContent=(s!==null&&en!==null)?"⏱ "+fmtDur(s,en):"";
   const cb=document.getElementById("tt-comment-box");
-  document.getElementById("tt-comment").textContent=comment||"";
-  cb.style.display=comment?"block":"none";
+  const decoded=comment?comment.replace(/\\n/g,"\n"):"";
+  document.getElementById("tt-comment").textContent=decoded;
+  cb.style.display=decoded?"block":"none";
   TT.classList.add("visible"); ttMove(e);
 };
 window.hideTT=()=>TT.classList.remove("visible");
 
-/* ══ CORRECTION 4 : COMPARAISON SIMPLIFIÉE ══ */
 window.toggleSelect=id=>{
   const idx=selectedIds.indexOf(id);
   if(idx>-1)selectedIds.splice(idx,1);
   else{if(selectedIds.length>=2)selectedIds.shift();selectedIds.push(id);}
-  updateCmpBar(); renderGantt();
+  updateCmpBar();
+  document.querySelectorAll("[data-uid]").forEach(tr=>{
+    const uid=tr.dataset.uid, chk=tr.querySelector("input[type=checkbox]");
+    if(chk){chk.checked=selectedIds.includes(uid);tr.classList.toggle("sel-a",selectedIds[0]===uid);tr.classList.toggle("sel-b",selectedIds[1]===uid);}
+  });
 };
 
 function updateCmpBar(){
@@ -687,184 +639,126 @@ function updateCmpBar(){
 
 window.doCompare=()=>{
   if(selectedIds.length!==2)return;
-  const[idA,idB]=selectedIds, A=allTasks[idA], B=allTasks[idB];
-  if(!A||!B)return;
-  const sA=toMin(A.start), sB=toMin(B.start);
-  const eA=toMin(A.end),   eB=toMin(B.end);
-
+  const[idA,idB]=selectedIds,A=allTasks[idA],B=allTasks[idB]; if(!A||!B)return;
+  const sA=toMin(A.start),sB=toMin(B.start),eA=toMin(A.end),eB=toMin(B.end);
   document.getElementById("cmp-result-title").textContent=(A.machine||"—")+" vs "+(B.machine||"—");
   document.getElementById("cmp-cards").innerHTML=`
-    <div class="cmp-card a">
-      <div class="cmp-card-badge a">🟡 Tâche A</div>
-      <div class="cmp-card-name">${A.machine||"—"}</div>
-      <div class="cmp-card-time">${A.start||"?"}  →  ${A.end||"?"}</div>
-    </div>
-    <div class="cmp-card b">
-      <div class="cmp-card-badge b">🟢 Tâche B</div>
-      <div class="cmp-card-name">${B.machine||"—"}</div>
-      <div class="cmp-card-time">${B.start||"?"}  →  ${B.end||"?"}</div>
-    </div>`;
-
-  // Correction 4 : une seule valeur — différence de démarrage
-  let diffText="—", diffSub="";
+    <div class="cmp-card a"><div class="cmp-card-badge a">🟡 A</div><div class="cmp-card-name">${A.machine||"—"}</div><div class="cmp-card-time">${A.start||"?"}  →  ${A.end||"?"}</div></div>
+    <div class="cmp-card b"><div class="cmp-card-badge b">🟢 B</div><div class="cmp-card-name">${B.machine||"—"}</div><div class="cmp-card-time">${B.start||"?"}  →  ${B.end||"?"}</div></div>`;
+  let diffText="—",diffSub="Données insuffisantes";
   if(sA!==null&&sB!==null){
-    const d=Math.abs(sB-sA);
-    const h=Math.floor(d/60), m=d%60;
-    diffText = h&&m?h+"h "+m+"min":h?h+"h":m+"min";
-    diffSub  = sB>sA?"B démarre "+diffText+" après A":sB<sA?"B démarre "+diffText+" avant A":"Même heure de démarrage";
+    const d=Math.abs(sB-sA),h=Math.floor(d/60),m=d%60;
+    diffText=h&&m?h+"h "+m+"min":h?h+"h":m+"min";
+    diffSub=sB>sA?"B démarre "+diffText+" après A":sB<sA?"B démarre "+diffText+" avant A":"Même heure de démarrage";
   } else if(eA!==null&&eB!==null){
-    const d=Math.abs(eB-eA);
-    const h=Math.floor(d/60), m=d%60;
-    diffText = h&&m?h+"h "+m+"min":h?h+"h":m+"min";
-    diffSub  = "Écart entre les fins";
+    const d=Math.abs(eB-eA),h=Math.floor(d/60),m=d%60;
+    diffText=h&&m?h+"h "+m+"min":h?h+"h":m+"min";
+    diffSub="Écart entre les fins de tâche";
   }
-
-  document.getElementById("cmp-diff-box").innerHTML=`
-    <div class="cmp-diff-label">Écart entre les deux tâches</div>
-    <div class="cmp-diff-value">${diffText}</div>
-    <div class="cmp-diff-sub">${diffSub}</div>`;
-
+  document.getElementById("cmp-diff-box").innerHTML=`<div class="cmp-diff-label">Écart entre les deux tâches</div><div class="cmp-diff-value">${diffText}</div><div class="cmp-diff-sub">${diffSub}</div>`;
   document.getElementById("cmp-result").classList.add("visible");
   document.getElementById("cmp-result").scrollIntoView({behavior:"smooth",block:"nearest"});
 };
 window.closeCompare=()=>document.getElementById("cmp-result").classList.remove("visible");
 
 /* ══ RENDER GANTT ══ */
-function renderGantt(){
+function renderGantt(date, machine, typeData){
   const container=document.getElementById("gantt-container");
-  const data=sessionData;
-
-  if(!data.type||!TYPE_DATA[data.type]){
-    container.innerHTML='<div class="empty-gantt">Sélectionnez un type et enregistrez pour voir le Gantt</div>';
+  if(!activeType||!TYPE_DATA[activeType]){
+    container.innerHTML='<div class="empty-gantt">Sélectionnez un type et enregistrez pour afficher le Gantt</div>';
     return;
   }
+  const def=TYPE_DATA[activeType];
+  const tv=typeData||typeStates[activeType]||{};
+  const savedTasks=tv.tasks||{},savedTarget=tv.target||{};
 
   allTasks={};
-  let minT=Infinity, maxT=-Infinity;
-  const def=TYPE_DATA[data.type];
-  const tv=(data.typeData&&data.typeData[data.type])||{};
-  const tgt=tv.target||{};
-
-  function regT(sh,sm,eh,em){
-    const s=toMin(getTV(sh,sm)), e=toMin(getTV(eh,em));
-    if(s!==null)minT=Math.min(minT,s); if(e!==null)maxT=Math.max(maxT,e);
-  }
-  regT(tgt.sh||"",tgt.sm||"",tgt.eh||"",tgt.em||"");
-  def.tasks.forEach(task=>{
-    const t=(tv.tasks&&tv.tasks[task.id])||{};
-    regT(t.sh||"",t.sm||"",t.eh||"",t.em||"");
-  });
-  (data.indicators||[]).forEach(ind=>{
-    if(ind.sh&&ind.sm){ const s=toMin(getTV(ind.sh,ind.sm)); if(s!==null)minT=Math.min(minT,s); }
-  });
+  let minT=Infinity,maxT=-Infinity;
+  function regT(h,m,h2,m2){ const s=toMin(getTV(h,m)),e=toMin(getTV(h2,m2)); if(s!==null)minT=Math.min(minT,s); if(e!==null)maxT=Math.max(maxT,e); }
+  regT(savedTarget.sh||"",savedTarget.sm||"",savedTarget.eh||"",savedTarget.em||"");
+  def.tasks.forEach(task=>{ const t=savedTasks[task.id]||{}; regT(t.sh||"",t.sm||"",t.eh||"",t.em||""); });
 
   if(!isFinite(minT))minT=480; if(!isFinite(maxT))maxT=minT+120;
   minT=Math.floor(minT/60)*60; maxT=Math.ceil(maxT/60)*60+60;
-  const total=maxT-minT, slotMin=10, slots=total/slotMin, slotW=600/slots;
+  const total=maxT-minT,slotMin=10,slots=total/slotMin,slotW=600/slots;
 
-  const dateStr=data.date?new Date(data.date+"T00:00:00").toLocaleDateString("fr-FR",{weekday:"long",day:"2-digit",month:"long",year:"numeric"}):"";
-  document.getElementById("gantt-subtitle").textContent=(data.machine||"SGD Pharma")+(dateStr?" — "+dateStr:"");
+  const dateStr=date?new Date(date+"T00:00:00").toLocaleDateString("fr-FR",{weekday:"long",day:"2-digit",month:"long",year:"numeric"}):"";
+  document.getElementById("gantt-machine-title").textContent=machine||"Changement – Temp/Machine";
+  document.getElementById("gantt-subtitle").textContent=def.label+(dateStr?" — "+dateStr:"");
 
   let h=`<table class="gantt">`;
-  h+=`<tr><th colspan="5"></th>`;
-  for(let m=minT;m<maxT;m+=60) h+=`<th colspan="${60/slotMin}" style="background:#1a3a6b;color:#fff">60 min</th>`;
-  h+=`</tr><tr><th class="chk-cell"></th><th style="width:150px;text-align:left;padding-left:8px">MACHINE / SECTEUR</th><th style="width:80px">QUI</th><th style="width:60px">Début</th><th style="width:55px">Fin</th>`;
+  h+=`<tr><th colspan="6"></th>`;
+  for(let m=minT;m<maxT;m+=60)h+=`<th colspan="${60/slotMin}" style="background:#1a3a6b;color:#fff">60 min</th>`;
+  h+=`</tr><tr><th class="chk-cell"></th><th style="width:140px;text-align:left;padding-left:8px">MACHINE / SECTEUR</th><th style="width:75px">QUI</th><th style="width:50px">DÉBUT</th><th style="width:45px">FIN</th><th style="width:160px">COMMENTAIRE</th>`;
   for(let m=minT;m<maxT;m+=slotMin){
     const hh=Math.floor(m/60).toString().padStart(2,"0"),mm=(m%60).toString().padStart(2,"0");
     h+=`<th style="width:${slotW}px;font-size:10px;color:#555;font-weight:400">${mm==="00"?hh+"h":mm}</th>`;
   }
   h+=`</tr>`;
+  h+=`<tr><td colspan="${6+slots}" style="background:${def.color};color:#fff;font-weight:700;font-size:13px;padding:7px 10px;border:1px solid ${def.color}">${def.label} ════════════════▶▶▶</td></tr>`;
 
-  // Header type
-  h+=`<tr><td colspan="${5+slots}" style="background:${def.color};color:#fff;font-weight:700;font-size:13px;padding:7px 10px;border:1px solid ${def.color}">${def.label} ════════════════▶▶▶</td></tr>`;
-
-  // TARGET jaune
-  const tStart=getTV(tgt.sh||"",tgt.sm||""), tEnd=getTV(tgt.eh||"",tgt.em||"");
-  const tS=toMin(tStart), tE=toMin(tEnd);
+  // TARGET
+  const tStart=getTV(savedTarget.sh||"",savedTarget.sm||""),tEnd=getTV(savedTarget.eh||"",savedTarget.em||"");
+  const tS=toMin(tStart),tE=toMin(tEnd),tCmt=savedTarget.comment||"";
+  const tUid="target";
+  allTasks[tUid]={machine:"🎯 Objectif",qui:"—",start:tStart,end:tEnd,color:"#f59e0b"};
   let tBar="";
   if(tS!==null&&tE!==null&&tE>tS){
-    const lp=((tS-minT)/total)*100, wp=((tE-tS)/total)*100;
-    tBar=`<div class="gantt-bar-target" style="left:${lp}%;width:${wp}%" onmouseenter="showTT(event,'Objectif TARGET','—','${tStart}','${tEnd}','#f59e0b','')" onmouseleave="hideTT()"></div>`;
+    const lp=((tS-minT)/total)*100,wp=((tE-tS)/total)*100;
+    const enc=encCmt(tCmt);
+    tBar=`<div class="gantt-bar-target" style="left:${lp}%;width:${wp}%" onmouseenter="showTT(event,'Objectif','—','${tStart}','${tEnd}','#f59e0b','${enc}')" onmouseleave="hideTT()">
+      ${tCmt?'<div class="gantt-comment-dot"></div>':""}
+    </div>`;
   }
-  h+=`<tr class="target-row"><td class="chk-cell info"></td><td class="info machine-name" style="color:#b45309;font-style:italic">🎯 Objectif TARGET</td><td class="info who-cell">—</td><td class="info time-cell">${tStart||"—"}</td><td class="info time-cell">${tEnd||"—"}</td><td colspan="${slots}" class="bar-cell"><div class="bar-inner">${tBar}</div></td></tr>`;
+  const tSelA=selectedIds[0]===tUid,tSelB=selectedIds[1]===tUid;
+  h+=`<tr class="target-row${tSelA?" sel-a":tSelB?" sel-b":""}" data-uid="${tUid}">
+    <td class="chk-cell info"><input type="checkbox" ${selectedIds.includes(tUid)?"checked":""} onchange="toggleSelect('${tUid}')"></td>
+    <td class="info machine-name" style="color:#b45309;font-style:italic">🎯 Objectif</td>
+    <td class="info who-cell">—</td>
+    <td class="info time-cell">${tStart||"—"}</td>
+    <td class="info time-cell">${tEnd||"—"}</td>
+    <td class="comment-cell">${tCmt||""}</td>
+    <td colspan="${slots}" class="bar-cell"><div class="bar-inner">${tBar}</div></td>
+  </tr>`;
 
-  // Tâches avec couleurs uniques
   def.tasks.forEach((task,idx)=>{
-    const t=(tv.tasks&&tv.tasks[task.id])||{};
-    const start=getTV(t.sh||"",t.sm||""), end=getTV(t.eh||"",t.em||"");
-    const s=toMin(start), e=toMin(end);
+    const t=savedTasks[task.id]||{};
+    const start=getTV(t.sh||"",t.sm||""),end=getTV(t.eh||"",t.em||"");
+    const s=toMin(start),e=toMin(end);
     const color=TASK_COLORS[idx%TASK_COLORS.length];
-    const uid=data.type+"_"+task.id;
+    const uid=activeType+"_"+task.id;
     allTasks[uid]={machine:task.machine,qui:task.qui,start,end,color};
-
     let bar="";
     if(s!==null&&e!==null&&e>s){
-      const lp=((s-minT)/total)*100, wp=((e-s)/total)*100;
-      const mach=task.machine.replace(/'/g,"&#39;"), cmt=(t.comment||"").replace(/'/g,"&#39;");
+      const lp=((s-minT)/total)*100,wp=((e-s)/total)*100;
+      const enc=encCmt(t.comment||"");
       bar=`<div class="gantt-bar" style="left:${lp}%;width:${wp}%;background:${color}"
-        onmouseenter="showTT(event,'${mach}','${task.qui}','${start}','${end}','${color}','${cmt}')"
+        onmouseenter="showTT(event,'${task.machine.replace(/'/g,"&#39;")}','${task.qui}','${start}','${end}','${color}','${enc}')"
         onmouseleave="hideTT()">
-        ${t.comment?`<div class="gantt-comment-dot"></div>`:""}
+        ${t.comment?'<div class="gantt-comment-dot"></div>':""}
       </div>`;
     }
-
-    const isSelA=selectedIds[0]===uid, isSelB=selectedIds[1]===uid;
+    const isSelA=selectedIds[0]===uid,isSelB=selectedIds[1]===uid;
     const rowCls=isSelA?"sel-a":isSelB?"sel-b":idx%2===0?"odd":"even";
-    const checked=selectedIds.includes(uid)?"checked":"";
-
-    h+=`<tr class="${rowCls}" data-id="${uid}">
-      <td class="chk-cell info"><input type="checkbox" ${checked} onchange="toggleSelect('${uid}')"></td>
-      <td class="info machine-name">
-        <span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:${color};margin-right:6px;vertical-align:middle"></span>
-        ${task.machine}
-      </td>
+    h+=`<tr class="${rowCls}" data-uid="${uid}">
+      <td class="chk-cell info"><input type="checkbox" ${selectedIds.includes(uid)?"checked":""} onchange="toggleSelect('${uid}')"></td>
+      <td class="info machine-name"><span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:${color};margin-right:5px;vertical-align:middle"></span>${task.machine}</td>
       <td class="info who-cell">${task.qui}</td>
       <td class="info time-cell">${start||"—"}</td>
       <td class="info time-cell">${end||"—"}</td>
+      <td class="comment-cell">${(t.comment||"").replace(/\n/g,"<br>")}</td>
       <td colspan="${slots}" class="bar-cell"><div class="bar-inner">${bar}</div></td>
     </tr>`;
   });
 
-  // Indicateurs avec flèches
-  const validIndics = (data.indicators||[]).filter(ind=>ind.from&&ind.to);
-  if(validIndics.length){
-    h+=`<tr><td colspan="${5+slots}" style="background:#fff0f0;font-weight:700;font-size:11px;color:#ef4444;padding:5px 10px;border:1px solid #fecaca">➤ INDICATEURS</td></tr>`;
-    validIndics.forEach(ind=>{
-      const fromTask=def.tasks.find(t=>t.id===ind.from);
-      const toTask  =def.tasks.find(t=>t.id===ind.to);
-      if(!fromTask||!toTask) return;
-      const fromData=(tv.tasks&&tv.tasks[ind.from])||{};
-      const toData  =(tv.tasks&&tv.tasks[ind.to])||{};
-      const fromEnd =getTV(fromData.eh||"",fromData.em||"");
-      const toStart =getTV(toData.sh||"",toData.sm||"");
-      const fE=toMin(fromEnd), tS2=toMin(toStart);
-      const hTime=ind.sh&&ind.sm?getTV(ind.sh,ind.sm):"";
-
-      let arrowBar="";
-      if(fE!==null&&tS2!==null&&tS2>=fE){
-        const lp=((fE-minT)/total)*100, wp=((tS2-fE)/total)*100;
-        const lbl=`${fromTask.machine} ➤ ${toTask.machine}`.replace(/'/g,"&#39;");
-        const cmt=(ind.comment||"").replace(/'/g,"&#39;");
-        arrowBar=`<div style="position:absolute;left:${lp}%;width:${wp}%;top:10px;bottom:10px;background:#ef4444;opacity:0.85;border-radius:0 4px 4px 0;display:flex;align-items:center;justify-content:flex-end;padding-right:4px"
-          onmouseenter="showTT(event,'${lbl}','—','${fromEnd}','${toStart}','#ef4444','${cmt}')" onmouseleave="hideTT()">
-          <span style="color:#fff;font-size:14px;font-weight:900">▶</span>
-        </div>`;
-      }
-
-      h+=`<tr class="indic-gantt-row">
-        <td class="chk-cell info"></td>
-        <td class="info machine-name" style="color:#ef4444;font-weight:700;font-size:11px">${fromTask.machine} ➤ ${toTask.machine}</td>
-        <td class="info who-cell">—</td>
-        <td class="info time-cell" style="color:#ef4444">${hTime||fromEnd||"—"}</td>
-        <td class="info time-cell" style="color:#ef4444">${toStart||"—"}</td>
-        <td colspan="${slots}" class="bar-cell"><div class="bar-inner">${arrowBar}</div></td>
-      </tr>`;
-    });
-  }
-
   h+=`</table>`;
   container.innerHTML=h;
   updateCmpBar();
+}
+
+function encCmt(str){
+  if(!str) return "";
+  return str.replace(/\\/g,"\\\\").replace(/'/g,"&#39;").replace(/"/g,"&quot;").replace(/\n/g,"\\n");
 }
 </script>
 </body>
